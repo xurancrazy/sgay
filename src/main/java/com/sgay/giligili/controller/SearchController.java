@@ -23,15 +23,21 @@ import java.util.regex.Pattern;
 
 
 @Controller
-@RequestMapping("/search")
 public class SearchController {
 
 	@Autowired
 	private ITorrentService iTorrentService;
 
-	private static final String defaultURL = "http://www.torrentkitty.me/search/";//爬虫的基础URL
 
 	private static Logger logger= LoggerFactory.getLogger(SearchController.class);
+
+	private static final String defaultURL = "";
+
+	@GetMapping(value = "/")
+	public String index(){
+		return "index";
+	}
+
 	@RequestMapping(method=RequestMethod.POST)
 	public String getResult(@RequestParam("fanhao") String fanhao)
 	{
