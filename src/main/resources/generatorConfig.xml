@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 <!-- 配置文件路径 -->
 <properties resource="jdbc.properties"/>
 <!--数据库驱动包路径 -->
-<classPathEntry location="D:\apache-maven-3.3.9-bin\repository\mysql\mysql-connector-java\5.1.27\mysql-connector-java-5.1.27.jar"/>
+<classPathEntry location="D:\apache-maven-3.3.9-bin\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
  
 <context id="MySQLTables" targetRuntime="MyBatis3">
 <!--关闭注释 -->
@@ -29,7 +29,7 @@ password="${jdbc.password}">
 </javaModelGenerator>
  
 <!--生成xml mapper文件 路径 -->
-<sqlMapGenerator targetPackage="${xml.mapper.package}" targetProject="${target.project}">
+<sqlMapGenerator targetPackage="${xml.mapper.package}" targetProject="${target.project.mapperfile}">
 <property name="enableSubPackages" value="ture"/>
 </sqlMapGenerator>
  
@@ -39,10 +39,11 @@ password="${jdbc.password}">
 </javaClientGenerator>
  
 <!--对应数据库表名 -->
-<table tableName="torrent_map" enableCountByExample="false"
+<table tableName="movies" enableCountByExample="false"
 	enableUpdateByExample="false" enableDeleteByExample="false" 
 	enableSelectByExample="false" selectByExampleQueryId="false">
- 
+	<columnOverride column="imgHref" javaType="java.lang.String" jdbcType="VARCHAR" />
+	<columnOverride column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
 </table>
 </context>
 </generatorConfiguration>

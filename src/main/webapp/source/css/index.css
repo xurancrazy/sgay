@@ -1,0 +1,2933 @@
+@charset "utf-8";
+body {
+    background: #eef0f3;
+    color: #454545;
+    -webkit-text-size-adjust: none
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Microsoft YaHei", "SimHei "
+}
+
+.sidebox:after, .topsection:after {
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0;
+    content: ".";
+    font-size: 0;
+    line-height: 0
+}
+
+.well {
+    padding: 5px 15px
+}
+
+.jumbotron {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px
+}
+
+.well h2 {
+    font-size: 20px;
+    line-height: normal
+}
+
+.f-12 {
+    font-size: 12px
+}
+
+.txt-shadow {
+    text-shadow: 0 1px 0 #fff
+}
+
+.c-gary {
+    color: #bdc3c7
+}
+
+[class*="span"] {
+    float: left;
+    min-height: 1px;
+    margin-left: 5px;
+}
+
+.span4 {
+    width: 250px;
+    position: relative;
+}
+
+
+.span8 {
+    width: 690px;
+}
+
+.icons {
+    position: relative;
+    display: inline-block;
+    background: url(../images/bg.png) no-repeat
+}
+
+.see-icon {
+    margin-right: 5px;
+    width: 14px;
+    height: 8px;
+    background-position: 0 -20px
+}
+
+.tag-icon {
+    top: 1px;
+    margin-right: 5px;
+    width: 7px;
+    height: 10px;
+    background-position: -20px 0
+}
+
+.th-list-icon {
+    top: 1px;
+    margin-right: 5px;
+    width: 12px;
+    height: 10px;
+    background-position: -53px 0
+}
+
+.ios-icon {
+    display: inline-block;
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    background-position: 0 -70px;
+    line-height: 200px
+}
+
+.andriod-icon {
+    display: inline-block;
+    overflow: hidden;
+    width: 32px;
+    height: 32px;
+    background-position: -52px -70px;
+    line-height: 200px
+}
+
+.email-icon {
+    position: relative;
+    top: 3px;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    background-position: -36px -36px;
+    *top: 0
+}
+
+.rss-icon {
+    position: relative;
+    top: 3px;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    background-position: -18px -36px;
+    *top: 0
+}
+
+.sina-icon {
+    position: relative;
+    top: 3px;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    background-position: 0 -36px;
+    *top: 0
+}
+
+.new-icon {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 10px;
+    background: url(../images/bg.png) -56px -36px no-repeat;
+    vertical-align: -4px
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+h2.heading {
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "Microsoft YaHei", "SimHei "
+}
+
+h3.heading {
+    margin: 0;
+    font-size: 14px;
+    font-family: "Microsoft YaHei", "SimHei "
+}
+
+.xfv {
+    display: inline-block;
+    padding: 0 3px;
+    color: #bbb;
+    font-size: 12px;
+    font-family: arial
+}
+
+.hidden {
+    display: none;
+    visibility: hidden
+}
+
+.container {
+    padding: 0 20px;
+    width: 960px
+}
+
+#recommend-post {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd
+}
+
+.header {
+    margin-bottom: 20px
+}
+
+.topbar {
+    overflow: hidden;
+    height: 25px;
+    border-bottom: 1px solid #eee;
+    background: #f9f9f9;
+    color: #999;
+    font-size: 12px;
+    line-height: 26px
+}
+
+.topbar .container {
+    padding: 0;
+    width: 1000px
+}
+
+.subscribe li {
+    float: left;
+    margin-right: 10px;
+    line-height: 26px
+}
+
+.subscribe a {
+    color: #999
+}
+
+a.logo {
+    display: inline-block;
+    margin: 10px 0 12px;
+    width: 225px;
+    height: 70px;
+    background: url(../images/logo.png) no-repeat;
+    text-indent: -9999em
+}
+
+.topsection {
+    width: 100%;
+    min-width: 980px
+}
+
+.topsection .inner {
+    margin: 0 auto;
+    width: 1000px
+}
+
+.topnavbar {
+    overflow: hidden;
+    height: 42px;
+    background: #9cb130
+}
+
+.topnavbar .menu {
+    padding-top: 2px
+}
+
+.topnavbar li {
+    float: left;
+    margin-right: 5px;
+    line-height: 42px
+}
+
+.topnavbar .active {
+    position: relative;
+    top: 5px;
+    background: #fff;
+    line-height: 35px
+}
+
+.topnavbar .active a {
+    color: #666
+}
+
+.clear {
+    clear: both;
+}
+
+.well .avms {
+    line-height: 24px;
+    padding: 0px 5px 0px 140px;
+    text-indent: 2em;
+}
+
+.nian {
+    overflow: hidden;
+    height: 36px;
+    display: block;
+    padding-top: 10px;
+    clear: both;
+}
+
+.nian ul {
+    position: relative;
+    float: left;
+    left: 50%;
+}
+
+.nian ul li {
+    float: left;
+    margin-right: 5px;
+    line-height: 32px;
+    position: relative;
+    right: 50%;
+    width: 40px;
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+.nian ul li:hover {
+    background: #9cc130;
+}
+
+.nian ul li a {
+    color: #333;
+    height: 34px;
+    display: block;
+}
+
+.nian ul li a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.topnavbar li a {
+    padding: 10px 15px;
+    color: #fff
+}
+
+.inner {
+    width: 1100px;
+    margin: auto;
+}
+
+.vote-list {
+    width: 100%;
+    padding-top: 20px;
+    border: #E6E6E6 solid 1px;
+}
+
+.box {
+    background: #fff;
+    box-shadow: 0 1px 1px 0px #d2d2d2;
+    float: left;
+    transition: 0.3s;
+}
+
+.vote-list .item {
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.vote-list .item .head {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: #fff;
+    background: url(../images/vote-head.png);
+}
+
+.vote-list .item .head .no {
+    line-height: 25px;
+    margin-left: 5px;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.vote-list .item .head .hot {
+    font-size: 12px;
+    line-height: 30px;
+    margin-right: 5px;
+}
+
+.vote-list .item img {
+    width: 208px;
+    height: 290px;
+}
+
+.vote-list .item .bottom {
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    bottom: 0px;
+    background: #fff;
+}
+
+.vote-list .item .bottom span {
+    width: 80px;
+    height: 45px;
+    overflow: hidden;
+    display: inline-block;
+    float: left;
+}
+
+.vote-list .item .bottom span a:hover {
+    text-decoration: none;
+}
+
+.vote-list .item .bottom h2.name {
+    font-size: 14px;
+    width: 118px;
+    height: 25px;
+    line-height: 25px;
+    margin: 0;
+    color: #696969;
+    overflow: hidden;
+    text-align: center;
+}
+
+.vote-list .item .bottom p {
+    color: #aaaaaa;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.vote-list .bottom span a:hover {
+    background-color: #1D780A;
+    transition: 0.3s;
+}
+
+.vote-list .bottom span a.img_on {
+    display: block;
+    width: 80px;
+    height: 45px;
+    background: url(../img/ipz722pl-lp.jpg) 10px center no-repeat #1c9f1e;
+    color: #fff;
+    line-height: 45px;
+    font-size: 14px;
+    text-indent: 40px;
+    transition: 0.3s;
+    float: left;
+}
+
+.header {
+    width: 100%;
+    background: #d1e2c5 url(../img/ipz722pl-lp.jpg) no-repeat fixed top center;
+}
+
+.header .head {
+    width: 1200px;
+    margin: 0 auto;
+    height: 220px;
+    position: relative;
+}
+
+.head .text {
+    float: right;
+    font-family: "微软雅黑";
+    font-size: 13px;
+    color: #fff;
+    text-shadow: #000 1px 1px 1px;
+    line-height: 28px;
+    width: 320px;
+    margin: 55px 0 0;
+}
+
+.head h1 {
+    float: left;
+    background: url(http://www.nh87.cn/templets/vip/images/logo.png) no-repeat;
+    text-indent: -9999em;
+    width: 384px;
+    height: 55px;
+    margin: 85px 0 0 10px;
+}
+
+.head h1 a {
+    width: 384px;
+    height: 55px;
+    display: block;
+}
+
+.header .menu {
+    border-top: 4px solid #8aa653;
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    background: url(../images/menubg.png);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.menu ul {
+    width: 1200px;
+    height: 42px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.menu ul li {
+    float: left;
+    background: url(../images/line1.gif) no-repeat right;
+    line-height: inherit;
+}
+
+.menu ul li a {
+    color: #4d4d4b;
+    font-family: "Microsoft Yahei", Arial;
+    font-size: 14px;
+    padding: 0 26px;
+    display: block;
+}
+
+.menu ul li a.current {
+    background-color: #8aa653;
+    color: #fff;
+}
+
+.menu ul li a:hover {
+    background-color: #8aa653;
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu ul .search {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    margin: 0;
+}
+
+.search .text {
+    float: left;
+    background: url(../images/search.png) no-repeat 0 6px;
+    height: 30px;
+    padding: 0 0 0 17px;
+    opacity: 0.8;
+    border: 1px solid #9cc;
+    line-height: 26px;
+    color: #666;
+}
+
+.search .submit {
+    float: left;
+    height: 32px;
+    border: 0;
+    background: #8aa653;
+    color: #fff;
+    cursor: pointer;
+}
+
+.topfixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #fff !important;
+}
+
+.uu_sy {
+    background-color: #fff;
+}
+
+.uu_sy ul li {
+    display: inline-block;
+    padding: 0 8px;
+}
+
+.uu_sy ul li.active {
+    background-color: #111;
+}
+
+.uu_sy ul li a {
+    display: inline-block;
+    width: 29px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+.uu_sy ul li a:hover {
+    background-color: #111;
+    color: #fff;
+    text-decoration: none;
+}
+
+.uu_sy ul li.active a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.blockTitle {
+    border-top: 1px solid #2ca1f1;
+    border-bottom: 1px solid #2ca1f1;
+    height: 29px;
+    line-height: 29px;
+    color: #2ca1f1;
+    font-weight: normal;
+}
+
+.blockTitle h2 {
+    font-weight: normal;
+    float: left;
+    font-size: 1em;
+    line-height: 12px;
+}
+
+.more {
+    font-weight: normal;
+    color: #2ca1f1;
+    float: right;
+}
+
+.hotArticle {
+    width: 690px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hotArticle li h3:hover {
+    color: #2ca1f1;
+}
+
+.hotArticle li a {
+    text-decoration: none;
+}
+
+.hotArticle li {
+    width: 140px;
+    float: left;
+    margin: 20px 32px 0 0;
+}
+
+.hotArticle li img {
+    display: block;
+    width: 140px;
+    height: 94px;
+}
+
+.hotArticle li h3 {
+    font-weight: normal;
+    height: 20px;
+    line-height: 12px;
+    margin: 0;
+    overflow: hidden;
+    font-size: 1em;
+    color: #707070;
+    text-align: center;
+}
+
+.sy_ad01_fixed {
+    position: fixed;
+    top: 45px;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.sy_ad02_fixed {
+    position: fixed;
+    bottom: -75px;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.wangzuan {
+    background-color: #eee;
+    padding: 10px;
+}
+
+.wangzuan p {
+    margin: 5px 0 0 0;
+}
+
+.beiyong {
+    text-indent: 2em;
+    padding: 20px;
+    border: 1px #FDCDA4 dashed;
+}
+
+.beiyong a {
+    color: #662A07;
+}
+
+.subnavbar {
+    height: 30px;
+    background: #fff;
+    font-size: 12px;
+    line-height: 30px
+}
+
+.subnavbar ul {
+    margin-left: 15px
+}
+
+.subnavbar li {
+    float: left;
+    margin: 0 15px 0 0;
+    color: #999;
+    line-height: 30px
+}
+
+.subnavbar li a {
+    padding-right: 15px;
+    border-right: 1px solid #eee;
+    color: #999
+}
+
+.content {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 960px;
+    background: #fff;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.1)
+}
+
+#recommend-post .main {
+    overflow: hidden;
+    width: 980px;
+    height: 183px
+}
+
+.recommend-items {
+    position: absolute;
+    margin-left: -13px;
+    min-width: 980px
+}
+
+.recommend-items .item {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    margin-left: 13px;
+    width: 230px;
+    height: 182px
+}
+
+.recommend-items .item .txt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    width: 210px;
+    height: 32px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    white-space: nowrap;
+    line-height: 32px;
+    filter: alpha(opacity=50)
+}
+
+.recommend-items .item a {
+    color: #fff
+}
+
+.recommend-items .item img {
+    width: 230px;
+    height: 182px
+}
+
+.recommend-post-navi {
+    text-align: center
+}
+
+.recommend-post-navi a {
+    display: inline-block;
+    margin: 0 5px;
+    width: 6px;
+    height: 6px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #ddd;
+    font-size: 0;
+    line-height: 0;
+    *display: inline;
+    *zoom: 1
+}
+
+.recommend-post-navi a.active {
+    background: #cd7b00 !important
+}
+
+.hotRecommend {
+    padding-bottom: 20px
+}
+
+.hotRecommend h2.heading {
+    margin-bottom: 5px;
+    text-align: center;
+    text-align: left;
+    font-size: 18px
+}
+
+.hotRecommend .a {
+    margin-right: 20px;
+    width: 290px
+}
+
+.hotRecommend .a .photo {
+    overflow: hidden;
+    margin-bottom: 15px;
+    width: 290px;
+}
+
+.hotRecommend .a .photo img {
+    overflow: hidden;
+    width: 290px;
+}
+
+.hotRecommend .a p {
+    font-size: 12px;
+    line-height: 22px
+}
+
+.hotRecommend .a .info span {
+    margin-right: 20px;
+    color: #999;
+    text-align: center
+}
+
+.hotRecommend .b {
+    width: 340px
+}
+
+.hotRecommend .b .list li {
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ccc
+}
+
+.hotRecommend .b .list li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: 0
+}
+
+.hotRecommend .b .pic {
+    margin-right: 10px
+}
+
+.hotRecommend .b .pic img {
+    width: 80px;
+    height: 62px
+}
+
+.hotRecommend .b h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: normal
+}
+
+.hotRecommend .b .dec p {
+    margin: 0;
+    color: #777;
+    font-size: 12px
+}
+
+.hotRecommend .b .list li:hover .dec p {
+    color: #444
+}
+
+.post-list {
+    margin-bottom: 10px
+}
+
+.post-list li {
+    float: left;
+    clear: both;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    width: 690px;
+    border-bottom: 1px dotted #ccc
+}
+
+.post-list .info {
+    margin-bottom: 10px;
+    color: #95a5a6;
+    font-size: 12px
+}
+
+.post-list .info span {
+    margin-right: 5px
+}
+
+.post-list .main {
+    margin-bottom: 10px
+}
+
+.post-list .thumbnail {
+    display: inline-block;
+    overflow: hidden;
+    width: 161px
+}
+
+.post-list .thumbnail img {
+    width: 161px;
+    height: 187px
+}
+
+.post-list .desc {
+    padding-top: 50px;
+    margin-left: 20px;
+    width: 490px;
+    color: #555;
+    line-height: 24px
+}
+
+.post-list .more a {
+    display: none;
+    padding: 0 5px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: #9cb12f;
+    color: #fff;
+    text-align: right;
+    font-size: 12px
+}
+
+.post-list .more a:hover {
+    background: #8da126;
+    text-decoration: none
+}
+
+.post-list .lbar {
+    font-size: 12px
+}
+
+.post-list .lbar a {
+    margin-right: 3px;
+    color: #7f8c8d
+}
+
+.sidebox {
+    margin-bottom: 15px
+}
+
+.sidebox .hd {
+    margin-bottom: 5px;
+    padding-left: 10px;
+    height: 30px;
+    background: #9cb12f;
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px
+}
+
+.sidebox .hd .heading {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Microsoft YaHei", "SimHei ";
+    line-height: 30px
+}
+
+.toptabs {
+    margin: 3px 3px 0 0
+}
+
+.toptabs li {
+    float: left;
+    line-height: 31px
+}
+
+.toptabs li a {
+    padding: 0 10px;
+    color: #fff
+}
+
+.toptabs li a:hover {
+    text-decoration: none
+}
+
+.toptabs .active {
+    -webkit-border-top-right-radius: 2px;
+    border-top-right-radius: 2px;
+    -webkit-border-top-left-radius: 2px;
+    border-top-left-radius: 2px;
+    background: #fff
+}
+
+.toptabs .active a {
+    color: #666
+}
+
+.diggArea li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #ddd
+}
+
+.diggArea li:last-child {
+    border: 0
+}
+
+.diggArea a {
+    font-size: 12px
+}
+
+.diggNum {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: #dcdcdc;
+    color: #666;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 18px
+}
+
+.diggArea .h {
+    background: #d14836;
+    color: #fff
+}
+
+.taglist a {
+    display: inline-block;
+    margin-right: 3px;
+    padding: 3px 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: #888;
+    text-decoration: none;
+    white-space: nowrap;
+    white-space: nowrap;
+    -webkit-transition-timing-function: ease;
+    -moz-transition-timing-function: ease;
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    -webkit-transition-property: background-color;
+    -moz-transition-property: background-color
+}
+
+.taglist a:hover {
+    background: none repeat scroll 0 0 #888;
+    color: #fff
+}
+
+.tx-list {
+    color: #666;
+    font-size: 12px
+}
+
+.tx-list li {
+    padding-left: 10px;
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    background: url(../images/point-gary.png) no-repeat left center
+}
+
+.tx-list a {
+    line-height: 24px
+}
+
+.photo-list {
+    overflow: hidden;
+    margin-left: -10px
+}
+
+.photo-list li {
+    float: left;
+    overflow: hidden;
+    margin: 5px 0 10px 10px;
+    width: 120px;
+    height: 135px;
+    text-align: left;
+    font-size: 12px
+}
+
+.photo-list li img {
+    width: 120px;
+    height: 95px
+}
+
+.ph-tx-list {
+    margin-top: 10px
+}
+
+.ph-tx-list li {
+    float: left;
+    clear: both;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    width: 250px;
+    border-bottom: 1px dotted #ccc
+}
+
+.ph-tx-list li:last-child {
+    margin-bottom: 0;
+    border: 0
+}
+
+.ph-tx-list li .pic {
+    margin-right: 5px;
+    width: 72px
+}
+
+.ph-tx-list img {
+    width: 72px;
+    height: 57px
+}
+
+.ph-tx-list h3 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: "Microsoft YaHei", "SimHei ";
+    line-height: normal
+}
+
+.ph-tx-list .dec {
+    float: left;
+    width: 170px;
+    vertical-align: top
+}
+
+.ph-tx-list .dec p {
+    padding-top: 5px;
+    color: #95a5a6;
+    font-size: 10px
+}
+
+.ph-tx-list .dec p span {
+    margin-right: 15px
+}
+
+.sideShare li {
+    position: relative;
+    float: left;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    width: 250px
+}
+
+.sideShare .title {
+    position: absolute;
+    top: 10px;
+    left: 38px;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: "Microsoft YaHei", "SimHei ";
+    line-height: normal
+}
+
+.sideShare .count {
+    position: absolute;
+    top: 25px;
+    left: 38px;
+    color: #999;
+    font-size: 12px;
+    line-height: normal
+}
+
+.sideShare li span {
+    clear: both;
+    display: block
+}
+
+.sina-share, .tencent-share, .rss-share, .email-share {
+    position: relative;
+    top: 5px;
+    float: left;
+    overflow: hidden;
+    width: 32px;
+    height: 32px
+}
+
+.sina-share {
+    background-position: -89px 0
+}
+
+.tencent-share {
+    background-position: -89px -40px
+}
+
+.rss-share {
+    background-position: -89px -80px
+}
+
+.email-share {
+    background-position: -89px -120px
+}
+
+.pages li {
+    float: left;
+    margin: 0 2px
+}
+
+.pages li a {
+    display: inline-block;
+    padding: 2px 8px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: #9cb12f;
+    color: #fff
+}
+
+.pages li a:hover {
+    background: #8da126;
+    text-decoration: none
+}
+
+.pages .thisclass {
+    display: inline-block;
+    padding: 1px 7px;
+    border: 1px solid #8da126;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: #8da126;
+    font-weight: bold
+}
+
+.newpage {
+    clear: both;
+    margin: 20px 0;
+    text-align: left;
+    font-size: 14px
+}
+
+.newpage a {
+    display: inline-block;
+    padding: 2px 8px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: #9cb12f;
+    color: #fff
+}
+
+.newpage a:hover {
+    background: #8da126;
+    text-decoration: none
+}
+
+.newpage a.pre, .pages a.next {
+    padding: 2px 5px;
+    *padding: 3px 5px
+}
+
+.newpage b, .newpage strong {
+    display: inline-block;
+    padding: 1px 7px;
+    border: 1px solid #8da126;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    color: #8da126;
+    font-weight: bold
+}
+
+.newpage span {
+    margin-right: 10px;
+    color: #333;
+    font-size: 12px
+}
+
+.friendLink {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    background: #fff;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.1)
+}
+
+.friendLink .hd {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd
+}
+
+.friendLink li {
+    float: left;
+    margin-right: 15px;
+    font-size: 12px;
+    line-height: 24px
+}
+
+.friendLink li a {
+    color: #666;
+    white-space: nowrap
+}
+
+.friendLink .demand {
+    margin-top: 11px;
+    color: #999;
+    font-size: 12px
+}
+
+.footer {
+    padding: 5px 0 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    font-size: 12px
+}
+
+.footer .row {
+    margin-left: 0
+}
+
+.footer .heading {
+    color: #6c6c6c
+}
+
+.footer .list li {
+    padding-left: 10px;
+    background: url(../images/point-gary.png) no-repeat left center
+}
+
+.footer a {
+    color: #878787
+}
+
+.client li {
+    margin-right: 10px;
+    color: #878787;
+    line-height: 26px
+}
+
+.follow {
+    margin-top: -5px
+}
+
+.follow li {
+    margin-bottom: 3px
+}
+
+.weibo-icon, .TCweibo-icon, .weixin-icon {
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    margin-right: 5px;
+    width: 18px;
+    height: 18px
+}
+
+.weibo-icon {
+    background-position: 0 -106px
+}
+
+.TCweibo-icon {
+    background-position: -24px -106px
+}
+
+.weixin-icon {
+    background-position: -48px -106px
+}
+
+a.f-weibo .icons, a.f-TCweibo .icons, a.f-weixin .icons {
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    -o-transition-duration: .2s;
+    transition-duration: .2s;
+    -webkit-transition-property: background-position;
+    -moz-transition-property: background-position;
+    -o-transition-property: background-position
+}
+
+a.f-weibo:hover .icons, a.f-TCweibo:hover .icons, a.f-weixin:hover .icons {
+    -webkit-transition-duration: .2s;
+    -moz-transition-duration: .2s;
+    -o-transition-duration: .2s;
+    transition-duration: .2s;
+    -webkit-transition-property: background-position;
+    -moz-transition-property: background-position;
+    -o-transition-property: background-position
+}
+
+a.f-weibo:hover .icons {
+    background-position: 0 -124px
+}
+
+a.f-TCweibo:hover .icons {
+    background-position: -24px -124px
+}
+
+a.f-weixin:hover .icons {
+    background-position: -48px -124px
+}
+
+.copyright {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    color: #999;
+    font-size: 12px
+}
+
+.qiniu {
+    display: block;
+    padding-left: 115px;
+    height: 50px;
+    background: url(../images/qiniu.png) top left no-repeat;
+    line-height: 50px
+}
+
+#totop {
+    position: fixed;
+    right: 20px;
+    bottom: 200px;
+    z-index: 999;
+    -webkit-transition: bottom .9s;
+    -moz-transition: bottom .9s;
+    -o-transition: bottom .9s;
+    transition: bottom .9s
+}
+
+.gotop {
+    overflow: hidden;
+    width: 29px;
+    height: 66px;
+    background-position: 0 -150px;
+    line-height: 200px;
+    cursor: pointer
+}
+
+.gotop:hover {
+    width: 29px;
+    height: 66px;
+    background-position: 0 -215px
+}
+
+.max-weixin-icon-gary {
+    width: 32px;
+    height: 32px;
+    background-position: -89px -160px
+}
+
+.max-weixin-icon-gary:hover {
+    background-position: -89px -200px
+}
+
+.show-weixin {
+    position: relative
+}
+
+#totop .show-main {
+    display: none;
+    width: 250px;
+    height: 325px;
+    border: 1px solid #ccc
+}
+
+#totop .show-weixin:hover .show-main {
+    position: absolute;
+    right: 32px;
+    bottom: 5px;
+    display: block;
+    -webkit-animation: fadeInUp 1s .2s ease both;
+    -moz-animation: fadeInUp 1s .2s ease both
+}
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0)
+    }
+}
+
+@-moz-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -moz-transform: translateY(20px)
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: translateY(0)
+    }
+}
+
+.article h1.heading {
+    text-align: center;
+    font-size: 26px
+}
+
+.article .artCon img, .article .articleCon img, .article .artBox img {
+    display: block;
+    margin: 0px auto;
+    max-width: 680px;
+    height: auto;
+    background: none repeat scroll 0 0 #fff;
+    vertical-align: middle;
+    text-align: center
+}
+
+.article .meta {
+    height: 24px;
+    background: #f3f3f3;
+    color: #999;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px
+}
+
+.article .meta span {
+    margin: 5px
+}
+
+.article .artCon, .article .articleCon, .article .artBox {
+    margin-top: 15px
+}
+
+.article .artCon p, .article .articleCon p, .article .artBox p {
+    line-height: 28px
+}
+
+.article .artCon h2, .article .articleCon h2, .article .artBox h2 {
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 16px
+}
+
+.article .artCon h3, .article .articleCon h3, .article .artBox h3 {
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 32px
+}
+
+.article .alert-info {
+    margin-top: 20px
+}
+
+.arteditor {
+    margin-top: 40px;
+    color: #999;
+    text-align: right;
+    font-size: 12px
+}
+
+.arteditor span {
+    margin: 0 10px
+}
+
+.statement {
+    margin: 15px 0;
+    font-size: 12px
+}
+
+.statement p {
+    margin-bottom: 5px
+}
+
+.statement p a {
+    margin: 0 5px
+}
+
+.pageShare {
+    margin: 40px 0
+}
+
+.pageShare strong {
+    display: block;
+    padding-bottom: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: "Microsoft YaHei", "SimHei "
+}
+
+.pageShare div {
+    margin-left: -5px
+}
+
+.pageShare .wxqrcode {
+    clear: both;
+    padding: 30px 0;
+    text-align: center
+}
+
+.wz_xgtj {
+    margin-bottom: 20px;
+}
+
+.wz_xgtj ul {
+    list-style: none;
+}
+
+.wz_xgtj ul li {
+    float: left;
+    margin: 5px;
+    width: 148px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+
+.wz_xgtj ul li img {
+    width: 127px;
+    height: 162px;
+    margin: 10px;
+}
+
+.wz_xgtj ul li .xgtj_bt {
+    padding: 4px 5px;
+    background-color: #FAFAFA;
+    border-top: 1px solid #F2F2F2;
+    text-align: center;
+    line-height: 25px;
+    max-height: 22px;
+    overflow: hidden;
+}
+
+.context {
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    font-size: 12px
+}
+
+.postRelated .list li {
+    padding: 2px 0 2px 10px;
+    background: url(../images/point-gary.png) no-repeat left center
+}
+
+.postRelated .hd {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee
+}
+
+.quickTag {
+    margin-left: -25px
+}
+
+.quickTag h3.heading {
+    margin-left: 28px;
+    font-size: 18px
+}
+
+.tag-cloud {
+    margin: 0 25px
+}
+
+.quickTag .foot-tag {
+    float: left;
+    width: 239px;
+    height: 105px;
+    border-right: 1px solid #ecebf0
+}
+
+.quickTag div:last-child {
+    border: 0
+}
+
+.quickTag .foot-tag a {
+    display: inline-block;
+    margin: 5px;
+    height: 24px;
+    color: #666;
+    font-size: 12px;
+    line-height: 24px;
+    zoom: 1
+}
+
+.g960-90 {
+    overflow: hidden;
+    width: 960px;
+    height: 90px;
+    margin: 0 auto;
+}
+
+.g300-250 {
+    overflow: hidden;
+    width: 300px;
+    height: 250px
+}
+
+.article .money {
+    margin-bottom: 10px;
+    margin-left: -45px
+}
+
+.article .g300-250 {
+    float: left;
+    margin-left: 45px
+}
+
+.error404 {
+    padding-top: 50px;
+    height: 320px;
+    background: url(../images/404-terror.gif) top right no-repeat;
+    color: #666;
+    line-height: 2.6
+}
+
+.error404 h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px
+}
+
+.error404 ol {
+    margin-top: 10px
+}
+
+.error404 li {
+    list-style: inside decimal;
+    line-height: 2.4
+}
+
+.error404 li a {
+    margin: 0 5px;
+    text-decoration: underline
+}
+
+.nav_list {
+    padding-bottom: 10px
+}
+
+.title_bar {
+    position: relative;
+    margin: 30px 0 20px 0;
+    height: 0;
+    border-top: #e9e9e9 1px solid;
+    border-bottom: #fff 1px solid;
+    font-size: 14px
+}
+
+.title_bar .title {
+    position: absolute;
+    top: -11px;
+    left: 0;
+    padding-right: 5px;
+    background: #eef0f3;
+    color: #666;
+    font-weight: bold
+}
+
+.title_bar .icon {
+    display: inline-block;
+    margin-right: 10px
+}
+
+.title_bar .icon img {
+    vertical-align: text-bottom
+}
+
+.icon_list {
+    clear: both
+}
+
+.icon_list a {
+    font-size: 12px
+}
+
+.icon_list .line_hr {
+    width: 820px
+}
+
+.more_nav {
+    float: right
+}
+
+ul.icon_list {
+    margin: 10px 0 0 2px;
+    width: 1010px
+}
+
+ul.icon_list li {
+    position: relative;
+    float: left;
+    margin-right: 44px;
+    width: 56px;
+    height: 90px
+}
+
+ul.icon_list li a.icon_box {
+    display: block;
+    margin-bottom: 5px;
+    width: 56px;
+    height: 85px
+}
+
+ul.icon_list li .icon_box img {
+    padding: 4px;
+    width: 48px;
+    height: 48px
+}
+
+ul.icon_list li span {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    display: block;
+    margin-left: -15px;
+    width: 86px;
+    text-align: center
+}
+
+.category {
+    overflow: hidden;
+    padding: 10px 0;
+    width: 960px;
+    height: auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    line-height: 30px
+}
+
+.category a {
+    color: #06C;
+    font-size: 14px
+}
+
+.category a:hover {
+    color: #03C;
+    text-decoration: underline
+}
+
+.category li {
+    float: left;
+    display: inline;
+    overflow: hidden;
+    overflow: hidden;
+    margin-right: 10px;
+    padding-bottom: 5px;
+    width: 150px;
+    white-space: nowrap;
+    line-height: 2.4;
+    heigt: 24px
+}
+
+.category li a {
+    padding: 5px 8px
+}
+
+.category li a:hover {
+    padding: 5px 8px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #06a4ff;
+    color: #FFF;
+    text-decoration: none
+}
+
+.topPages {
+    margin-top: 10px
+}
+
+.topPages a {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 2px 10px;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #fff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+    background-repeat: repeat-x;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333;
+    vertical-align: middle;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    font-size: 11.9px;
+    line-height: 20px;
+    cursor: pointer;
+    *display: inline;
+    *margin-left: .3em;
+    *background-color: #e6e6e6;
+    *border: 0;
+    border-bottom-color: #b3b3b3;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    *zoom: 1
+}
+
+.topPages a:hover {
+    background-color: #e6e6e6;
+    background-position: 0 -15px;
+    color: #333;
+    text-decoration: none;
+    -webkit-transition: background-position .1s linear;
+    -moz-transition: background-position .1s linear;
+    -o-transition: background-position .1s linear;
+    transition: background-position .1s linear;
+    *background-color: #d9d9d9
+}
+
+.top_box, .top_content h5 {
+    font-size: 14px
+}
+
+.top_box .topmenu {
+    overflow: hidden;
+    margin-top: 10px;
+    width: 150px;
+    line-height: 2.4
+}
+
+.top_box .topmenu li {
+    padding-left: 15px;
+    line-height: 2.4
+}
+
+.top_box .cut {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #9cb12f;
+    color: #FFF;
+    -o-border-radius: 3px;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none
+}
+
+.top_box .cut a {
+    color: #FFF;
+    font-weight: bold
+}
+
+.top_content {
+    overflow: hidden;
+    margin-top: 10px;
+    width: 800px;
+    line-height: 2.5
+}
+
+.top_content .top_min {
+    overflow: hidden;
+    margin-bottom: 10px;
+    width: 390px;
+    height: 440px;
+    border: 1px solid #ccc;
+    font-size: 12px
+}
+
+.top_content .top_full {
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    font-size: 12px
+}
+
+.top_content .tt {
+    overflow: hidden;
+    padding: 0 10px;
+    background: #f2f2f2
+}
+
+.top_content h5 a {
+    color: #333;
+    font-weight: bold
+}
+
+.top_content .top_list li {
+    overflow: hidden;
+    padding: 0 10px;
+    border-bottom: 1px dotted #ccc;
+    line-height: 2.4
+}
+
+.top_content .icon_num {
+    float: left;
+    width: 20px;
+    text-align: center;
+    font-style: italic;
+    font-size: 14px
+}
+
+.top_content .top_list a {
+    float: left;
+    margin-left: 10px
+}
+
+.top_content .icon_rise {
+    float: right
+}
+
+#fixedMain .sidebox {
+    overflow: hidden;
+    width: 250px
+}
+
+.hbshare {
+    margin: 5px 3px 0 3px !important;
+    height: 37px
+}
+
+.book .title {
+    margin-bottom: 20px;
+    margin-left: 23px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd
+}
+
+.book .title h2.heading {
+    font-size: 20px
+}
+
+.book .span2 {
+    overflow: hidden;
+    margin-bottom: 15px;
+    padding: 1px;
+    font-size: 12px
+}
+
+.book .span2:hover {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #f4f3f3
+}
+
+.book .span2 .caption {
+    padding: 0 10px
+}
+
+.book .span2 h3 {
+    display: block;
+    height: 30px;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4
+}
+
+.book .span2 img {
+    display: block;
+    margin: 10px 12px 0 12px;
+    width: 105px;
+    height: 145px
+}
+
+.book .span2 p {
+    display: block;
+    height: 35px;
+    color: #999;
+    font-weight: normal;
+    font-size: 12px
+}
+
+.book .popover, .book .btn {
+    font-size: 12px
+}
+
+.book .popover {
+    color: #999;
+    line-height: 2
+}
+
+.book .banner {
+    position: relative;
+    margin-bottom: 30px;
+    margin-left: 19px;
+    width: 960px;
+    height: 239px;
+    background: url(../images/bookbanner.jpg) no-repeat
+}
+
+.book h1.heading, .dy {
+    padding: 15px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 48px
+}
+
+.book .banner .a1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 960px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.7)
+}
+
+.book .dy {
+    float: left;
+    width: 100px
+}
+
+.book .banner p {
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px
+}
+
+.book .a2 {
+    position: absolute;
+    top: 10px;
+    right: 10px
+}
+
+.website-map section {
+    margin-bottom: 10px
+}
+
+.website-map .sub-title {
+    position: relative;
+    margin: 20px 0;
+    height: 1px;
+    border-bottom: 1px solid #e6e6e6
+}
+
+.website-map .sub-title h3 {
+    position: absolute;
+    top: -22px;
+    left: 0;
+    padding: 0 5px 0 20px;
+    height: 24px;
+    background: #fff url(../images/bg.png) -130px 5px no-repeat;
+    color: #585858;
+    font-weight: 700;
+    font-size: 1.2em;
+    line-height: 24px
+}
+
+.website-map .span2 {
+    margin: 5px 10px;
+    padding: 5px 15px;
+    height: 70px
+}
+
+.website-map .span2:hover {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #f4f3f3
+}
+
+.website-map .span2 a {
+    display: block;
+    height: 70px;
+    color: #999;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px
+}
+
+.website-map .span2 span {
+    display: block;
+    overflow: hidden;
+    height: 25px;
+    color: #08c;
+    font-size: 14px
+}
+
+.website-map .new-item {
+    padding-left: 18px;
+    background: url(../images/bg.png) -88px -243px no-repeat;
+    color: #5dad2c !important
+}
+
+.website-map .hot-item {
+    padding-left: 18px;
+    background: url(../images/bg.png) -88px -269px no-repeat;
+    color: #ff8901 !important
+}
+
+.share-wrap {
+    margin: 40px 0;
+    padding: 20px;
+    height: 160px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: #f5f5f5
+}
+
+.Ext-read {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    border-top: #242424 solid 5px
+}
+
+.title-read {
+    width: 400px
+}
+
+.keywords-read {
+    padding-left: 20px;
+    width: 200px;
+    height: 220px;
+    border-left: 1px solid #ccc
+}
+
+.title-read .list li {
+    padding: 2px 0 2px 10px;
+    background: url(../images/point-gary.png) no-repeat left center;
+    line-height: 24px
+}
+
+.title-read .list li span {
+    color: #999;
+    font-size: 12px
+}
+
+.title-read .list li a {
+    margin-right: 10px
+}
+
+.Ext-read .keywords a {
+    display: block;
+    padding: 2px 0;
+    line-height: 25px
+}
+
+.Ext-read .keywords .label {
+    margin: 0 10px 15px 0;
+    padding: 2px 5px
+}
+
+.Ext-read .returnlink {
+    clear: both;
+    padding: 20px 0;
+    text-align: center
+}
+
+.Ext-read .btn-group {
+    display: inherit
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    body {
+        background: #fff
+    }
+
+    .topbar {
+        background: #f5f5f5;
+        color: #333
+    }
+
+    .topbar a {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 14px
+    }
+
+    .content {
+        padding: 0;
+        border: 0;
+        box-shadow: none
+    }
+
+    .header {
+        margin: 0
+    }
+
+    #recommend-post, .hotRecommend, .span4, .topnavbar, .subscribe, .subnavbar, .search, .footer, .money, #totop, .wumii-hook, .friendLink, .g960-90, .topsection, .quickTag, .postRelated, .pageShare, .statement, .keywords-read, .context {
+        display: none
+    }
+
+    .topbar {
+        display: block
+    }
+
+    .topsection {
+        min-width: 340px
+    }
+
+    .topsection .inner {
+        width: 340px !important
+    }
+
+    .content, .span8 {
+        overflow: hidden;
+        width: 340px !important
+    }
+
+    .article .artCon img, .article .articleCon img, .article .artBox img {
+        max-width: 340px
+    }
+
+    #contrainer {
+        margin: 10px;
+        width: 340px
+    }
+
+    .row {
+        margin-left: -10px
+    }
+
+    .content {
+        padding: 5px
+    }
+
+    #totop {
+        display: none !important
+    }
+
+    .post-list li {
+        width: 340px !important
+    }
+
+    .post-list .desc {
+        margin-left: 0;
+        width: 340px !important
+    }
+
+    .post-list .thumbnail {
+        display: none
+    }
+
+    .article h1.heading {
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .article .meta {
+        height: auto;
+        background: 0;
+        text-align: left;
+        font-size: 10px
+    }
+
+    .post-list h2.heading {
+        font-size: 16px
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 540px) {
+    body {
+        background: #fff
+    }
+
+    .topbar {
+        background: #f5f5f5;
+        color: #333
+    }
+
+    .topbar a {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 14px
+    }
+
+    .content {
+        padding: 0;
+        border: 0;
+        box-shadow: none
+    }
+
+    .header {
+        margin: 0
+    }
+
+    #recommend-post, .hotRecommend, .span4, .topnavbar, .subscribe, .subnavbar, .search, .footer, .money, #totop, .wumii-hook, .friendLink, .g960-90, .topsection, .quickTag, .postRelated, .pageShare, .statement, .keywords-read, .context {
+        display: none
+    }
+
+    .topbar {
+        display: block
+    }
+
+    .topsection {
+        min-width: 500px
+    }
+
+    .topsection .inner {
+        width: 500px !important
+    }
+
+    .content, .span8 {
+        overflow: hidden;
+        width: 500px !important
+    }
+
+    .article .artCon img, .article .articleCon img, .article .artBox img {
+        max-width: 500px
+    }
+
+    #contrainer {
+        margin: 10px;
+        width: 500px
+    }
+
+    .row {
+        margin-left: -10px
+    }
+
+    .content {
+        padding: 5px
+    }
+
+    #totop {
+        display: none !important
+    }
+
+    .post-list li {
+        width: 500px !important
+    }
+
+    .post-list .desc {
+        width: 270px !important
+    }
+
+    .article h1.heading {
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .article .meta {
+        height: auto;
+        background: 0;
+        text-align: left;
+        font-size: 10px
+    }
+
+    .post-list h2.heading {
+        font-size: 16px
+    }
+}
+
+@media only screen and (min-width: 540px) and (max-width: 640px) {
+    body {
+        background: #fff
+    }
+
+    .topbar {
+        background: #f5f5f5;
+        color: #333
+    }
+
+    .topbar a {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 14px
+    }
+
+    .content {
+        padding: 0;
+        border: 0;
+        box-shadow: none
+    }
+
+    .header {
+        margin: 0
+    }
+
+    #recommend-post, .hotRecommend, .span4, .topnavbar, .subscribe, .subnavbar, .search, .footer, .money, #totop, .wumii-hook, .friendLink, .g960-90, .topsection, .quickTag, .postRelated, .pageShare, .statement, .keywords-read, .context {
+        display: none
+    }
+
+    .topbar {
+        display: block
+    }
+
+    .topsection {
+        min-width: 560px
+    }
+
+    .topsection .inner {
+        width: 560px !important
+    }
+
+    .content, .span8 {
+        overflow: hidden;
+        width: 560px !important
+    }
+
+    .article .artCon img, .article .articleCon img, .article .artBox img {
+        max-width: 560px
+    }
+
+    #contrainer {
+        margin: 10px;
+        width: 560px
+    }
+
+    .row {
+        margin-left: -10px
+    }
+
+    .content {
+        padding: 5px
+    }
+
+    #totop {
+        display: none !important
+    }
+
+    .post-list li {
+        width: 560px !important
+    }
+
+    .post-list .desc {
+        width: 340px !important
+    }
+
+    .article h1.heading {
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .article .meta {
+        height: auto;
+        background: 0;
+        text-align: left;
+        font-size: 10px
+    }
+
+    .post-list h2.heading {
+        font-size: 16px
+    }
+}
+
+@media screen and (min-width: 640px) and (max-width: 720px) {
+    body {
+        background: #fff
+    }
+
+    .topbar {
+        background: #f5f5f5;
+        color: #333
+    }
+
+    .topbar a {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 14px
+    }
+
+    .content {
+        padding: 0;
+        border: 0;
+        box-shadow: none
+    }
+
+    .header {
+        margin: 0
+    }
+
+    #recommend-post, .hotRecommend, .span4, .topnavbar, .subscribe, .subnavbar, .search, .footer, .money, #totop, .wumii-hook, .friendLink, .g960-90, .topsection, .quickTag, .postRelated, .pageShare, .statement, .keywords-read, .context {
+        display: none
+    }
+
+    .topbar {
+        display: block
+    }
+
+    .topsection {
+        min-width: 660px
+    }
+
+    .topsection .inner {
+        width: 660px !important
+    }
+
+    .content, .span8 {
+        overflow: hidden;
+        width: 660px !important
+    }
+
+    .article .artCon img, .article .articleCon img, .article .artBox img {
+        max-width: 660px
+    }
+
+    #contrainer {
+        margin: 10px;
+        width: 660px
+    }
+
+    .row {
+        margin-left: -10px
+    }
+
+    .content {
+        padding: 5px
+    }
+
+    #totop {
+        display: none !important
+    }
+
+    .post-list li {
+        width: 660px !important
+    }
+
+    .post-list .desc {
+        width: 430px !important
+    }
+
+    .article h1.heading {
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .article .meta {
+        height: auto;
+        background: 0;
+        text-align: left;
+        font-size: 10px
+    }
+
+    .post-list h2.heading {
+        font-size: 16px
+    }
+}
+
+@media screen and (min-width: 720px) and (max-width: 800px) {
+    body {
+        background: #fff
+    }
+
+    .topbar {
+        background: #f5f5f5;
+        color: #333
+    }
+
+    .topbar a {
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 14px
+    }
+
+    .content {
+        padding: 0;
+        border: 0;
+        box-shadow: none
+    }
+
+    .header {
+        margin: 0
+    }
+
+    #recommend-post, .hotRecommend, .span4, .topnavbar, .subscribe, .subnavbar, .search, .footer, .money, #totop, .wumii-hook, .friendLink, .g960-90, .topsection, .quickTag, .postRelated, .pageShare, .statement, .keywords-read, .context {
+        display: none
+    }
+
+    .topbar {
+        display: block
+    }
+
+    .topsection {
+        min-width: 740px
+    }
+
+    .topsection .inner {
+        width: 740px !important
+    }
+
+    .content, .span8 {
+        overflow: hidden;
+        width: 740px !important
+    }
+
+    .article .artCon img, .article .articleCon img, .article .artBox img {
+        max-width: 740px
+    }
+
+    #contrainer {
+        margin: 10px;
+        width: 740px
+    }
+
+    .row {
+        margin-left: -10px
+    }
+
+    .content {
+        padding: 5px
+    }
+
+    #totop {
+        display: none !important
+    }
+
+    .post-list li {
+        width: 740px !important
+    }
+
+    .post-list .desc {
+        width: 500px !important
+    }
+
+    .article h1.heading {
+        text-align: left;
+        font-weight: bold;
+        font-size: 16px
+    }
+
+    .article .meta {
+        height: auto;
+        background: 0;
+        text-align: left;
+        font-size: 10px
+    }
+
+    .post-list h2.heading {
+        font-size: 16px
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-toggle {
+        display: none
+    }
+}
+
+.searchBox {
+    text-align: center;
+    display: none;
+}
+
+#daojishi {
+    color: red;
+}
+
+.loading {
+    text-align: center;
+}
+
+.kissad {
+    padding: 15px;
+    color: #D04725;
+    display: none;
+}
+
+/**list*/
+.list_box {
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.list_box .next_page {
+    display: none;
+}
+
+.list2 {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.list2 ul {
+    margin: -21px 0 0 -21px;
+    padding: 1px 2px 3px;
+    position: relative;
+}
+
+.list2 .post {
+    width: 210px;
+    margin: 28px 0 0 24px;
+    float: left;
+    display: block;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.list2 li, .link {
+    position: relative;
+    display: block;
+    background: #fff;
+}
+
+.link {
+    position: relative;
+    display: block;
+    background: #fff;
+}
+
+.list_img {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.list_img a img {
+    height: 260px;
+    width: 200px;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.list_text {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    margin: 15px auto 10px;
+    line-height: 21px;
+    color: #aaa;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.list_text strong, .list_text em {
+    font-weight: normal;
+}
+
+.list_text b a {
+    color: #8aa653;
+}
+
+.list_text b a:hover {
+    text-decoration: none;
+    color: #7594B3;
+}
+
+.list_text em, .list_text strong {
+    font-style: normal;
+}
+
+p.info {
+    padding-top: 5px;
+    margin-top: 8px;
+    border-top: 1px dotted #ccc;
+    clear: both;
+}
+
+.list_text em p {
+    font-family: Microsoft YaHei, \5FAE\8F6F\96C5\9ED1, tahoma, arial, simsun, \5B8B\4F53;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.list_text em p strong {
+    color: #444;
+}
+
+.view:hover {
+    color: #444;
+}
+
+.good:hover {
+    color: #444;
+}
+
+.list_text .view {
+    width: 55px;
+    height: 18px;
+    line-height: 18px;
+    background: url(http://www.nh87.cn/images/pic_ilike.png) left -1230px;
+    padding-left: 15px;
+    float: left;
+}
+
+.list_text .good {
+    height: 18px;
+    line-height: 18px;
+    background: url(http://www.nh87.cn/images/pic_ilike.png) left -523px;
+    padding-left: 15px;
+    float: left;
+}
+
+.list_tp {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.list_tp a.img_on {
+    display: block;
+    width: 80px;
+    height: 30px;
+    background: url(/templets/vip/images/vote-zan.png) 10px center no-repeat #1c9f1e;
+    color: #fff;
+    font-size: 14px;
+    text-indent: 40px;
+    transition: 0.3s;
+}
+
+.well {
+    float: left;
+}
+
+.box_ad {
+    display: inline-block;
+    padding-left: 8px;
+}
+
+.weizhi {
+    box-shadow: 0 1px 1px 0px #d2d2d2;
+    color: #9A9A9A;
+    font-size: 14px;
+    padding: 3px
+}
+
+.weizhi a {
+    color: #454545;
+}
+
+.weizhi a:hover {
+    color: green;
+}
+
+.weizhi2 {
+    height: 18px;
+    line-height: 24px;
+    border-top: 1px solid #BADAA1;
+    border-bottom: 1px solid #BADAA1;
+    font: 12px Verdana, Arial, Tahoma;
+}
+
+.weizhi2 a {
+    color: #428C5B;
+}
+
+.artCon {
+    margin-top: 15px;
+    line-height: 1.8;
+    color: #000;
+    font: 16px/1.5 '寰粺姝ｉ粦楂�', 'Microsoft Yahei', 'mingliu', Tahoma;
+}
+
+.artCon p {
+    text-indent: 2em;
+}
+
+blockquote {
+    color: #7da33c;
+    margin-top: 45px;
+    padding-top: 10px;
+}
