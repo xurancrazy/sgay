@@ -17,6 +17,8 @@ public class Movies {
 
     private String teacher;
 
+    private Boolean recommend;
+
     public Long getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class Movies {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher == null ? null : teacher.trim();
+    }
+
+    public Boolean getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Boolean recommend) {
+        this.recommend = recommend;
     }
 }

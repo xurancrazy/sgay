@@ -1,7 +1,9 @@
 package com.sgay.giligili.dao;
 
 import com.sgay.giligili.entity.Teachers;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface TeachersMapper {
     int deleteByPrimaryKey(Long id);
 

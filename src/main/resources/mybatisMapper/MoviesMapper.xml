@@ -10,10 +10,17 @@
     <result column="viewsNum" jdbcType="BIGINT" property="viewsnum" />
     <result column="likesNum" jdbcType="BIGINT" property="likesnum" />
     <result column="teacher" jdbcType="VARCHAR" property="teacher" />
+    <result column="recommend" jdbcType="BIT" property="recommend" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, fanhao, imgHref, title, publishTime, viewsNum, likesNum, teacher
+    id, fanhao, imgHref, title, publishTime, viewsNum, likesNum, teacher, recommend
   </sql>
+  <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where recommend = TRUE
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -27,10 +34,12 @@
   <insert id="insert" parameterType="com.sgay.giligili.entity.Movies">
     insert into movies (id, fanhao, imgHref, 
       title, publishTime, viewsNum, 
-      likesNum, teacher)
+      likesNum, teacher, recommend
+      )
     values (#{id,jdbcType=BIGINT}, #{fanhao,jdbcType=VARCHAR}, #{imghref,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{publishtime,jdbcType=VARCHAR}, #{viewsnum,jdbcType=BIGINT}, 
-      #{likesnum,jdbcType=BIGINT}, #{teacher,jdbcType=VARCHAR})
+      #{likesnum,jdbcType=BIGINT}, #{teacher,jdbcType=VARCHAR}, #{recommend,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sgay.giligili.entity.Movies">
     insert into movies
@@ -59,6 +68,9 @@
       <if test="teacher != null">
         teacher,
       </if>
+      <if test="recommend != null">
+        recommend,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -84,6 +96,9 @@
       </if>
       <if test="teacher != null">
         #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        #{recommend,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -111,6 +126,9 @@
       <if test="teacher != null">
         teacher = #{teacher,jdbcType=VARCHAR},
       </if>
+      <if test="recommend != null">
+        recommend = #{recommend,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -122,7 +140,8 @@
       publishTime = #{publishtime,jdbcType=VARCHAR},
       viewsNum = #{viewsnum,jdbcType=BIGINT},
       likesNum = #{likesnum,jdbcType=BIGINT},
-      teacher = #{teacher,jdbcType=VARCHAR}
+      teacher = #{teacher,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
