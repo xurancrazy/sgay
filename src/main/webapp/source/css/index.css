@@ -43,10 +43,13 @@ h1, h2, h3, h4, h5, h6 {
 .span4 {
     width: 250px;
     position: relative;
+    float:left;
 }
 
 .span8 {
-    width: 690px
+    width: 690px;
+    margin-left: 20px;
+    float:left;
 }
 
 .icons {

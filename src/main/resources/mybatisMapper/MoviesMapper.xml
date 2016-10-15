@@ -28,6 +28,7 @@
     <include refid="Base_Column_List" />
     from movies
     where teacher = #{teacher,jdbcType=VARCHAR}
+    ORDER BY viewsNum DESC
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
