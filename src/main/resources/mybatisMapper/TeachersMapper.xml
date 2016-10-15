@@ -14,7 +14,7 @@
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from teachers
     where id = #{id,jdbcType=BIGINT}
@@ -24,6 +24,13 @@
     select
     <include refid="Base_Column_List" />
     from teachers
+  </select>
+
+  <select id="selectTeacherByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teachers
+    where name = #{teacherName,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

@@ -21,4 +21,9 @@ public class TeacherService implements ITeacherService {
     public List<Teachers> queryTeachers() {
         return mTeachersMapper.selectTeachers();
     }
+
+    @Override
+    public Teachers queryTeacherByName(String teacherName) {
+        return mTeachersMapper.selectTeacherByName(teacherName);
+    }
 }

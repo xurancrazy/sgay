@@ -27,10 +27,12 @@ public class TeachersController {
     @Autowired
     private IMoviesService mMoviesService;
 
-    @GetMapping(value = "/{teacher}")
-    public String teacherMovies(@PathVariable String teacher, ModelMap modelMap){
-        List<Movies> movies = mMoviesService.queryMoviesByTeacherName(teacher);
+    @GetMapping(value = "/{teacherName}")
+    public String teacherMovies(@PathVariable String teacherName, ModelMap modelMap){
+        List<Movies> movies = mMoviesService.queryMoviesByTeacherName(teacherName);
+        Teachers teacher = mTeacherService.queryTeacherByName(teacherName);
         modelMap.addAttribute("movies",movies);
+        modelMap.addAttribute("teacher",teacher);
         return "teacherDetail";
     }
 }

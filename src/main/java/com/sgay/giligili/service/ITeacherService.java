@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface ITeacherService {
     List<Teachers> queryTeachers();
+
+    Teachers queryTeacherByName(String teacherName);
 }

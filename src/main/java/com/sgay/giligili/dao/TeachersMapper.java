@@ -20,4 +20,6 @@ public interface TeachersMapper {
     int updateByPrimaryKey(Teachers record);
 
     List<Teachers> selectTeachers();
+
+    Teachers selectTeacherByName(String teacherName);
 }

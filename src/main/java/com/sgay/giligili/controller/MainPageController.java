@@ -18,7 +18,7 @@ import java.util.List;
 public class MainPageController {
 
 	@Autowired
-	private IMoviesService mRecommendService;
+	private IMoviesService mMoviesService;
 	@Autowired
 	private ITeacherService mTeacherService;
 
@@ -26,7 +26,7 @@ public class MainPageController {
 
 	@GetMapping(value = "/")
 	public String homePage(ModelMap modelMap){
-		List<Movies> recommendMovies = mRecommendService.queryRecommendMovies();
+		List<Movies> recommendMovies = mMoviesService.queryRecommendMovies();
 		modelMap.addAttribute("recommendMovies",recommendMovies);
 		return "index";
 	}
