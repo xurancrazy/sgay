@@ -1,7 +1,9 @@
 package com.sgay.giligili.controller;
 
 import com.sgay.giligili.entity.Movies;
+import com.sgay.giligili.entity.Teachers;
 import com.sgay.giligili.service.IMoviesService;
+import com.sgay.giligili.service.ITeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class MainPageController {
 
 	@Autowired
 	private IMoviesService mRecommendService;
+	@Autowired
+	private ITeacherService mTeacherService;
 
 	private static Logger logger= LoggerFactory.getLogger(MainPageController.class);
 
@@ -29,6 +33,8 @@ public class MainPageController {
 
 	@GetMapping(value = "/teachers")
 	public String teachersPage(ModelMap modelMap){
-		return "index";
+		List<Teachers> teachers = mTeacherService.queryTeachers();
+		modelMap.addAttribute("teachers",teachers);
+		return "teachers";
 	}
 }

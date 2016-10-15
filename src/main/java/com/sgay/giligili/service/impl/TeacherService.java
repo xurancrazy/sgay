@@ -2,6 +2,7 @@ package com.sgay.giligili.service.impl;
 
 import com.sgay.giligili.dao.TeachersMapper;
 import com.sgay.giligili.entity.Movies;
+import com.sgay.giligili.entity.Teachers;
 import com.sgay.giligili.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,10 @@ import java.util.List;
 @Service
 public class TeacherService implements ITeacherService {
 
+    @Autowired
+    private TeachersMapper mTeachersMapper;
+    @Override
+    public List<Teachers> queryTeachers() {
+        return mTeachersMapper.selectTeachers();
+    }
 }

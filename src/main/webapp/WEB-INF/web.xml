@@ -31,11 +31,6 @@
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
 
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/source/*</url-pattern>
-    </servlet-mapping>
-
     <!-- Spring MVC servlet -->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>

@@ -11,6 +11,8 @@ public class Teachers {
 
     private String img;
 
+    private Long onclicknum;
+
     public Long getId() {
         return id;
     }
@@ -50,4 +52,13 @@ public class Teachers {
     public void setImg(String img) {
         this.img = img == null ? null : img.trim();
     }
+
+    public Long getOnclicknum() {
+        return onclicknum;
+    }
+
+    public void setOnclicknum(Long onclicknum) {
+        this.onclicknum = onclicknum;
+    }
+
 }

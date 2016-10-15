@@ -23,7 +23,7 @@ public class MoviesService implements IMoviesService {
     }
 
     @Override
-    public List<Movies> queryTeacherMovies() {
-        return null;
+    public List<Movies> queryMoviesByTeacherName(String teacher) {
+        return mMoviesMapper.selectMoviesByTeacherName(teacher);
     }
 }

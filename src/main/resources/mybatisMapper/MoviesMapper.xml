@@ -15,12 +15,21 @@
   <sql id="Base_Column_List">
     id, fanhao, imgHref, title, publishTime, viewsNum, likesNum, teacher, recommend
   </sql>
+
   <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movies">
     select
     <include refid="Base_Column_List" />
     from movies
     where recommend = TRUE
   </select>
+
+  <select id="selectMoviesByTeacherName" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where teacher = #{teacher,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -10,5 +10,5 @@ import java.util.List;
 public interface IMoviesService {
     List<Movies> queryRecommendMovies();
 
-    List<Movies> queryTeacherMovies();
+    List<Movies> queryMoviesByTeacherName(String teacher);
 }

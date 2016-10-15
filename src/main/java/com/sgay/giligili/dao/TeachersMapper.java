@@ -3,6 +3,8 @@ package com.sgay.giligili.dao;
 import com.sgay.giligili.entity.Teachers;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface TeachersMapper {
     int deleteByPrimaryKey(Long id);
@@ -15,7 +17,7 @@ public interface TeachersMapper {
 
     int updateByPrimaryKeySelective(Teachers record);
 
-    int updateByPrimaryKeyWithBLOBs(Teachers record);
-
     int updateByPrimaryKey(Teachers record);
+
+    List<Teachers> selectTeachers();
 }

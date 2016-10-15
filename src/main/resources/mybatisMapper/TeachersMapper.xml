@@ -6,24 +6,26 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="moviesNum" jdbcType="INTEGER" property="moviesnum" />
     <result column="likesNum" jdbcType="BIGINT" property="likesnum" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sgay.giligili.entity.Teachers">
     <result column="img" jdbcType="LONGVARCHAR" property="img" />
+    <result column="onclickNum" jdbcType="LONGVARCHAR" property="onclicknum" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, moviesNum, likesNum
+    id, name, moviesNum, likesNum, img, onclickNum
   </sql>
-  <sql id="Blob_Column_List">
-    img
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from teachers
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectTeachers" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from teachers
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from teachers
     where id = #{id,jdbcType=BIGINT}
@@ -89,19 +91,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sgay.giligili.entity.Teachers">
+  <update id="updateByPrimaryKey" parameterType="com.sgay.giligili.entity.Teachers">
     update teachers
     set name = #{name,jdbcType=VARCHAR},
       moviesNum = #{moviesnum,jdbcType=INTEGER},
       likesNum = #{likesnum,jdbcType=BIGINT},
       img = #{img,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.sgay.giligili.entity.Teachers">
-    update teachers
-    set name = #{name,jdbcType=VARCHAR},
-      moviesNum = #{moviesnum,jdbcType=INTEGER},
-      likesNum = #{likesnum,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
