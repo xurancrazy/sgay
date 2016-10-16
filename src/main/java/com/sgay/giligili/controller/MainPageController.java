@@ -15,14 +15,7 @@ import java.util.List;
 
 
 @Controller
-public class MainPageController {
-
-	@Autowired
-	private IMoviesService mMoviesService;
-	@Autowired
-	private ITeacherService mTeacherService;
-
-	private static Logger logger= LoggerFactory.getLogger(MainPageController.class);
+public class MainPageController extends BaseController{
 
 	@GetMapping(value = "/")
 	public String homePage(ModelMap modelMap){

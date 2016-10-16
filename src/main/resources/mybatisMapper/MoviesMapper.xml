@@ -6,7 +6,7 @@
     <result column="fanhao" jdbcType="VARCHAR" property="fanhao" />
     <result column="imgHref" jdbcType="VARCHAR" property="imghref" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="publishTime" jdbcType="VARCHAR" property="publishtime" />
+    <result column="publishTime" jdbcType="DATE" property="publishtime" />
     <result column="viewsNum" jdbcType="BIGINT" property="viewsnum" />
     <result column="likesNum" jdbcType="BIGINT" property="likesnum" />
     <result column="teacher" jdbcType="VARCHAR" property="teacher" />
@@ -15,29 +15,6 @@
   <sql id="Base_Column_List">
     id, fanhao, imgHref, title, publishTime, viewsNum, likesNum, teacher, recommend
   </sql>
-
-  <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movies">
-    select
-    <include refid="Base_Column_List" />
-    from movies
-    where recommend = TRUE
-  </select>
-
-  <select id="selectMoviesByTeacherName" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
-    select
-    <include refid="Base_Column_List" />
-    from movies
-    where teacher = #{teacherName,jdbcType=VARCHAR}
-    ORDER BY viewsNum DESC
-  </select>
-
-  <select id="selectMovieByFanhao" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
-    select
-    <include refid="Base_Column_List" />
-    from movies
-    where fanhao = #{movieName,jdbcType=VARCHAR}
-  </select>
-
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -54,7 +31,7 @@
       likesNum, teacher, recommend
       )
     values (#{id,jdbcType=BIGINT}, #{fanhao,jdbcType=VARCHAR}, #{imghref,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{publishtime,jdbcType=VARCHAR}, #{viewsnum,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{publishtime,jdbcType=DATE}, #{viewsnum,jdbcType=BIGINT}, 
       #{likesnum,jdbcType=BIGINT}, #{teacher,jdbcType=VARCHAR}, #{recommend,jdbcType=BIT}
       )
   </insert>
@@ -103,7 +80,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="publishtime != null">
-        #{publishtime,jdbcType=VARCHAR},
+        #{publishtime,jdbcType=DATE},
       </if>
       <if test="viewsnum != null">
         #{viewsnum,jdbcType=BIGINT},
@@ -132,7 +109,7 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="publishtime != null">
-        publishTime = #{publishtime,jdbcType=VARCHAR},
+        publishTime = #{publishtime,jdbcType=DATE},
       </if>
       <if test="viewsnum != null">
         viewsNum = #{viewsnum,jdbcType=BIGINT},
@@ -154,11 +131,41 @@
     set fanhao = #{fanhao,jdbcType=VARCHAR},
       imgHref = #{imghref,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=VARCHAR},
+      publishTime = #{publishtime,jdbcType=DATE},
       viewsNum = #{viewsnum,jdbcType=BIGINT},
       likesNum = #{likesnum,jdbcType=BIGINT},
       teacher = #{teacher,jdbcType=VARCHAR},
       recommend = #{recommend,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where recommend = TRUE
+  </select>
+
+  <select id="selectMoviesByTeacherName" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where teacher = #{teacherName,jdbcType=VARCHAR}
+    ORDER BY viewsNum DESC
+  </select>
+
+  <select id="selectMovieByFanhao" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where fanhao = #{movieName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectMoviesByTeacherNameAndYear" parameterType="java.util.Map" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where teacher = #{teacherName,jdbcType=VARCHAR} AND publishTime BETWEEN #{startTime,jdbcType=VARCHAR} AND #{endTime,jdbcType=VARCHAR}
+    ORDER BY viewsNum DESC
+  </select>
 </mapper>

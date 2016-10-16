@@ -13,4 +13,6 @@ public interface IMoviesService {
     List<Movies> queryMoviesByTeacherName(String teacherName);
 
     Movies queryMovieByFanhao(String movieName);
+
+    List<Movies> queryMoviesByTeacherNameAndYear(String teacherName, String year);
 }

@@ -1,5 +1,7 @@
 package com.sgay.giligili.entity;
 
+import java.sql.Date;
+
 public class Movies {
     private Long id;
 
@@ -9,7 +11,7 @@ public class Movies {
 
     private String title;
 
-    private String publishtime;
+    private Date publishtime;
 
     private Long viewsnum;
 
@@ -51,12 +53,12 @@ public class Movies {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getPublishtime() {
+    public Date getPublishtime() {
         return publishtime;
     }
 
-    public void setPublishtime(String publishtime) {
-        this.publishtime = publishtime == null ? null : publishtime.trim();
+    public void setPublishtime(Date publishtime) {
+        this.publishtime = publishtime;
     }
 
     public Long getViewsnum() {

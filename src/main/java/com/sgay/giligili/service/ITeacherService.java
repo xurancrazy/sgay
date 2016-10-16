@@ -12,4 +12,6 @@ public interface ITeacherService {
     List<Teachers> queryTeachers();
 
     Teachers queryTeacherByName(String teacherName);
+
+    void updateTeacherViewsNum(Teachers teacher);
 }

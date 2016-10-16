@@ -76,7 +76,7 @@
                 <!--同演员相关-->
                 <div class="wz_xgtj">
                     <div class="blockTitle">
-                        <h2>藤浦惠作品全集</h2></div>
+                        <h2>${movie.teacher}作品全集</h2></div>
                     <div class="xg_bd">
                         <ul class="hotArticle">
 

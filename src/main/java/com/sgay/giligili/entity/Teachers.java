@@ -11,7 +11,7 @@ public class Teachers {
 
     private String img;
 
-    private Long onclicknum;
+    private Long viewsnum;
 
     public Long getId() {
         return id;
@@ -53,12 +53,12 @@ public class Teachers {
         this.img = img == null ? null : img.trim();
     }
 
-    public Long getOnclicknum() {
-        return onclicknum;
+    public Long getViewsnum() {
+        return viewsnum;
     }
 
-    public void setOnclicknum(Long onclicknum) {
-        this.onclicknum = onclicknum;
+    public void setViewsnum(Long viewsnum) {
+        this.viewsnum = viewsnum;
     }
 
 }

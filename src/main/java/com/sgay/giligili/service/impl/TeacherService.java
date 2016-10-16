@@ -13,10 +13,8 @@ import java.util.List;
  * Created by xurancrazy on 2016/10/10.
  */
 @Service
-public class TeacherService implements ITeacherService {
+public class TeacherService extends BaseService implements ITeacherService {
 
-    @Autowired
-    private TeachersMapper mTeachersMapper;
     @Override
     public List<Teachers> queryTeachers() {
         return mTeachersMapper.selectTeachers();
@@ -25,5 +23,10 @@ public class TeacherService implements ITeacherService {
     @Override
     public Teachers queryTeacherByName(String teacherName) {
         return mTeachersMapper.selectTeacherByName(teacherName);
+    }
+
+    @Override
+    public void updateTeacherViewsNum(Teachers teacher) {
+        mTeachersMapper.updateByPrimaryKeySelective(teacher);
     }
 }

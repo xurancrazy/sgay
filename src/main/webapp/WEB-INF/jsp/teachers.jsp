@@ -59,7 +59,7 @@
             <c:forEach items="${teachers}" var="teacher" varStatus="s">
                 <div class="vote item box">
                     <div class="head"><span class="no fl">TOP.${s.index+1}</span><span
-                            class="hot fr">人气：${teacher.onclicknum}</span></div>
+                            class="hot fr">人气：${teacher.viewsnum}</span></div>
                     <a href="/teachers/${teacher.name}"><img src="uploads/images/icon/full/${teacher.img}"
                                                      alt="${teacher.name}"
                                                      data-original="uploads/images/icon/full/${teacher.img}"

@@ -4,7 +4,7 @@ import com.sgay.giligili.entity.Movies;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+import java.util.Map;
 
 @Component
 public interface MoviesMapper {
@@ -25,4 +25,6 @@ public interface MoviesMapper {
     List<Movies> selectMoviesByTeacherName(String teacherName);
 
     Movies selectMovieByFanhao(String movieName);
+
+    List<Movies> selectMoviesByTeacherNameAndYear(Map paramMap);
 }
