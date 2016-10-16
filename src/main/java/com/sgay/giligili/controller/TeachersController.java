@@ -35,4 +35,13 @@ public class TeachersController {
         modelMap.addAttribute("teacher",teacher);
         return "teacherDetail";
     }
+
+    @GetMapping(value = "/{teacherName}/{movieName}")
+    public String movieDetail(@PathVariable String teacherName, @PathVariable String movieName,ModelMap modelMap){
+        Movies movie = mMoviesService.queryMovieByFanhao(movieName);
+        modelMap.addAttribute("movie",movie);
+        modelMap.addAttribute("teacherName",teacherName);
+        return "movieDetail";
+    }
+
 }

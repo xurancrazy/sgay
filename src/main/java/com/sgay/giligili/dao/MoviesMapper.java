@@ -22,5 +22,7 @@ public interface MoviesMapper {
 
     List<Movies> selectRecommendMovies();
 
-    List<Movies> selectMoviesByTeacherName(String teacher);
+    List<Movies> selectMoviesByTeacherName(String teacherName);
+
+    Movies selectMovieByFanhao(String movieName);
 }

@@ -27,8 +27,15 @@
     select
     <include refid="Base_Column_List" />
     from movies
-    where teacher = #{teacher,jdbcType=VARCHAR}
+    where teacher = #{teacherName,jdbcType=VARCHAR}
     ORDER BY viewsNum DESC
+  </select>
+
+  <select id="selectMovieByFanhao" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
+    select
+    <include refid="Base_Column_List" />
+    from movies
+    where fanhao = #{movieName,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
