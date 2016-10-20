@@ -69,8 +69,10 @@ public class TeachersController extends BaseController{
     public String movieDetail(@PathVariable String teacherName, @PathVariable String movieName,ModelMap modelMap){
         Movies movie = mMoviesService.queryMovieByFanhao(movieName);
         if (movie == null || !movie.getTeacher().equals(teacherName)){
-            
+            return "";
         }
+        movie.setViewsnum(movie.getViewsnum()+1);
+        mMoviesService.updateMovieViewsNum(movie);
         modelMap.addAttribute("movie",movie);
         modelMap.addAttribute("teacherName",teacherName);
         return "movieDetail";

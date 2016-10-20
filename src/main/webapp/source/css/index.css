@@ -1,4 +1,4 @@
-@charset "gb2312";
+@charset "UTF-8";
 body {
     background: #eef0f3;
     color: #454545;
@@ -42,15 +42,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .span4 {
     width: 250px;
-    margin-left: 20px;
     position: relative;
-    float:left;
 }
 
 .span8 {
-    width: 690px;
-    margin-left: 20px;
-    float:left;
+    width: 690px
 }
 
 .icons {
@@ -315,8 +311,6 @@ a.logo {
 .inner {
     width: 1100px;
     margin: auto;
-    height: 100%;
-    overflow: hidden;
 }
 
 .vote-list {
@@ -441,7 +435,7 @@ a.logo {
 
 .head .text {
     float: right;
-    font-family: "瀹嬩綋";
+    font-family: "Microsoft YaHei";
     font-size: 13px;
     color: #fff;
     text-shadow: #000 1px 1px 1px;
@@ -588,7 +582,6 @@ a.logo {
     float: left;
     font-size: 1em;
     line-height: 12px;
-    margin-top:10px;
 }
 
 .more {
@@ -2854,9 +2847,10 @@ p.info {
 }
 
 .list_tp {
-    width: 100px;
+    width: 80px;
     height: 30px;
-    line-height: 30px;
+    line-height: 33px;
+    overflow: hidden;
     display: inline-block;
     padding-left: 20px;
 }
@@ -2865,10 +2859,10 @@ p.info {
     display: block;
     width: 80px;
     height: 30px;
-    background: url(../images/vote-zan.png) 10px center no-repeat #1c9f1e;
+    background: url(/templets/vip/images/vote-zan.png) 6px center no-repeat #1c9f1e;
     color: #fff;
     font-size: 14px;
-    text-indent: 40px;
+    text-indent: 35px;
     transition: 0.3s;
 }
 
@@ -2912,7 +2906,7 @@ p.info {
     margin-top: 15px;
     line-height: 1.8;
     color: #000;
-    font: 16px/1.5 '寰粺姝ｉ粦楂�', 'Microsoft Yahei', 'mingliu', Tahoma;
+    font: 16px/1.5 'Microsoft Yahei', 'mingliu', Tahoma;
 }
 
 .artCon p {

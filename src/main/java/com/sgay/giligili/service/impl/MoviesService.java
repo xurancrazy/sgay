@@ -42,4 +42,9 @@ public class MoviesService extends BaseService implements IMoviesService {
         paramMap.put("endTime",endTime);
         return mMoviesMapper.selectMoviesByTeacherNameAndYear(paramMap);
     }
+
+    @Override
+    public void updateMovieViewsNum(Movies movie) {
+        mMoviesMapper.updateByPrimaryKeySelective(movie);
+    }
 }

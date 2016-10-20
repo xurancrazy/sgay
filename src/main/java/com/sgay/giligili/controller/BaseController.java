@@ -6,18 +6,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by xurancrazy on 2016/10/16.
  */
 
 @Controller
-public class BaseController {
+public class BaseController{
     @Autowired
     protected IMoviesService mMoviesService;
     @Autowired
     protected ITeacherService mTeacherService;
 
     protected  Logger logger= LoggerFactory.getLogger(BaseController.class);
+
+    public static final String DEFAULT_404_NOTFOUND_VIEW = "common/404";
+
+    public static final String DEFAULT_INTERNAL_ERROR_VIEW = "common/500";
+
 
 }

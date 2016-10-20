@@ -3,17 +3,6 @@
 <div class="span4">
     <div class="sidebox sy_ad01">
         <div class="mbox">
-            <script type="text/javascript" src="http://www.nh87.cn/js/adjs/1105438.js"></script>
-            <script type="text/javascript">BAIDU_CLB_fillSlot("1105438");</script>
-            <div id="BAIDU_SSP__wrapper_1105438_0">
-                <iframe id="iframe1105438_0"
-                        src="http://pos.baidu.com/mcmm?rtbid=2100189&amp;rdid=9223372032564594078&amp;dc=2&amp;di=1105438&amp;dri=0&amp;dis=0&amp;dai=1&amp;ps=306x1181&amp;dcb=BAIDU_SSP_define&amp;dtm=HTML_POST&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1476023117178&amp;ti=%E3%80%90%E7%94%B7%E4%BA%BA%E5%9B%A2%E3%80%91%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%E7%94%B7%E4%BA%BA%E9%9D%9E%E5%B8%B8%E5%96%9C%E6%AC%A2%E7%9C%8B%E7%9A%84%E7%94%B7%E6%80%A7%E7%BD%91%E7%AB%99&amp;ari=2&amp;dbv=2&amp;drs=1&amp;pcs=1903x955&amp;pss=1903x3318&amp;cfv=0&amp;cpl=5&amp;chi=9&amp;cce=true&amp;cec=UTF-8&amp;tlm=1475992226&amp;rw=955&amp;ltu=http%3A%2F%2Fwww.nh87.cn%2F&amp;ltr=http%3A%2F%2Fwww.nh87.cn%2Fold.html&amp;ecd=1&amp;psr=1920x1080&amp;par=1920x1040&amp;pis=-1x-1&amp;ccd=24&amp;cja=false&amp;cmi=7&amp;col=zh-CN&amp;cdo=-1&amp;tcn=1476023117&amp;qn=d9d861abc96bd4f7&amp;tt=1476023117143.40.159.161"
-                        width="250" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0"
-                        marginheight="0" scrolling="no" frameborder="0"
-                        style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe>
-            </div>
-            <script charset="utf-8"
-                    src="http://pos.baidu.com/mcmm?di=1105438&amp;dri=0&amp;dis=0&amp;dai=1&amp;ps=306x1181&amp;dcb=BAIDU_SSP_define&amp;dtm=SSP_JSONP&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1476023117178&amp;ti=%E3%80%90%E7%94%B7%E4%BA%BA%E5%9B%A2%E3%80%91%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%E7%94%B7%E4%BA%BA%E9%9D%9E%E5%B8%B8%E5%96%9C%E6%AC%A2%E7%9C%8B%E7%9A%84%E7%94%B7%E6%80%A7%E7%BD%91%E7%AB%99&amp;ari=2&amp;dbv=2&amp;drs=1&amp;pcs=1903x955&amp;pss=1903x3318&amp;cfv=0&amp;cpl=5&amp;chi=9&amp;cce=true&amp;cec=UTF-8&amp;tlm=1475992226&amp;rw=955&amp;ltu=http%3A%2F%2Fwww.nh87.cn%2F&amp;ltr=http%3A%2F%2Fwww.nh87.cn%2Fold.html&amp;ecd=1&amp;psr=1920x1080&amp;par=1920x1040&amp;pis=-1x-1&amp;ccd=24&amp;cja=false&amp;cmi=7&amp;col=zh-CN&amp;cdo=-1&amp;tcn=1476023117"></script>
         </div>
     </div>
     <div class="sidebox">
@@ -343,80 +332,13 @@
         <div class="hd">
             <h2 class="heading">图文推荐</h2>
         </div>
-        <!--原生广告1-->
-        <script type="text/javascript" src="http://www.nh87.cn/js/adjs/1149296.js"></script>
-        <script type="text/javascript">BAIDU_CLB_fillSlot("1149296");</script>
-        <div id="BAIDU_SSP__wrapper_1149296_0"></div>
-        <script charset="utf-8"
-                src="http://pos.baidu.com/mcmm?di=1149296&amp;dri=0&amp;dis=0&amp;dai=2&amp;ps=1839x1181&amp;dcb=BAIDU_SSP_define&amp;dtm=SSP_JSONP&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1476023117178&amp;ti=%E3%80%90%E7%94%B7%E4%BA%BA%E5%9B%A2%E3%80%91%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%E7%94%B7%E4%BA%BA%E9%9D%9E%E5%B8%B8%E5%96%9C%E6%AC%A2%E7%9C%8B%E7%9A%84%E7%94%B7%E6%80%A7%E7%BD%91%E7%AB%99&amp;ari=2&amp;dbv=2&amp;drs=1&amp;pcs=1903x955&amp;pss=1903x3318&amp;cfv=0&amp;cpl=5&amp;chi=9&amp;cce=true&amp;cec=UTF-8&amp;tlm=1475992226&amp;rw=955&amp;ltu=http%3A%2F%2Fwww.nh87.cn%2F&amp;ltr=http%3A%2F%2Fwww.nh87.cn%2Fold.html&amp;ecd=1&amp;psr=1920x1080&amp;par=1920x1040&amp;pis=-1x-1&amp;ccd=24&amp;cja=false&amp;cmi=7&amp;col=zh-CN&amp;cdo=-1&amp;tcn=1476023117"></script>
-        <script type="text/javascript">
-            var cpro_id = "u2301111";
-            (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id] = {
-                at: "3",
-                rsi0: "250",
-                rsi1: "350",
-                pat: "6",
-                tn: "baiduCustNativeAD",
-                rss1: "#fff",
-                conBW: "0",
-                adp: "1",
-                ptt: "0",
-                titFF: "%E5%BE%AE%E8%BD%AF%E9%9B%85%E9%BB%91",
-                titFS: "14",
-                rss2: "#08c",
-                titSU: "0",
-                ptbg: "90",
-                piw: "0",
-                pih: "0",
-                ptp: "0"
-            }
-        </script>
-        <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
-        <div id="BAIDU_SSP__wrapper_u2301111_0">
-            <iframe id="iframeu2301111_0"
-                    src="http://pos.baidu.com/mcmm?sz=250x350&amp;rdid=2301111&amp;dc=2&amp;di=u2301111&amp;dri=0&amp;dis=0&amp;dai=3&amp;ps=1839x1181&amp;coa=at%3D3%26rsi0%3D250%26rsi1%3D350%26pat%3D6%26tn%3DbaiduCustNativeAD%26rss1%3D%2523fff%26conBW%3D0%26adp%3D1%26ptt%3D0%26titFF%3D%2525E5%2525BE%2525AE%2525E8%2525BD%2525AF%2525E9%25259B%252585%2525E9%2525BB%252591%26titFS%3D14%26rss2%3D%252308c%26titSU%3D0%26ptbg%3D90%26piw%3D0%26pih%3D0%26ptp%3D0&amp;dcb=BAIDU_SSP_define&amp;dtm=HTML_POST&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1476023117178&amp;ti=%E3%80%90%E7%94%B7%E4%BA%BA%E5%9B%A2%E3%80%91%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%E7%94%B7%E4%BA%BA%E9%9D%9E%E5%B8%B8%E5%96%9C%E6%AC%A2%E7%9C%8B%E7%9A%84%E7%94%B7%E6%80%A7%E7%BD%91%E7%AB%99&amp;ari=2&amp;dbv=2&amp;drs=1&amp;pcs=1903x955&amp;pss=1903x3318&amp;cfv=0&amp;cpl=5&amp;chi=9&amp;cce=true&amp;cec=UTF-8&amp;tlm=1475992226&amp;rw=955&amp;ltu=http%3A%2F%2Fwww.nh87.cn%2F&amp;ltr=http%3A%2F%2Fwww.nh87.cn%2Fold.html&amp;ecd=1&amp;psr=1920x1080&amp;par=1920x1040&amp;pis=-1x-1&amp;ccd=24&amp;cja=false&amp;cmi=7&amp;col=zh-CN&amp;cdo=-1&amp;tcn=1476023117&amp;qn=50f204d8f7568ff8&amp;tt=1476023117143.275.275.276"
-                    width="250" height="350" align="center,center" vspace="0" hspace="0" marginwidth="0"
-                    marginheight="0" scrolling="no" frameborder="0"
-                    style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe>
-        </div>
+        <!--广告1-->
 
-        <!--原生广告1 End-->
+        <!--广告1 End-->
 
     </div>
     <div class="sidebox sy_ad02">
         <!-- 广告位：橱窗广告-首页 -->
-        <script type="text/javascript" src="http://www.nh87.cn/js/adjs/1147575.js"></script>
-        <script type="text/javascript">BAIDU_CLB_fillSlot("1147575");</script>
-        <div id="BAIDU_SSP__wrapper_1147575_0"></div>
-        <script charset="utf-8"
-                src="http://pos.baidu.com/mcmm?di=1147575&amp;dri=0&amp;dis=0&amp;dai=4&amp;ps=2204x1181&amp;dcb=BAIDU_SSP_define&amp;dtm=SSP_JSONP&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1476023117178&amp;ti=%E3%80%90%E7%94%B7%E4%BA%BA%E5%9B%A2%E3%80%91%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%E7%94%B7%E4%BA%BA%E9%9D%9E%E5%B8%B8%E5%96%9C%E6%AC%A2%E7%9C%8B%E7%9A%84%E7%94%B7%E6%80%A7%E7%BD%91%E7%AB%99&amp;ari=2&amp;dbv=2&amp;drs=1&amp;pcs=1903x955&amp;pss=1903x3318&amp;cfv=0&amp;cpl=5&amp;chi=9&amp;cce=true&amp;cec=UTF-8&amp;tlm=1475992226&amp;rw=955&amp;ltu=http%3A%2F%2Fwww.nh87.cn%2F&amp;ltr=http%3A%2F%2Fwww.nh87.cn%2Fold.html&amp;ecd=1&amp;psr=1920x1080&amp;par=1920x1040&amp;pis=-1x-1&amp;ccd=24&amp;cja=false&amp;cmi=7&amp;col=zh-CN&amp;cdo=-1&amp;tcn=1476023117"></script>
-        <script type="text/javascript">
-            var cpro_id = "u2333372";
-            (window["cproStyleApi"] = window["cproStyleApi"] || {})[cpro_id] = {
-                at: "3",
-                rsi0: "250",
-                rsi1: "250",
-                pat: "17",
-                tn: "baiduCustNativeAD",
-                rss1: "#FFFFFF",
-                conBW: "1",
-                adp: "1",
-                ptt: "0",
-                titFF: "",
-                titFS: "14",
-                rss2: "#000000",
-                titSU: "0"
-            }
-        </script>
-        <script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script>
-        <div id="BAIDU_SSP__wrapper_u2333372_0">
-            <iframe id="iframeu2333372_0"
-                    src="http://pos.baidu.com/mcmm?sz=250x250&amp;rdid=2333372&amp;dc=2&amp;di=u2333372&amp;dri=0&amp;dis=0&amp;dai=5&amp;ps=2204x1181&amp;coa=at%3D3%26rsi0%3D250%26rsi1%3D250%26pat%3D17%26tn%3DbaiduCustNativeAD%26rss1%3D%2523FFFFFF%26conBW%3D1%26adp%3D1%26ptt%3D0%26titFF%3D%26titFS%3D14%26rss2%3D%2523000000%26titSU%3D0&amp;dcb=BAIDU_SSP_define&amp;dtm=HTML_POST&amp;dvi=0.0&amp;dci=-1&amp;dpt=none&amp;tsr=0&amp;tpr=1476023117178&amp;ti=%E3%80%90%E7%94%B7%E4%BA%BA%E5%9B%A2%E3%80%91%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%E7%94%B7%E4%BA%BA%E9%9D%9E%E5%B8%B8%E5%96%9C%E6%AC%A2%E7%9C%8B%E7%9A%84%E7%94%B7%E6%80%A7%E7%BD%91%E7%AB%99&amp;ari=2&amp;dbv=2&amp;drs=1&amp;pcs=1903x955&amp;pss=1903x3318&amp;cfv=0&amp;cpl=5&amp;chi=9&amp;cce=true&amp;cec=UTF-8&amp;tlm=1475992226&amp;rw=955&amp;ltu=http%3A%2F%2Fwww.nh87.cn%2F&amp;ltr=http%3A%2F%2Fwww.nh87.cn%2Fold.html&amp;ecd=1&amp;psr=1920x1080&amp;par=1920x1040&amp;pis=-1x-1&amp;ccd=24&amp;cja=false&amp;cmi=7&amp;col=zh-CN&amp;cdo=-1&amp;tcn=1476023118&amp;qn=906e04cc3600dd7e&amp;tt=1476023117143.393.393.394"
-                    width="250" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0"
-                    marginheight="0" scrolling="no" frameborder="0"
-                    style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe>
-        </div>
-
     </div>
 </div>
 <!-- span4 End-->
