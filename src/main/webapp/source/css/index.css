@@ -446,7 +446,7 @@ a.logo {
 
 .head h1 {
     float: left;
-    background: url(http://www.nh87.cn/templets/vip/images/logo.png) no-repeat;
+    background: url(../images/logo.png) no-repeat;
     text-indent: -9999em;
     width: 384px;
     height: 55px;
@@ -2859,7 +2859,7 @@ p.info {
     display: block;
     width: 80px;
     height: 30px;
-    background: url(/templets/vip/images/vote-zan.png) 6px center no-repeat #1c9f1e;
+    background: url(../images/vote-zan.png) 6px center no-repeat #1c9f1e;
     color: #fff;
     font-size: 14px;
     text-indent: 35px;

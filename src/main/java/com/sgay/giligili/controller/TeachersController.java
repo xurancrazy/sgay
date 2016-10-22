@@ -40,7 +40,7 @@ public class TeachersController extends BaseController{
                 movies = (List<Movies>)yearMapToMovies.get(year);
             }
         }else{
-
+            return DEFAULT_404_NOTFOUND_VIEW;
         }
         List<String> years = new LinkedList<>(yearMapToMovies.keySet());
         years.sort((final String o1, String o2) -> Integer.valueOf(o2)-Integer.valueOf(o1));
@@ -69,10 +69,13 @@ public class TeachersController extends BaseController{
     public String movieDetail(@PathVariable String teacherName, @PathVariable String movieName,ModelMap modelMap){
         Movies movie = mMoviesService.queryMovieByFanhao(movieName);
         if (movie == null || !movie.getTeacher().equals(teacherName)){
-            return "";
+            return DEFAULT_404_NOTFOUND_VIEW;
         }
         movie.setViewsnum(movie.getViewsnum()+1);
         mMoviesService.updateMovieViewsNum(movie);
+        Teachers teacher = mTeacherService.queryTeacherByName(teacherName);
+        teacher.setViewsnum(teacher.getViewsnum()+1);
+        mTeacherService.updateTeacherViewsNum(teacher);
         modelMap.addAttribute("movie",movie);
         modelMap.addAttribute("teacherName",teacherName);
         return "movieDetail";

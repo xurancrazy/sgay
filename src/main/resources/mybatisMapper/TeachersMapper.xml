@@ -23,7 +23,7 @@
   <select id="selectTeachers" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from teachers
+    from teachers ORDER BY viewsNum DESC
   </select>
 
   <select id="selectTeacherByName" parameterType="java.lang.String" resultMap="BaseResultMap">
