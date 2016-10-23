@@ -26,5 +26,4 @@ public interface MoviesMapper {
 
     Movies selectMovieByFanhao(String movieName);
 
-    List<Movies> selectMoviesByTeacherNameAndYear(Map paramMap);
 }

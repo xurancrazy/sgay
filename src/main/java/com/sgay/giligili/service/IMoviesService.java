@@ -14,7 +14,5 @@ public interface IMoviesService {
 
     Movies queryMovieByFanhao(String movieName);
 
-    List<Movies> queryMoviesByTeacherNameAndYear(String teacherName, String year);
-
     void updateMovieViewsNum(Movies movie);
 }

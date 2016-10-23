@@ -1,8 +1,9 @@
 package com.sgay.giligili.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Movies {
+public class Movies implements Serializable{
     private Long id;
 
     private String fanhao;

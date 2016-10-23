@@ -16,13 +16,13 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"/>
+		<property name="initialSize" value="${jdbc.initialSize}"/>
 		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"/>
+		<property name="maxActive" value="${jdbc.maxActive}"/>
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"/>
+		<property name="minIdle" value="${jdbc.minIdle}"/>
 		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"/>
+		<property name="maxWait" value="${jdbc.maxWait}"/>
 
 		<property name="validationQuery" value="SELECT 'x'" />
 		<property name="testOnBorrow" value="false" />
