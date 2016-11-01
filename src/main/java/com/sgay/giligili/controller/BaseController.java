@@ -22,13 +22,12 @@ public class BaseController{
     @Autowired
     protected ITeacherService mTeacherService;
     @Autowired
-    protected RedisTemplate<String, String> template;
+    protected RedisTemplate<String, String> mRedisTemplate;
 
     protected  Logger logger= LoggerFactory.getLogger(BaseController.class);
 
-    public static final String DEFAULT_404_NOTFOUND_VIEW = "common/404";
+    protected static final String DEFAULT_404_NOTFOUND_VIEW = "common/404";
 
-    public static final String DEFAULT_INTERNAL_ERROR_VIEW = "common/500";
-
+    protected static final String DEFAULT_INTERNAL_ERROR_VIEW = "common/500";
 
 }

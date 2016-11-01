@@ -27,6 +27,8 @@ import java.util.*;
 @RequestMapping(value = "/teachers")
 public class TeachersController extends BaseController{
 
+
+
     @GetMapping(value = "/{teacherName}")
     public String teacherMovies(@PathVariable String teacherName, @RequestParam(value = "year", required = false) String year, ModelMap modelMap){
         List<Movies> movies;

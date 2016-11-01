@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+
 <!-- span4 Start -->
 <div class="span4">
     <div class="sidebox sy_ad01">
@@ -11,34 +12,43 @@
                 <h2 class="heading pull-left">热门推荐</h2>
                 <div class="tab pull-right">
                     <ul class="toptabs">
-                        <li class="active"><a href="#zj" data-toggle="tab">最近</a></li>
+                        <li class="active"><a href="#br" data-toggle="tab">本日</a></li>
                         <li><a href="#by" data-toggle="tab">本月</a></li>
                         <li><a href="#bz" data-toggle="tab">本周</a></li>
                     </ul>
                 </div>
             </div>
             <div class="tab-content">
-                <ol id="zj" class="diggArea tab-pane fade active in">
-                    <li>
-                        <div><span class="diggNum h">1</span><a href="/zhengmei/10632.html" target="_blank"
-                                                                title="《宅宅AVDay》2016年6月份AV女优出道完整版">《宅宅AVDay》2016年6月份AV女优出道</a>
-                        </div>
-                    </li>
+                <ol id="br" class="diggArea tab-pane fade active in">
+                    <c:forEach items="${todayPopularMovies}" var="movie" varStatus="s">
+                        <li>
+                            <div><span class="diggNum h">${s.index+1}</span><a
+                                    href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                                    title="${movie.title}">${movie.fanhao}${movie.title}</a>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ol>
                 <ol id="by" class="diggArea tab-pane fade">
-                    <li>
-                        <div><span class="diggNum h">1</span><a href="/yudugongziyuan/2016/SNIS-752.html"
-                                                                target="_blank"
-                                                                title="SNIS-752-無理矢理12発パイズリ射精させられ集団レ●プされたJcup女教師 RION">SNIS-752-無理矢理12発パイズリ</a>
-                        </div>
-                    </li>
+                    <c:forEach items="${lastWeekPopularMovies}" var="movie" varStatus="s">
+                        <li>
+                            <div><span class="diggNum h">${s.index+1}</span><a
+                                    href="/teachers/${movie.teacher}/${movie.fanhao}"
+                                    target="_blank"
+                                    title="${movie.title}">${movie.fanhao}${movie.title}</a>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ol>
                 <ol id="bz" class="diggArea tab-pane fade">
-                    <li>
-                        <div><span class="diggNum h">1</span><a href="/zhengmei/14590.html" target="_blank"
-                                                                title="好脾气正妹《川崎あや》零瑕疵纤腰蜜桃臀超诱人?(??` )人">好脾气正妹《川崎あや》零瑕疵纤</a>
-                        </div>
-                    </li>
+                    <c:forEach items="${lastMonthPopularMovies}" var="movie" varStatus="s">
+                        <li>
+                            <div><span class="diggNum h">${s.index+1}</span><a
+                                    href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                                    title="${movie.title}">${movie.fanhao}${movie.title}</a>
+                            </div>
+                        </li>
+                    </c:forEach>
                 </ol>
             </div>
         </div>
@@ -52,7 +62,7 @@
             <li>
                 <div class="pic pull-left"><a href="/zhengmei/14659.html" target="_blank"
                                               title="《宅宅AVDay》2016年10月份AV女优出道完整版" rel="nofollow"><img
-                        src="http://www.nh87.cn/uploads/1610/pZ6WpKCelaeZqA-lp.jpg"
+                        src="/uploads/1610/pZ6WpKCelaeZqA-lp.jpg"
                         alt="《宅宅AVDay》2016年10月份AV女优出道完整版"></a></div>
                 <div class="dec"><h3><a href="/zhengmei/14659.html" target="_blank"
                                         title="《宅宅AVDay》2016年10月份AV女优出">《宅宅AVDay》2016年10月份AV女优出</a></h3>
@@ -61,7 +71,7 @@
             <li>
                 <div class="pic pull-left"><a href="/zhengmei/12233.html" target="_blank"
                                               title="《宅宅AVDay》2016年8月份AV女优出道完整版" rel="nofollow"><img
-                        src="http://www.nh87.cn/uploads/1607/pZ2apKSZkqabqA-lp.jpg"
+                        src="/uploads/1607/pZ2apKSZkqabqA-lp.jpg"
                         alt="《宅宅AVDay》2016年8月份AV女优出道完整版"></a></div>
                 <div class="dec"><h3><a href="/zhengmei/12233.html" target="_blank"
                                         title="《宅宅AVDay》2016年8月份AV女优出道">《宅宅AVDay》2016年8月份AV女优出道</a></h3>
@@ -70,7 +80,7 @@
             <li>
                 <div class="pic pull-left"><a href="/zhengmei/13201.html" target="_blank"
                                               title="不可错过《今夏最棒搭讪素人AV》精选出来的10部优秀强片" rel="nofollow"><img
-                        src="http://www.nh87.cn/uploads/1608/pZ6SpaGej6KVqA-lp.jpg"
+                        src="/uploads/1608/pZ6SpaGej6KVqA-lp.jpg"
                         alt="不可错过《今夏最棒搭讪素人AV》精选出来的10部优秀强片"></a></div>
                 <div class="dec"><h3><a href="/zhengmei/13201.html" target="_blank" title="不可错过《今夏最棒搭讪素人AV》">不可错过《今夏最棒搭讪素人AV》</a>
                 </h3>
@@ -79,7 +89,7 @@
             <li>
                 <div class="pic pull-left"><a href="/zhengmei/13595.html" target="_blank"
                                               title="《宅宅AVDay》2016年9月份AV女优出道完整版" rel="nofollow"><img
-                        src="http://www.nh87.cn/uploads/1609/pZ6ToqCclaGbqA-lp.jpg"
+                        src="/uploads/1609/pZ6ToqCclaGbqA-lp.jpg"
                         alt="《宅宅AVDay》2016年9月份AV女优出道完整版"></a></div>
                 <div class="dec"><h3><a href="/zhengmei/13595.html" target="_blank"
                                         title="《宅宅AVDay》2016年9月份AV女优出道">《宅宅AVDay》2016年9月份AV女优出道</a></h3>

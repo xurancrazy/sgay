@@ -57,22 +57,22 @@
                         <ul class="hotArticle">
 
                             <li><a href="/tengpuhui/2009/SOE-236.html" rel="nofollow"><img
-                                    src="http://www.nh87.cn/uploads/allimg/150825/soe00236pl-lp.jpg"
+                                    src="/uploads/allimg/150825/soe00236pl-lp.jpg"
                                     alt="SOE-236"></a><a class="hotArticle" href="/tengpuhui/2009/SOE-236.html"><h3>
                                 SOE-236</h3></a></li>
 
                             <li><a href="/tengpuhui/2014/PPPD-322.html" rel="nofollow"><img
-                                    src="http://www.nh87.cn/uploads/allimg/150827/pppd00322pl-lp.jpg"
+                                    src="/uploads/allimg/150827/pppd00322pl-lp.jpg"
                                     alt="PPPD-322"></a><a class="hotArticle" href="/tengpuhui/2014/PPPD-322.html"><h3>
                                 PPPD-322</h3></a></li>
 
                             <li><a href="/tengpuhui/2015/PPPD-355.html" rel="nofollow"><img
-                                    src="http://www.nh87.cn/uploads/allimg/150831/pppd00355pl-lp.jpg"
+                                    src="/uploads/allimg/150831/pppd00355pl-lp.jpg"
                                     alt="PPPD-355"></a><a class="hotArticle" href="/tengpuhui/2015/PPPD-355.html"><h3>
                                 PPPD-355</h3></a></li>
 
                             <li><a href="/tengpuhui/2014/PPPD-287.html" rel="nofollow"><img
-                                    src="http://www.nh87.cn/uploads/allimg/150827/pppd00287pl-lp.jpg"
+                                    src="/uploads/allimg/150827/pppd00287pl-lp.jpg"
                                     alt="PPPD-287"></a><a class="hotArticle" href="/tengpuhui/2014/PPPD-287.html"><h3>
                                 PPPD-287</h3></a></li>
 
@@ -88,19 +88,19 @@
                     <div class="xg_bd">
                         <ul class="hotArticle">
                             <li><a rel="nofollow" href="/xiaozaochuanlianzi/2012/BF-217.html"><img
-                                    src="http://www.nh87.cn/uploads/1607/bf00217pl-lp.jpg" alt="BF-217"></a><a
+                                    src="/uploads/1607/bf00217pl-lp.jpg" alt="BF-217"></a><a
                                     class="hotArticle" href="/xiaozaochuanlianzi/2012/BF-217.html"
                                     title="BF-217">BF-217</a></li>
                             <li><a rel="nofollow" href="/shen_shizhi/2013/MILD-858.html"><img
-                                    src="http://www.nh87.cn/uploads/allimg/1512/84mild00858pl-lp.jpg"
+                                    src="/uploads/allimg/1512/84mild00858pl-lp.jpg"
                                     alt="MILD-858"></a><a class="hotArticle" href="/shen_shizhi/2013/MILD-858.html"
                                                           title="MILD-858">MILD-858</a></li>
                             <li><a rel="nofollow" href="/liangchuanxuanyin/2015/AVOP-155.html"><img
-                                    src="http://www.nh87.cn/uploads/1608/avop00155pl-lp.jpg" alt="AVOP-155"></a><a
+                                    src="/uploads/1608/avop00155pl-lp.jpg" alt="AVOP-155"></a><a
                                     class="hotArticle" href="/liangchuanxuanyin/2015/AVOP-155.html" title="AVOP-155">AVOP-155</a>
                             </li>
                             <li><a rel="nofollow" href="/xiaoxiyou/2015/MXGS-805.html"><img
-                                    src="http://www.nh87.cn/uploads/allimg/1602/h_068mxgs00805pl-lp.jpg" alt="MXGS-805"></a><a
+                                    src="/uploads/allimg/1602/h_068mxgs00805pl-lp.jpg" alt="MXGS-805"></a><a
                                     class="hotArticle" href="/xiaoxiyou/2015/MXGS-805.html"
                                     title="MXGS-805">MXGS-805</a></li>
                         </ul>

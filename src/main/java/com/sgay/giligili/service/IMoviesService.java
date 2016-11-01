@@ -2,6 +2,7 @@ package com.sgay.giligili.service;
 
 import com.sgay.giligili.entity.Movies;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,6 +14,12 @@ public interface IMoviesService {
     List<Movies> queryMoviesByTeacherName(String teacherName);
 
     Movies queryMovieByFanhao(String movieName);
+
+    List<Movies> queryTodayPopularMovies() throws IOException;
+
+    List<Movies> queryLastWeekPopularMovies() throws IOException;
+
+    List<Movies> queryLastMonthPopularMovies() throws IOException;
 
     void updateMovieViewsNum(Movies movie);
 }

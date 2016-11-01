@@ -1,13 +1,13 @@
 package com.sgay.giligili.aop;
 
+import com.sgay.giligili.utils.Constants;
+import com.sgay.giligili.utils.Utils;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.ModelMap;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,23 +22,26 @@ public class RedisCacheClickEvent {
     @Autowired
     private RedisTemplate<String,String> template;
 
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+    private SimpleDateFormat simpleDateFormat = Utils.createSimpleDateFormat(Constants.sfPattern);
 
-    @Pointcut("execution(* com.sgay.giligili.controller.TeachersController.teacherMovies(String))"+
-    "&&args(teacherName,..)")
-    public void viewPages(String teacherName){}
+    @Pointcut("execution(* com.sgay.giligili.controller.TeachersController.teacherMovies(..)) && args(teacherName, ..)")
+    public void viewTeacherPage(String teacherName){}
 
-    @AfterReturning("viewPages(teacherName)")
-    public void addTeacherOneView(String teacherName){
-        String key = simpleDateFormat.format(new Date());
+    @Pointcut("execution(* com.sgay.giligili.controller.TeachersController.movieDetail(..)) && args(teacherName, movieName, ..)")
+    public void viewMoviePage(String teacherName, String movieName){}
+
+
+    @AfterReturning("viewTeacherPage(teacherName)")
+    public void addTeacherOneClick(String teacherName){
+        String key = Constants.TEACHER_PREFIX + ":" + simpleDateFormat.format(new Date());
         System.out.println(key);
-        template.opsForZSet().incrementScore(key,"testaopafter",1);
+        template.opsForZSet().incrementScore(key,teacherName,1);
     }
 
-    @Before("viewPages(teacherName)")
-    public void test(String teacherName){
-        String key = simpleDateFormat.format(new Date());
+    @AfterReturning("viewMoviePage(teacherName, movieName)")
+    public void addMovieOneClick(String teacherName, String movieName){
+        String key = Constants.MOVIE_PREFIX + ":" + simpleDateFormat.format(new Date());
         System.out.println(key);
-        template.opsForZSet().incrementScore(key,"testaopbefore",1);
+        template.opsForZSet().incrementScore(key, movieName, 1);
     }
 }
