@@ -1,7 +1,6 @@
 package com.sgay.giligili.service;
 
-import com.sgay.giligili.entity.Movies;
-import com.sgay.giligili.entity.Teachers;
+import com.sgay.giligili.entity.Teacher;
 
 import java.util.List;
 
@@ -9,9 +8,9 @@ import java.util.List;
  * Created by xurancrazy on 2016/10/10.
  */
 public interface ITeacherService {
-    List<Teachers> queryTeachers();
+    List<Teacher> queryTeachers();
 
-    Teachers queryTeacherByName(String teacherName);
+    Teacher queryTeacherByName(String teacherName);
 
-    void updateTeacherViewsNum(Teachers teacher);
+    void updateTeacherViewsNum(Teacher teacher);
 }

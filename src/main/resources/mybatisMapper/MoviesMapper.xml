@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sgay.giligili.dao.MoviesMapper">
+<mapper namespace="com.sgay.giligili.dao.MovieMapper">
   <cache/>
-  <resultMap id="BaseResultMap" type="com.sgay.giligili.entity.Movies">
+  <resultMap id="BaseResultMap" type="com.sgay.giligili.entity.Movie">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="fanhao" jdbcType="VARCHAR" property="fanhao" />
     <result column="imgHref" jdbcType="VARCHAR" property="imghref" />
@@ -26,7 +26,7 @@
     delete from movies
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.sgay.giligili.entity.Movies">
+  <insert id="insert" parameterType="com.sgay.giligili.entity.Movie">
     insert into movies (id, fanhao, imgHref, 
       title, publishTime, viewsNum, 
       likesNum, teacher, recommend
@@ -36,7 +36,7 @@
       #{likesnum,jdbcType=BIGINT}, #{teacher,jdbcType=VARCHAR}, #{recommend,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sgay.giligili.entity.Movies">
+  <insert id="insertSelective" parameterType="com.sgay.giligili.entity.Movie">
     insert into movies
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sgay.giligili.entity.Movies">
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgay.giligili.entity.Movie">
     update movies
     <set>
       <if test="fanhao != null">
@@ -127,7 +127,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sgay.giligili.entity.Movies">
+  <update id="updateByPrimaryKey" parameterType="com.sgay.giligili.entity.Movie">
     update movies
     set fanhao = #{fanhao,jdbcType=VARCHAR},
       imgHref = #{imghref,jdbcType=VARCHAR},
@@ -140,14 +140,14 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movies">
+  <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movie">
     select
     <include refid="Base_Column_List" />
     from movies
     where recommend = TRUE
   </select>
 
-  <select id="selectMoviesByTeacherName" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
+  <select id="selectMoviesByTeacherName" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movie">
     select
     <include refid="Base_Column_List" />
     from movies
@@ -155,7 +155,7 @@
     ORDER BY viewsNum DESC
   </select>
 
-  <select id="selectMovieByFanhao" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movies">
+  <select id="selectMovieByFanhao" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movie">
     select
     <include refid="Base_Column_List" />
     from movies

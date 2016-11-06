@@ -10,7 +10,7 @@
 
         <li><a href="/teachers/京香julia">京香julia</a></li>
 
-        <li><a href="/teachers/京香julia">波多野结衣</a></li>
+        <li><a href="/teachers/波多野结衣">波多野结衣</a></li>
 
         <li><a href="/teachers/三上悠亚">三上悠亚</a></li>
 

@@ -8,5 +8,9 @@ public class Constants {
 
     public static final String MOVIE_PREFIX = "Movie";
 
-    public static final String sfPattern = "yyyyMMdd";
+    public static final String SF_PATTERN = "yyyyMMdd";
+
+    public static final String LAST_WEEK = "lastWeek";
+
+    public static final String LAST_MONTH = "lastMonth";
 }

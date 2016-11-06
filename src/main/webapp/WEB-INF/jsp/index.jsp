@@ -1,16 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/header.jsp"%>
+<%@include file="/WEB-INF/jsp/common/header.jsp" %>
 <body>
 <script type="text/javascript">
     jQuery(document).ready(
-            function($){
+            function ($) {
                 $(".post-list img").lazyload({
-                    placeholder : "http://img.yixieshi.com/style/yixieshi/img/grey.gif",
-                    effect      : "fadeIn"
+                    placeholder: "http://img.yixieshi.com/style/yixieshi/img/grey.gif",
+                    effect: "fadeIn"
                 });
             });
 </script>
-<%@include file="/WEB-INF/jsp/common/navigate.jsp"%>
+<%@include file="/WEB-INF/jsp/common/navigate.jsp" %>
 <div class="content container">
     <!--幻灯结束-->
     <div class="row">
@@ -18,18 +18,20 @@
             <!--文章列表开始-->
             <div class="post-list ">
                 <ul class="clearfix">
-                        <c:forEach items="${recommendMovies}" var="movie">
-                            <li>
+                    <c:forEach items="${recommendMovies}" var="movie">
+                        <li>
                             <h2 class="heading"><span class="new-icon"></span>
-                                <a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank" title="${movie.fanhao}">${movie.fanhao}</a>
+                                <a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                                   title="${movie.fanhao}">${movie.fanhao}</a>
                             </h2>
                             <div class="info"><span>发片时间：${movie.publishtime}</span> <span><i
-                                    class="icons th-list-icon"></i><span class="hidden">老师：</span><a href="/teachers/${movie.teacher}"
-                                                                                                     target="_blank">${movie.teacher}</a></span>
+                                    class="icons th-list-icon"></i><span class="hidden">老师：</span><a
+                                    href="/teachers/${movie.teacher}">${movie.teacher}</a></span>
                             </div>
 
                             <div class="main row-fluid">
-                                <div class="thumbnail pull-left"><a href="/teachers/${movie.teacher}/${movie.fanhao}" class="imgview"
+                                <div class="thumbnail pull-left"><a href="/teachers/${movie.teacher}/${movie.fanhao}"
+                                                                    class="imgview"
                                                                     target="_blank" rel="nofollow"><img
                                         src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
                                         data-original="uploads/images/cover/full/${movie.imghref}"
@@ -40,15 +42,15 @@
                                 </div>
                             </div>
                         </li>
-                        </c:forEach>
+                    </c:forEach>
                 </ul>
             </div>
             <!--列表结束-->
         </div>
-        <%@include file="/WEB-INF/jsp/common/sideAD.jsp"%>
+        <%@include file="/WEB-INF/jsp/common/sideAD.jsp" %>
     </div>
 </div>
-<%@include file="/WEB-INF/jsp/common/footer.jsp"%>
+<%@include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>
 

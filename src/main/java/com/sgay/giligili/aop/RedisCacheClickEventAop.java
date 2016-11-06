@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,12 +18,7 @@ import java.util.Date;
  */
 @Aspect
 @Component
-public class RedisCacheClickEvent {
-
-    @Autowired
-    private RedisTemplate<String,String> template;
-
-    private SimpleDateFormat simpleDateFormat = Utils.createSimpleDateFormat(Constants.sfPattern);
+public class RedisCacheClickEventAop extends BaseAop{
 
     @Pointcut("execution(* com.sgay.giligili.controller.TeachersController.teacherMovies(..)) && args(teacherName, ..)")
     public void viewTeacherPage(String teacherName){}
@@ -33,15 +29,17 @@ public class RedisCacheClickEvent {
 
     @AfterReturning("viewTeacherPage(teacherName)")
     public void addTeacherOneClick(String teacherName){
-        String key = Constants.TEACHER_PREFIX + ":" + simpleDateFormat.format(new Date());
-        System.out.println(key);
-        template.opsForZSet().incrementScore(key,teacherName,1);
+        Date today = Utils.getToday();
+        String key = Constants.TEACHER_PREFIX + ":" + Utils.getDateFormatString(today);
+        logger.info("addTeacherOneClick --> key");
+        mRedisTemplate.opsForZSet().incrementScore(key,teacherName,1);
     }
 
     @AfterReturning("viewMoviePage(teacherName, movieName)")
     public void addMovieOneClick(String teacherName, String movieName){
-        String key = Constants.MOVIE_PREFIX + ":" + simpleDateFormat.format(new Date());
-        System.out.println(key);
-        template.opsForZSet().incrementScore(key, movieName, 1);
+        Date today = Utils.getToday();
+        String key = Constants.MOVIE_PREFIX + ":" + Utils.getDateFormatString(today);
+        logger.info("addMovieOneClick --> key");
+        mRedisTemplate.opsForZSet().incrementScore(key, movieName, 1);
     }
 }

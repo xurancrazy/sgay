@@ -2,7 +2,7 @@ package com.sgay.giligili.entity;
 
 import java.io.Serializable;
 
-public class Teachers implements Serializable{
+public class Teacher implements Serializable{
     private Long id;
 
     private String name;

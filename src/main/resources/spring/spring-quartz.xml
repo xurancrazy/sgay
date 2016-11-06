@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <task:annotation-driven/>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.sgay.giligili.quartz"/>
+
+    <bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="updateTeacherViewNumTrigger"/>
+                <ref bean="updateMovieViewNumTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="updateTeacherViewNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateTeacherViewNumDetail"/>
+        <!-- run every morning at 00:02 AM -->
+        <property name="cronExpression" value="0 2 0 * * ?"/>
+    </bean>
+
+    <bean id="updateMovieViewNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateMovieViewNumDetail"/>
+        <!-- run every morning at 00:02 AM -->
+        <property name="cronExpression" value="0 2 0 * * ?"/>
+    </bean>
+
+    <bean id="updateTeacherViewNumDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="redisPersistence"/>
+        <property name="targetMethod" value="updateTeacherViewNum"/>
+    </bean>
+
+    <bean id="updateMovieViewNumDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="redisPersistence"/>
+        <property name="targetMethod" value="updateMovieViewNum"/>
+    </bean>
+
+    <bean id="redisPersistence" class="com.sgay.giligili.quartz.RedisCachePersistenceQuartz"/>
+
+</beans>
