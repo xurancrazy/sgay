@@ -18,6 +18,7 @@
             <list>
                 <ref bean="updateTeacherViewNumTrigger"/>
                 <ref bean="updateMovieViewNumTrigger"/>
+                <ref bean="updateTeachersTrigger"/>
             </list>
         </property>
     </bean>
@@ -28,10 +29,22 @@
         <property name="cronExpression" value="0 2 0 * * ?"/>
     </bean>
 
+    <bean id="updateTeacherLikeNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateTeacherViewNumDetail"/>
+        <!-- run every morning at 00:05 AM -->
+        <property name="cronExpression" value="0 2 0 * * ?"/>
+    </bean>
+
     <bean id="updateMovieViewNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="updateMovieViewNumDetail"/>
         <!-- run every morning at 00:02 AM -->
         <property name="cronExpression" value="0 2 0 * * ?"/>
+    </bean>
+
+    <bean id="updateTeachersTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateTeachers"/>
+        <!-- run every morning at 00:02 AM -->
+        <property name="cronExpression" value="0 3 0 * * ?"/>
     </bean>
 
     <bean id="updateTeacherViewNumDetail"
@@ -40,10 +53,22 @@
         <property name="targetMethod" value="updateTeacherViewNum"/>
     </bean>
 
+    <bean id="updateTeacherLikeNumDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="redisPersistence"/>
+        <property name="targetMethod" value="updateTeacherLikeNum"/>
+    </bean>
+
     <bean id="updateMovieViewNumDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="redisPersistence"/>
         <property name="targetMethod" value="updateMovieViewNum"/>
+    </bean>
+
+    <bean id="updateTeachers"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="redisPersistence"/>
+        <property name="targetMethod" value="updateTeachers"/>
     </bean>
 
     <bean id="redisPersistence" class="com.sgay.giligili.quartz.RedisCachePersistenceQuartz"/>

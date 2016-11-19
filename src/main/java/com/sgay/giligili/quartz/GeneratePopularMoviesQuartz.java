@@ -1,12 +1,7 @@
 package com.sgay.giligili.quartz;
 
-import com.mysql.jdbc.Util;
 import com.sgay.giligili.utils.Constants;
 import com.sgay.giligili.utils.Utils;
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.redis.core.BoundZSetOperations;
-import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,7 +15,7 @@ import java.util.*;
 public class GeneratePopularMoviesQuartz extends BaseQuartz {
 
     @Scheduled(cron = "0 2 0 ? * 1 ")
-    public void GenerateLastWeekPopularMovies() {
+    public void generateLastWeekPopularMovies() {
         Date yesterday = Utils.getYesterday();
         logger.info("GenerateLastWeekPopularMovies" + new Date());
         mRedisTemplate.delete(Constants.MOVIE_PREFIX + ":" + Constants.LAST_WEEK);
@@ -28,7 +23,7 @@ public class GeneratePopularMoviesQuartz extends BaseQuartz {
     }
 
     @Scheduled(cron = "0 2 0 1 * ? ")
-    public void GenerateLastMonthPopularMovies() {
+    public void generateLastMonthPopularMovies() {
         Date yesterday = Utils.getYesterday();
         logger.info("GenerateLastWeekPopularMovies --> time:" + new Date());
         mRedisTemplate.delete(Constants.MOVIE_PREFIX + ":" + Constants.LAST_MONTH);
@@ -51,11 +46,7 @@ public class GeneratePopularMoviesQuartz extends BaseQuartz {
                 for (ZSetOperations.TypedTuple<Object> item : tmp) {
                     String value = (String) item.getValue();
                     int score = item.getScore().intValue();
-                    if (map.containsKey(value)) {
-                        map.put(value, map.get(value) + score);
-                    } else {
-                        map.put(value, score);
-                    }
+                    map.put(value,map.getOrDefault(value,0)+score);
                 }
             }
         }

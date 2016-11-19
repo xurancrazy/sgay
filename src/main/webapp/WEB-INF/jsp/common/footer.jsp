@@ -14,8 +14,8 @@
         <li><a href="/teachers/天使萌" target="_blank">天使萌</a></li>
         <li><a href="/teachers/明日花绮罗" target="_blank">明日花绮罗</a></li>
         <li><a href="/teachers/林由奈" target="_blank">林由奈</a></li>
-        <li><a href="/teachers/宇都宫紫苑" target="_blank">宇都宫紫苑</a></li>
-        <li><a href="/" target="_blank">更多</a></li>
+        <li><a href="/teachers/宇都宫紫苑(RION)" target="_blank">宇都宫紫苑</a></li>
+        <li><a href="/teachers" target="_blank">更多</a></li>
     </ul>
 </div>
 <div class="footer row-fluid">
@@ -36,7 +36,7 @@
                     <li><a href="/teachers/彩美旬果" target="_blank">彩美旬果</a></li>
                     <li><a href="/teachers/铃村爱里" target="_blank">铃村爱里</a></li>
                     <li><a href="/teachers/宫地蓝" target="_blank">宫地蓝</a></li>
-                    <li><a href="/teachers/长谷川留衣" target="_blank">长谷川留衣</a></li>
+                    <li><a href="/teachers/長谷川留衣" target="_blank">長谷川留衣</a></li>
                 </ul>
             </div>
             <div class="span3">
@@ -52,7 +52,6 @@
                 <ul class="client">
                     <li><a href="/teachers/天使萌" target="_blank">天使萌</a></li>
                     <li><a href="/teachers/葵" target="_blank">葵</a></li>
-                    <li><a href="/teachers/长谷川留衣" target="_blank">长谷川留衣</a></li>
                 </ul>
             </div>
         </div>

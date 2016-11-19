@@ -34,9 +34,9 @@
                                                                     class="imgview"
                                                                     target="_blank" rel="nofollow"><img
                                         src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
-                                        data-original="uploads/images/cover/full/${movie.imghref}"
+                                        data-original="/uploads/images/cover/full/${movie.imghref}"
                                         align="right"
-                                        alt="《兽王鲨柳美稀》动物战队兽王者的美女泳装写真出炉"></a></div>
+                                        alt="${movie.fanhao}"></a></div>
                                 <div class="desc pull-left"><p>
                                     　　说到日本的战队系列不知道萤幕前的各位是不是都还有在追呢？像阿漆小时候最迷的就是鸟人战队，除了当时会到录影带店(就说我很老)租片子看以外~还会去买红白机上面的游戏来玩，...</p>
                                 </div>

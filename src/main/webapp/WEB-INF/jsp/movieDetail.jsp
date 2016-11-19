@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/header.jsp"%>
+<%@include file="/WEB-INF/jsp/common/header.jsp" %>
 <body>
-<%@include file="/WEB-INF/jsp/common/navigate.jsp"%>
+<%@include file="/WEB-INF/jsp/common/navigate.jsp" %>
 <div class="content container">
     <div class="weizhi2">当前位置：<a href="/">番号站</a> &gt; <a href="/teachers/${teacherName}">${teacherName}</a> &gt; <a
             href="/teachers/${teacherName}/${movie.fanhao}">${movie.fanhao}</a>
@@ -49,33 +49,25 @@
                 <div class="arteditor">
                     <p>围观:<span id="dianji">${movie.viewsnum}</span>次 </p>
                 </div>
+                <!--滚动栏-->
+                <!--滚动栏结束-->
                 <!--同演员相关-->
                 <div class="wz_xgtj">
                     <div class="blockTitle">
-                        <h2>${movie.teacher}作品全集</h2></div>
+                        <h2>${movie.teacher}作品全集</h2>
+                        <a class="more" target="_blank" href="/teachers/${movie.teacher}">更多 &gt;&gt;</a></div>
+
                     <div class="xg_bd">
                         <ul class="hotArticle">
-
-                            <li><a href="/tengpuhui/2009/SOE-236.html" rel="nofollow"><img
-                                    src="/uploads/allimg/150825/soe00236pl-lp.jpg"
-                                    alt="SOE-236"></a><a class="hotArticle" href="/tengpuhui/2009/SOE-236.html"><h3>
-                                SOE-236</h3></a></li>
-
-                            <li><a href="/tengpuhui/2014/PPPD-322.html" rel="nofollow"><img
-                                    src="/uploads/allimg/150827/pppd00322pl-lp.jpg"
-                                    alt="PPPD-322"></a><a class="hotArticle" href="/tengpuhui/2014/PPPD-322.html"><h3>
-                                PPPD-322</h3></a></li>
-
-                            <li><a href="/tengpuhui/2015/PPPD-355.html" rel="nofollow"><img
-                                    src="/uploads/allimg/150831/pppd00355pl-lp.jpg"
-                                    alt="PPPD-355"></a><a class="hotArticle" href="/tengpuhui/2015/PPPD-355.html"><h3>
-                                PPPD-355</h3></a></li>
-
-                            <li><a href="/tengpuhui/2014/PPPD-287.html" rel="nofollow"><img
-                                    src="/uploads/allimg/150827/pppd00287pl-lp.jpg"
-                                    alt="PPPD-287"></a><a class="hotArticle" href="/tengpuhui/2014/PPPD-287.html"><h3>
-                                PPPD-287</h3></a></li>
-
+                            <c:forEach items="${sameTeacherMovies}" var="sameTeacherMovie">
+                                <li><a href="/teachers/${sameTeacherMovie.teacher}/${sameTeacherMovie.fanhao}"
+                                       rel="nofollow"><img
+                                        src="/uploads/images/cover/full/${sameTeacherMovie.imghref}"
+                                        alt="${sameTeacherMovie.fanhao}"></a><a class="hotArticle"
+                                                                                href="/teachers/${sameTeacherMovie.teacher}/${sameTeacherMovie.fanhao}">
+                                    <h3>
+                                            ${sameTeacherMovie.fanhao}</h3></a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -83,26 +75,18 @@
                 <div class="wz_xgtj">
                     <div class="blockTitle">
                         <h2>同类型作品推荐</h2>
-                        <a class="more" target="_blank" href="/find.html">更多 &gt;&gt;</a>
+                        <a class="more" target="_blank" href="/teachers">更多 &gt;&gt;</a>
                     </div>
                     <div class="xg_bd">
                         <ul class="hotArticle">
-                            <li><a rel="nofollow" href="/xiaozaochuanlianzi/2012/BF-217.html"><img
-                                    src="/uploads/1607/bf00217pl-lp.jpg" alt="BF-217"></a><a
-                                    class="hotArticle" href="/xiaozaochuanlianzi/2012/BF-217.html"
-                                    title="BF-217">BF-217</a></li>
-                            <li><a rel="nofollow" href="/shen_shizhi/2013/MILD-858.html"><img
-                                    src="/uploads/allimg/1512/84mild00858pl-lp.jpg"
-                                    alt="MILD-858"></a><a class="hotArticle" href="/shen_shizhi/2013/MILD-858.html"
-                                                          title="MILD-858">MILD-858</a></li>
-                            <li><a rel="nofollow" href="/liangchuanxuanyin/2015/AVOP-155.html"><img
-                                    src="/uploads/1608/avop00155pl-lp.jpg" alt="AVOP-155"></a><a
-                                    class="hotArticle" href="/liangchuanxuanyin/2015/AVOP-155.html" title="AVOP-155">AVOP-155</a>
-                            </li>
-                            <li><a rel="nofollow" href="/xiaoxiyou/2015/MXGS-805.html"><img
-                                    src="/uploads/allimg/1602/h_068mxgs00805pl-lp.jpg" alt="MXGS-805"></a><a
-                                    class="hotArticle" href="/xiaoxiyou/2015/MXGS-805.html"
-                                    title="MXGS-805">MXGS-805</a></li>
+                            <c:forEach items="${sameTypeMovies}" var="sameTypeMovie">
+                                <li><a rel="nofollow"
+                                       href="/teachers/${sameTypeMovie.teacher}/${sameTypeMovie.fanhao}"><img
+                                        src="/uploads/images/cover/full/${sameTypeMovie.imghref}"
+                                        alt="${sameTypeMovie.fanhao}"></a><a
+                                        class="hotArticle"
+                                        href="/teachers/${sameTypeMovie.teacher}/${sameTypeMovie.fanhao}">${sameTypeMovie.fanhao}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -110,11 +94,11 @@
             </div>
         </div>
         <!--左侧文章结束-->
-        <%@include file="/WEB-INF/jsp/common/sideAD.jsp"%>
+        <%@include file="/WEB-INF/jsp/common/sideAD.jsp" %>
 
     </div>
 
 </div>
-<%@include file="/WEB-INF/jsp/common/footer.jsp"%>
+<%@include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>

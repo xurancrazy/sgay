@@ -62,9 +62,31 @@ public class TeachersController extends BaseController{
         if (!movie.getTeacher().equals(teacherName)){
             throw new PageNotFoundException("movieDetail-->"+"teacherName="+teacherName+",movieName="+movieName);
         }
+        List<Movie> sameTeacherMovies = buildRandomMoviesByTeacherName(teacherName, movieName);
+        List<Movie> sameTypeMovies = mMovieService.queryRandomMovies(4,4,false);
+        modelMap.addAttribute("sameTypeMovies",sameTypeMovies);
+        modelMap.addAttribute("sameTeacherMovies",sameTeacherMovies);
         modelMap.addAttribute("movie",movie);
         modelMap.addAttribute("teacherName",teacherName);
         return "movieDetail";
+    }
+
+    private List<Movie> buildRandomMoviesByTeacherName(String teacherName, String movieName){
+        List<Movie> movies = mMovieService.queryMoviesByTeacherName(teacherName);
+        List<Movie> res = new ArrayList<>();
+        int len = movies.size();
+        int numOfMovies = len < 4 ? len : 4;
+        int curNum = 0;
+        int cursor = 0;
+        while(cursor<len && curNum<numOfMovies){
+            Movie tmp = movies.get(cursor);
+            if (!movieName.equals(tmp.getFanhao())){
+                res.add(tmp);
+                curNum++;
+            }
+            cursor++;
+        }
+        return res;
     }
 
 }

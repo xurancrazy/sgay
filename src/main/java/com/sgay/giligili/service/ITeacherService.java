@@ -12,5 +12,9 @@ public interface ITeacherService {
 
     Teacher queryTeacherByName(String teacherName);
 
+    Teacher queryTeacherById(long id);
+
     void updateTeacherViewsNum(Teacher teacher);
+
+    void updateTeacherLikesNumInCache(String teacherName);
 }

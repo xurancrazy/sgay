@@ -44,4 +44,12 @@ public class BaseQuartz {
 
     protected Logger logger= LoggerFactory.getLogger(this.getClass());
 
+    protected final static String RANDOM_MOVIES_KEY = "randomMovies";
+
+    protected final static String EDITOR_RECOMMEND_MOVIES_KEY = "editorRecommendMovies";
+
+    protected final static String IMAGE_AND_TEXT_MOVIES_KEY = "imageAndTextRecommendMovies";
+
+    protected final static String TEACHERS_KEY = "teachers";
+
 }

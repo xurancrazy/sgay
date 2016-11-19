@@ -8,6 +8,8 @@ public class Constants {
 
     public static final String MOVIE_PREFIX = "Movie";
 
+    public static final String TEACHER_VOTE = "Voted";
+
     public static final String SF_PATTERN = "yyyyMMdd";
 
     public static final String LAST_WEEK = "lastWeek";

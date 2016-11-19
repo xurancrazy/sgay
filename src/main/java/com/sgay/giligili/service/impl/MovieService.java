@@ -8,6 +8,7 @@ import com.sgay.giligili.utils.Utils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,34 @@ public class MovieService extends BaseService implements IMovieService {
     @Override
     public List<Movie> queryRecommendMovies() {
         return mMovieMapper.selectRecommendMovies();
+    }
+
+    @Cacheable(value = "queryRandomMovies", key = "'randomMovies'", condition = "#isUseCache == true")
+    @Override
+    public List<Movie> queryRandomMovies(int sum, int numOfOneQuery, boolean isUseCache) {
+        return queryRandomMoviesImpl(sum, numOfOneQuery);
+    }
+
+    @Cacheable(value = "queryEditorRecommendMovies", key = "'editorRecommendMovies'")
+    @Override
+    public List<Movie> queryEditorRecommendMovies(int sum, int numOfOneQuery) {
+        return queryRandomMoviesImpl(sum, numOfOneQuery);
+    }
+
+    @Cacheable(value = "queryImageAndTextRecommendMovies", key = "'imageAndTextRecommendMovies'")
+    @Override
+    public List<Movie> queryImageAndTextRecommendMovies(int sum, int numOfOneQuery) {
+        return queryRandomMoviesImpl(sum, numOfOneQuery);
+    }
+
+
+    private List<Movie> queryRandomMoviesImpl(int sum, int numOfOneQuery){
+        int times = sum / numOfOneQuery;
+        List<Movie> res = new LinkedList<>();
+        for (int i = 0; i < times; i++){
+            res.addAll(mMovieMapper.selectRandomMovies(numOfOneQuery));
+        }
+        return res;
     }
 
     @Cacheable(value = "queryMoviesByTeacherName", key = "'teacherName:'+#teacherName")

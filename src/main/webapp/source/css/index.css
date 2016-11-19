@@ -1038,7 +1038,7 @@ a.logo {
     white-space: nowrap;
     width: 250px;
     overflow: hidden;
-    background: url(../images/point-gary.png) no-repeat left center
+    background: url(../images/line1.gif) no-repeat left center
 }
 
 .tx-list a {
@@ -1296,7 +1296,7 @@ a.logo {
 
 .footer .list li {
     padding-left: 10px;
-    background: url(../images/point-gary.png) no-repeat left center
+    background: url(../images/line1.gif) no-repeat left center
 }
 
 .footer a {
@@ -1382,7 +1382,6 @@ a.f-weixin:hover .icons {
     display: block;
     padding-left: 115px;
     height: 50px;
-    background: url(../images/qiniu.png) top left no-repeat;
     line-height: 50px
 }
 
@@ -1605,7 +1604,7 @@ a.f-weixin:hover .icons {
 
 .postRelated .list li {
     padding: 2px 0 2px 10px;
-    background: url(../images/point-gary.png) no-repeat left center
+    background: url(../images/line1.gif) no-repeat left center
 }
 
 .postRelated .hd {
@@ -2182,7 +2181,7 @@ ul.icon_list li span {
 
 .title-read .list li {
     padding: 2px 0 2px 10px;
-    background: url(../images/point-gary.png) no-repeat left center;
+    background: url(../images/line1.gif) no-repeat left center;
     line-height: 24px
 }
 
@@ -2833,7 +2832,7 @@ p.info {
     width: 55px;
     height: 18px;
     line-height: 18px;
-    background: url(http://www.nh87.cn/images/pic_ilike.png) left -1230px;
+    background: url(../images/pic_ilike.png) left -1230px;
     padding-left: 15px;
     float: left;
 }
@@ -2841,7 +2840,7 @@ p.info {
 .list_text .good {
     height: 18px;
     line-height: 18px;
-    background: url(http://www.nh87.cn/images/pic_ilike.png) left -523px;
+    background: url(../images/pic_ilike.png) left -523px;
     padding-left: 15px;
     float: left;
 }

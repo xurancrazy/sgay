@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sgay.giligili.dao.MovieMapper">
-  <cache/>
   <resultMap id="BaseResultMap" type="com.sgay.giligili.entity.Movie">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="fanhao" jdbcType="VARCHAR" property="fanhao" />
@@ -16,6 +15,11 @@
   <sql id="Base_Column_List">
     id, fanhao, imgHref, title, publishTime, viewsNum, likesNum, teacher, recommend
   </sql>
+
+  <sql id="Base_Column_List_ForSelectRandomMovies">
+    r1.id, r1.fanhao, r1.imgHref, r1.title, r1.publishTime, r1.viewsNum, r1.likesNum, r1.teacher, r1.recommend
+  </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -160,6 +164,19 @@
     <include refid="Base_Column_List" />
     from movies
     where fanhao = #{movieName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectRandomMovies" parameterType="java.lang.Integer" resultType="com.sgay.giligili.entity.Movie">
+    SELECT
+    <include refid="Base_Column_List_ForSelectRandomMovies"/>
+    FROM movies AS r1 JOIN
+       (SELECT CEIL(RAND() *
+                     (SELECT MAX(id)
+                        FROM movies)) AS id)
+        AS r2
+    WHERE r1.id >= r2.id
+    ORDER BY r1.id ASC
+    LIMIT #{numOfOneQuery, jdbcType=INTEGER}
   </select>
 
 </mapper>
