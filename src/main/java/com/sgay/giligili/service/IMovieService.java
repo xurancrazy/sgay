@@ -29,4 +29,6 @@ public interface IMovieService {
 
     void updateMovieViewsNum(Movie movie);
 
+    void testTransactional();
+
 }

@@ -57,7 +57,7 @@
         </div>
         <div class="row clearfix copyright">
             <div class="span8">
-                <p>Copyright © 2015-2016 nanrenvip. 番号站 版权所有</p>
+                <p>Copyright © 2015-2016 番号站 版权所有</p>
                 <p>鲁ICP备13029082号-1</p>
             </div>
             <div class="span4">

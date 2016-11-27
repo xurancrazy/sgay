@@ -16,19 +16,25 @@ public class GenerateRandomMoviesQuartz extends BaseQuartz {
 
     @Scheduled(cron = "0 0/15 * * * ? ")
     public void removeRandomMoviesCache() {
-        logger.info("GenerateRandomMovies" + System.currentTimeMillis());
+        logger.info("removeRandomMoviesCache" + System.currentTimeMillis());
         mRedisTemplate.delete(RANDOM_MOVIES_KEY);
+    }
+
+    @Scheduled(cron = "0 0 0/2 * * ? ")
+    public void removeRecommendMoviesCache() {
+        logger.info("removeRecommendMoviesCache" + System.currentTimeMillis());
+        mRedisTemplate.delete(RECOMMEND_MOVIES_KEY);
     }
 
     @Scheduled(cron = "0 0/15 * * * ? ")
     public void removeEditorRecommendMoviesCache() {
-        logger.info("GenerateRandomMovies" + System.currentTimeMillis());
+        logger.info("removeEditorRecommendMoviesCache" + System.currentTimeMillis());
         mRedisTemplate.delete(EDITOR_RECOMMEND_MOVIES_KEY);
     }
 
     @Scheduled(cron = "0 0/15 * * * ? ")
     public void removeImageAndTextRecommendMoviesCache() {
-        logger.info("GenerateRandomMovies" + System.currentTimeMillis());
+        logger.info("removeImageAndTextRecommendMoviesCache" + System.currentTimeMillis());
         mRedisTemplate.delete(IMAGE_AND_TEXT_MOVIES_KEY);
     }
 }

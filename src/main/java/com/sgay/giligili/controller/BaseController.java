@@ -34,6 +34,12 @@ public class BaseController{
 
     protected static final String DEFAULT_INTERNAL_ERROR_VIEW = "common/500";
 
+    protected void SeoOptimization(ModelMap modelMap, String description, String keywords, String title){
+        modelMap.addAttribute("title",title);
+        modelMap.addAttribute("description",description);
+        modelMap.addAttribute("keywords",keywords);
+    }
+
     @ModelAttribute
     public void queryPopularMovies(ModelMap modelMap) throws IOException {
         List<Movie> todayPopularMovies = mMovieService.queryTodayPopularMovies();

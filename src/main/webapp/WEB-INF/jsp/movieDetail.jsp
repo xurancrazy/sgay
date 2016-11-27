@@ -1,5 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <%@ include file="/WEB-INF/jsp/common/sourceCommon.jsp"%>
+</head>
 <body>
 <%@include file="/WEB-INF/jsp/common/navigate.jsp" %>
 <div class="content container">
@@ -22,29 +27,27 @@
 
                 <!--种子搜索-->
                 <div class="pages">
-                    <div class="loading" style="display: none;">请等待<span id="daojishi">1</span>秒<br>
-                        <p style="padding:15px;mrgin-top:20px;color:#D04725;">
-                            种子链接读不动是因为你浏览器屏蔽了广告显示，换浏览器或关闭广告插件后即可，这也是无奈之举，毕竟服务器域名都要钱，忘理解，谢谢！</p></div>
+                    <%--<div class="loading" style="display: block;">请等待<span id="daojishi">15</span>秒<br>--%>
+                        <%--<p style="padding:15px;mrgin-top:20px;color:#D04725;">--%>
+                            <%--种子链接读不动是因为你浏览器屏蔽了广告显示，换浏览器或关闭广告插件后即可，这也是无奈之举，毕竟服务器域名都要钱，望理解，谢谢！</p>--%>
+                    <%--</div>--%>
                     <div class="searchBox" style="display: block;">
                         <div class="btn">
                             <button type="submit" style="border:0;background:none;"><a
-                                    href="https://btdb.in/q/MEYD-202/" target="_blank"><strong>MEYD-202</strong>种子</a>
+                                    href="https://btdb.in/q/${movie.fanhao}/" target="_blank"><strong>${movie.fanhao}</strong>种子</a>
                             </button>
                             　(首选通道)
                         </div>
                     </div>
-                    <form action="http://btkitty.bid/#kwd" method="post" name="search" target="_blank" rel="nofollow">
-                        <div class="searchBox" style="display: block;">
-                            <div class="btn">
-                                <button type="submit" style="border:0;background:none;"><strong>MEYD-202</strong>种子　(备用通道)
-                                </button>
-                            </div>
-                            <p style="padding:15px;color:#D04725;">(种子搜索结果由第三方网站BTkitty提供，弹窗广告较多请注意甄别！)</p>
-                            <div class="kwd"><input type="hidden" name="keyword" id="kwd" value="MEYD-202"></div>
-                            <script language="javascript"
-                                    type="text/javascript">document.getElementById('kwd').value = decodeURIComponent('MEYD-202');</script>
+                    <div class="searchBox" style="display: block;">
+                        <div class="btn">
+                            <button type="submit" style="border:0;background:none;"><a
+                                    href="https://www.torrentkitty.tv/search/${movie.fanhao}/" target="_blank"><strong>${movie.fanhao}</strong>种子</a>
+                            </button>
+                            　(备用通道)
                         </div>
-                    </form>
+                        <p style="padding:15px;color:#D04725;">(种子搜索结果由第三方网站提供，弹窗广告较多请注意甄别！)</p>
+                    </div>
                 </div>
                 <div class="arteditor">
                     <p>围观:<span id="dianji">${movie.viewsnum}</span>次 </p>

@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import com.sgay.giligili.entity.Movie;
 import com.sgay.giligili.entity.Teacher;
 import com.sgay.giligili.exception.PageNotFoundException;
+import com.sgay.giligili.utils.Constants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +37,13 @@ public class TeachersController extends BaseController{
         List<String> years = new LinkedList<>(yearMapToMovies.keySet());
         years.sort((final String o1, String o2) -> Integer.valueOf(o2)-Integer.valueOf(o1));
         years.add(0,"all");
+        String teacherDescription = createTeacherDescription(teacherName, year, movies);
+        modelMap.addAttribute("teacherDescription",teacherDescription);
         modelMap.addAttribute("years",years);
         modelMap.addAttribute("movies",movies);
         modelMap.addAttribute("teacher",teacher);
+        String title = teacherName+"【作品　番号　种子　图片】 - 番号站";
+        SeoOptimization(modelMap, teacherDescription, teacherName, title);
         return "teacherDetail";
     }
 
@@ -47,6 +52,26 @@ public class TeachersController extends BaseController{
             String year = movie.getPublishtime().toString().split("-")[0];
             res.put(year,movie);
         }
+    }
+
+    private String createTeacherDescription(String teacherName, String year, List<Movie> movies){
+        StringBuilder sb = new StringBuilder();
+        sb.append(teacherName);
+        if (!Strings.isNullOrEmpty(year)){
+            sb.append(year);
+        }
+        sb.append("作品番号，最新作品包含：");
+        int num = 0;
+        int length = movies.size();
+        for(Movie movie : movies){
+            sb.append(movie.getFanhao());
+            num++;
+            if (num > 8 || num == length){
+                break;
+            }
+            sb.append("、");
+        }
+        return sb.toString();
     }
 
     private boolean validateParams_Year(String year) {
@@ -68,6 +93,13 @@ public class TeachersController extends BaseController{
         modelMap.addAttribute("sameTeacherMovies",sameTeacherMovies);
         modelMap.addAttribute("movie",movie);
         modelMap.addAttribute("teacherName",teacherName);
+        StringBuilder keywords = new StringBuilder();
+        keywords.append(teacherName).append(",").append(movieName);
+        StringBuilder title = new StringBuilder();
+        title.append("番号-").append(movieName).append("【").append(teacherName).append("】").append("作品封面及种子").append(" - 番号站");
+        StringBuilder description = new StringBuilder();
+        description.append("作品:").append(movieName).append(" ").append(movie.getTitle()).append(" 发行时间:").append(movie.getPublishtime());
+        SeoOptimization(modelMap, description.toString(), keywords.toString(), title.toString());
         return "movieDetail";
     }
 

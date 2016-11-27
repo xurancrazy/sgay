@@ -1,15 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/header.jsp" %>
-<body>
-<script type="text/javascript">
-    jQuery(document).ready(
-            function ($) {
-                $(".post-list img").lazyload({
-                    placeholder: "http://img.yixieshi.com/style/yixieshi/img/grey.gif",
-                    effect: "fadeIn"
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <%@ include file="/WEB-INF/jsp/common/sourceCommon.jsp"%>
+    <script type="text/javascript">
+        jQuery(document).ready(
+                function ($) {
+                    $(".post-list img").lazyload({
+                        placeholder: "http://img.yixieshi.com/style/yixieshi/img/grey.gif",
+                        effect: "fadeIn"
+                    });
                 });
-            });
-</script>
+    </script>
+</head>
+<body>
 <%@include file="/WEB-INF/jsp/common/navigate.jsp" %>
 <div class="content container">
     <!--幻灯结束-->
@@ -37,8 +42,11 @@
                                         data-original="/uploads/images/cover/full/${movie.imghref}"
                                         align="right"
                                         alt="${movie.fanhao}"></a></div>
-                                <div class="desc pull-left"><p>
-                                    　　说到日本的战队系列不知道萤幕前的各位是不是都还有在追呢？像阿漆小时候最迷的就是鸟人战队，除了当时会到录影带店(就说我很老)租片子看以外~还会去买红白机上面的游戏来玩，...</p>
+                                <div class="desc pull-left">
+                                    <p>日本AV女优<strong>${movie.teacher}</strong>参演的作品番号<strong>${movie.fanhao}</strong>，片名（<strong>${movie.title}</strong>），本作品已收录于番号站，<a
+                                            href="/teachers/${movie.teacher}/${movie.fanhao}" target=" _blank">点击此处查看详情</a>
+                                        ，正式发片日期是${movie.publishtime}
+                                    </p>
                                 </div>
                             </div>
                         </li>

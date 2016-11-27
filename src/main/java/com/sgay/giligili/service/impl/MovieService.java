@@ -8,7 +8,9 @@ import com.sgay.giligili.utils.Utils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -31,18 +33,21 @@ public class MovieService extends BaseService implements IMovieService {
 
     @Cacheable(value = "queryRandomMovies", key = "'randomMovies'", condition = "#isUseCache == true")
     @Override
+    @Transactional
     public List<Movie> queryRandomMovies(int sum, int numOfOneQuery, boolean isUseCache) {
         return queryRandomMoviesImpl(sum, numOfOneQuery);
     }
 
     @Cacheable(value = "queryEditorRecommendMovies", key = "'editorRecommendMovies'")
     @Override
+    @Transactional
     public List<Movie> queryEditorRecommendMovies(int sum, int numOfOneQuery) {
         return queryRandomMoviesImpl(sum, numOfOneQuery);
     }
 
     @Cacheable(value = "queryImageAndTextRecommendMovies", key = "'imageAndTextRecommendMovies'")
     @Override
+    @Transactional
     public List<Movie> queryImageAndTextRecommendMovies(int sum, int numOfOneQuery) {
         return queryRandomMoviesImpl(sum, numOfOneQuery);
     }
@@ -54,6 +59,9 @@ public class MovieService extends BaseService implements IMovieService {
         for (int i = 0; i < times; i++){
             res.addAll(mMovieMapper.selectRandomMovies(numOfOneQuery));
         }
+//        res.addAll(mMovieMapper.selectRandomMovies(1));
+//        res.addAll(mMovieMapper.selectRandomMovies(2));
+//        res.addAll(mMovieMapper.selectRandomMovies(3));
         return res;
     }
 
@@ -100,7 +108,18 @@ public class MovieService extends BaseService implements IMovieService {
 
     @CacheEvict(value = "queryqueryMovieByFanhao", key = "'movieName:'+#movie.fanhao")
     @Override
+    @Transactional(propagation = Propagation.NESTED)
     public void updateMovieViewsNum(Movie movie) {
         mMovieMapper.updateByPrimaryKeySelective(movie);
+        int a =3/0;
+    }
+
+    @Override
+    @Transactional
+    public void testTransactional(){
+        Movie movie = mMovieMapper.selectByPrimaryKey((long)3);
+        movie.setViewsnum((long)100);
+        mMovieMapper.updateByPrimaryKey(movie);
+        int a = 3/0;
     }
 }

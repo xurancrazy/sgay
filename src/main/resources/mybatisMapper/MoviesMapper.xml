@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sgay.giligili.dao.MovieMapper">
+  <cache/>
   <resultMap id="BaseResultMap" type="com.sgay.giligili.entity.Movie">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="fanhao" jdbcType="VARCHAR" property="fanhao" />
@@ -166,7 +167,7 @@
     where fanhao = #{movieName,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectRandomMovies" parameterType="java.lang.Integer" resultType="com.sgay.giligili.entity.Movie">
+  <select id="selectRandomMovies" parameterType="java.lang.Integer" resultType="com.sgay.giligili.entity.Movie"  flushCache="true">
     SELECT
     <include refid="Base_Column_List_ForSelectRandomMovies"/>
     FROM movies AS r1 JOIN

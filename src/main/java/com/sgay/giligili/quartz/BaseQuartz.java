@@ -46,6 +46,8 @@ public class BaseQuartz {
 
     protected final static String RANDOM_MOVIES_KEY = "randomMovies";
 
+    protected final static String RECOMMEND_MOVIES_KEY = "recommendMovies";
+
     protected final static String EDITOR_RECOMMEND_MOVIES_KEY = "editorRecommendMovies";
 
     protected final static String IMAGE_AND_TEXT_MOVIES_KEY = "imageAndTextRecommendMovies";

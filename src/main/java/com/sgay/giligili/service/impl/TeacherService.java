@@ -9,6 +9,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -44,6 +46,7 @@ public class TeacherService extends BaseService implements ITeacherService {
 
     @CacheEvict(value = "queryTeacherByName",key = "'teacherDetail:'+#teacher.name")
     @Override
+    @Transactional(propagation = Propagation.NESTED)
     public void updateTeacherViewsNum(Teacher teacher) {
         mTeacherMapper.updateByPrimaryKeySelective(teacher);
     }

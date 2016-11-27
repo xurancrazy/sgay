@@ -1,39 +1,44 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/header.jsp"%>
-<body>
-<script type="text/javascript">
-    jQuery(document).ready(
-            function ($) {
-                $(".list_box img").lazyload({
-                    placeholder: "http://img.yixieshi.com/style/yixieshi/img/grey.gif",
-                    effect: "fadeIn"
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <%@ include file="/WEB-INF/jsp/common/sourceCommon.jsp"%>
+    <script type="text/javascript">
+        jQuery(document).ready(
+                function ($) {
+                    $(".list_box img").lazyload({
+                        placeholder: "http://img.yixieshi.com/style/yixieshi/img/grey.gif",
+                        effect: "fadeIn"
+                    });
                 });
-            });
-</script>
-<script type="text/javascript">
-    $(function () {
-        $(".list_tp a").click(function () {
-            var zan = $(this);
-            var id = zan.attr("rel"); //对应id
-            $.ajax({
-                type:"POST",
-                url:"/vote/teachers/"+id,
-                cache:false,
-                dataType:"json",
-                success:function(msg){
-                    if(!msg.success){
-                        alert("您已经投过该老师了!");
-                    }else{
-                        alert("感谢您的参与!");
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".list_tp a").click(function () {
+                var zan = $(this);
+                var id = zan.attr("rel"); //对应id
+                $.ajax({
+                    type:"POST",
+                    url:"/vote/teachers/"+id,
+                    cache:false,
+                    dataType:"json",
+                    success:function(msg){
+                        if(!msg.success){
+                            alert("您已经投过该老师了!");
+                        }else{
+                            alert("感谢您的参与!");
+                        }
+                        zan.html(msg.num);
+                        zan.fadeIn(300); //渐显效果
                     }
-                    zan.html(msg.num);
-                    zan.fadeIn(300); //渐显效果
-                }
+                });
+                return false;
             });
-            return false;
         });
-    });
-</script>
+    </script>
+</head>
+<body>
 <%@include file="/WEB-INF/jsp/common/navigate.jsp"%>
 <div class="content container">
     <div id="contrainer" class="333">
@@ -46,9 +51,7 @@
                                                                 rel="${teacher.id}">投票</a></span></h2>
                     <img src="/uploads/images/icon/full/${teacher.img}" width="125" height="125" alt="${teacher.name}"
                          title="${teacher.name}" style="float: left;">
-                    <p class="avms">天海翼（天海つばさ / あまみ つばさ），1988年出生，2009年出道，出道以来一直在idea
-                        pocket公司发片，属于IP公司的台柱子，天海翼身高160cm，E罩杯的魔鬼身材，加上清纯的天使面孔，idea
-                        pocket的优质封面设计和良好的拍摄技巧，也是她的事业平步青云，如虎添翼，让她俘获了众多两岸三地骚年的心，如果说天海翼有什么缺点的话，她的声音不是很好听似乎是她唯一的弱点。</p>
+                    <p class="avms">${teacherDescription}</p>
                     <div class="nian btn-group">
                         <c:forEach items="${years}" var="year" varStatus="s">
                             <c:choose>

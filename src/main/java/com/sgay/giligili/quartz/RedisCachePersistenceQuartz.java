@@ -6,6 +6,7 @@ import com.sgay.giligili.utils.Constants;
 import com.sgay.giligili.utils.Utils;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
  */
 public class RedisCachePersistenceQuartz extends BaseQuartz {
 
+    @Transactional
     public void updateTeacherViewNum() {
         Date today = Utils.getToday();
         Date yesterday = Utils.getYesterday();
@@ -30,6 +32,7 @@ public class RedisCachePersistenceQuartz extends BaseQuartz {
         }
     }
 
+    @Transactional
     public void updateTeacherLikeNum() {
         Date today = Utils.getToday();
         Date yesterday = Utils.getYesterday();
@@ -39,12 +42,18 @@ public class RedisCachePersistenceQuartz extends BaseQuartz {
         for (ZSetOperations.TypedTuple<Object> teacherAndNums : set) {
             String teacherName = (String) teacherAndNums.getValue();
             int nums = (int) teacherAndNums.getScore().doubleValue();
-            Teacher teacher = mTeacherService.queryTeacherByName(teacherName);
-            teacher.setLikesnum(teacher.getLikesnum() + nums);
-            mTeacherService.updateTeacherViewsNum(teacher);
+            try {
+                Teacher teacher = mTeacherService.queryTeacherByName(teacherName);
+                teacher.setLikesnum(teacher.getLikesnum() + nums);
+                mTeacherService.updateTeacherViewsNum(teacher);
+            }catch (Exception e){
+                //rollback the nested Transaction
+                //continue the loop
+            }
         }
     }
 
+    @Transactional
     public void updateMovieViewNum() {
         Date today = Utils.getToday();
         Date yesterday = Utils.getYesterday();
@@ -54,9 +63,14 @@ public class RedisCachePersistenceQuartz extends BaseQuartz {
         for (ZSetOperations.TypedTuple<Object> fanhaoAndNums : set) {
             String fanhao = (String) fanhaoAndNums.getValue();
             int nums = (int) fanhaoAndNums.getScore().doubleValue();
-            Movie movie = mMovieService.queryMovieByFanhao(fanhao);
-            movie.setViewsnum(movie.getViewsnum() + nums);
-            mMovieService.updateMovieViewsNum(movie);
+            try {
+                Movie movie = mMovieService.queryMovieByFanhao(fanhao);
+                movie.setViewsnum(movie.getViewsnum() + nums);
+                mMovieService.updateMovieViewsNum(movie);
+            }catch (Exception e){
+                //rollback the nested Transaction
+                //continue the loop
+            }
         }
     }
 
