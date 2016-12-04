@@ -77,13 +77,13 @@
                         <li class="post">
                             <div class="link">
 			<span class="list_img" style="width:210px;">
-			<a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank">
+			<a href="/movies/${movie.fanhao}" target="_blank">
 			<img src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
                  data-original="/uploads/images/cover/full/${movie.imghref}" style="display: inline;" alt="${movie.fanhao}"></a>
 			<span class="arr"><span></span></span>			</span>
 			<span class="list_text">
 			<em><b><a
-                    href="/teachers/${movie.teacher}/${movie.fanhao}">${movie.fanhao}</a></b><p><strong>${movie.title}</strong>...  </p></em>
+                    href="/movies/${movie.fanhao}">${movie.fanhao}</a></b><p><strong>${movie.title}</strong>...  </p></em>
             <p class="info">
                 </p><div class="view" title="${movie.viewsnum}℃">${movie.viewsnum}</div>
                 <div class="good" title="发行日期">${movie.publishtime}</div>

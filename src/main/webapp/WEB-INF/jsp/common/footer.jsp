@@ -14,7 +14,7 @@
         <li><a href="/teachers/天使萌" target="_blank">天使萌</a></li>
         <li><a href="/teachers/明日花绮罗" target="_blank">明日花绮罗</a></li>
         <li><a href="/teachers/林由奈" target="_blank">林由奈</a></li>
-        <li><a href="/teachers/宇都宫紫苑(RION)" target="_blank">宇都宫紫苑</a></li>
+        <li><a href="/teachers/宇都宫紫苑" target="_blank">宇都宫紫苑</a></li>
         <li><a href="/teachers" target="_blank">更多</a></li>
     </ul>
 </div>

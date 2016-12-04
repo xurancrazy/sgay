@@ -26,7 +26,7 @@
                     <c:forEach items="${recommendMovies}" var="movie">
                         <li>
                             <h2 class="heading"><span class="new-icon"></span>
-                                <a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                                <a href="/movies/${movie.fanhao}" target="_blank"
                                    title="${movie.fanhao}">${movie.fanhao}</a>
                             </h2>
                             <div class="info"><span>发片时间：${movie.publishtime}</span> <span><i
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="main row-fluid">
-                                <div class="thumbnail pull-left"><a href="/teachers/${movie.teacher}/${movie.fanhao}"
+                                <div class="thumbnail pull-left"><a href="/movies/${movie.fanhao}"
                                                                     class="imgview"
                                                                     target="_blank" rel="nofollow"><img
                                         src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
@@ -44,7 +44,7 @@
                                         alt="${movie.fanhao}"></a></div>
                                 <div class="desc pull-left">
                                     <p>日本AV女优<strong>${movie.teacher}</strong>参演的作品番号<strong>${movie.fanhao}</strong>，片名（<strong>${movie.title}</strong>），本作品已收录于番号站，<a
-                                            href="/teachers/${movie.teacher}/${movie.fanhao}" target=" _blank">点击此处查看详情</a>
+                                            href="/movies/${movie.fanhao}" target=" _blank">点击此处查看详情</a>
                                         ，正式发片日期是${movie.publishtime}
                                     </p>
                                 </div>

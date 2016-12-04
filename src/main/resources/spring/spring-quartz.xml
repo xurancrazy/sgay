@@ -17,6 +17,7 @@
         <property name="triggers">
             <list>
                 <ref bean="updateTeacherViewNumTrigger"/>
+                <ref bean="updateTeacherLikeNumTrigger"/>
                 <ref bean="updateMovieViewNumTrigger"/>
                 <ref bean="updateTeachersTrigger"/>
             </list>
@@ -25,25 +26,25 @@
 
     <bean id="updateTeacherViewNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="updateTeacherViewNumDetail"/>
-        <!-- run every morning at 00:02 AM -->
-        <property name="cronExpression" value="0 2 0 * * ?"/>
+        <!-- run every morning at 00:01 AM -->
+        <property name="cronExpression" value="0 1 0 * * ?"/>
     </bean>
 
     <bean id="updateTeacherLikeNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="updateTeacherViewNumDetail"/>
-        <!-- run every morning at 00:05 AM -->
+        <property name="jobDetail" ref="updateTeacherLikeNumDetail"/>
+        <!-- run every morning at 00:02 AM -->
         <property name="cronExpression" value="0 2 0 * * ?"/>
     </bean>
 
     <bean id="updateMovieViewNumTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="updateMovieViewNumDetail"/>
-        <!-- run every morning at 00:02 AM -->
-        <property name="cronExpression" value="0 2 0 * * ?"/>
+        <!-- run every morning at 00:01 AM -->
+        <property name="cronExpression" value="0 1 0 * * ?"/>
     </bean>
 
     <bean id="updateTeachersTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="updateTeachers"/>
-        <!-- run every morning at 00:02 AM -->
+        <!-- run every morning at 00:03 AM -->
         <property name="cronExpression" value="0 3 0 * * ?"/>
     </bean>
 

@@ -19,7 +19,7 @@ public interface MovieMapper {
 
     int updateByPrimaryKey(Movie record);
 
-    List<Movie> selectRecommendMovies();
+    List<Movie> selectRecommendMovies(Integer interval);
 
     List<Movie> selectMoviesByTeacherName(String teacherName);
 

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by xurancrazy on 2016/10/10.
  */
-public interface ITeacherService {
+public interface ITeacherService extends IBaseService{
     List<Teacher> queryTeachers();
 
     Teacher queryTeacherByName(String teacherName);

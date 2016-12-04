@@ -20,26 +20,25 @@ import java.util.Date;
 @Component
 public class RedisCacheClickEventAop extends BaseAop{
 
-    @Pointcut("execution(* com.sgay.giligili.controller.TeachersController.teacherMovies(..)) && args(teacherName, ..)")
+    @Pointcut("execution(* com.sgay.giligili.controller.TeacherController.teacherMovies(..)) && args(teacherName, ..)")
     public void viewTeacherPage(String teacherName){}
 
-    @Pointcut("execution(* com.sgay.giligili.controller.TeachersController.movieDetail(..)) && args(teacherName, movieName, ..)")
-    public void viewMoviePage(String teacherName, String movieName){}
-
+    @Pointcut("execution(* com.sgay.giligili.controller.MovieController.movieDetail(..)) && args(movieName, ..)")
+    public void viewMoviePage(String movieName){}
 
     @AfterReturning("viewTeacherPage(teacherName)")
     public void addTeacherOneClick(String teacherName){
         Date today = Utils.getToday();
         String key = Constants.TEACHER_PREFIX + ":" + Utils.getDateFormatString(today);
-        logger.info("addTeacherOneClick --> key");
+        logger.info("addTeacherOneClick --> key:" + key);
         mRedisTemplate.opsForZSet().incrementScore(key,teacherName,1);
     }
 
-    @AfterReturning("viewMoviePage(teacherName, movieName)")
-    public void addMovieOneClick(String teacherName, String movieName){
+    @AfterReturning("viewMoviePage(movieName)")
+    public void addMovieOneClick(String movieName){
         Date today = Utils.getToday();
         String key = Constants.MOVIE_PREFIX + ":" + Utils.getDateFormatString(today);
-        logger.info("addMovieOneClick --> key");
+        logger.info("addMovieOneClick --> key:" + key);
         mRedisTemplate.opsForZSet().incrementScore(key, movieName, 1);
     }
 }

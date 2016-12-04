@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by xurancrazy on 2016/10/10.
  */
-public interface IMovieService {
+public interface IMovieService extends IBaseService{
     List<Movie> queryRecommendMovies();
 
     List<Movie> queryRandomMovies(int sum, int numOfOneQuery, boolean isUseCache);

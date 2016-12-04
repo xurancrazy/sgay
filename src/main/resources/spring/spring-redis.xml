@@ -31,7 +31,7 @@
         <property name="port" value="${redis.port}"/>
         <property name="password" value="${redis.pass}"/>
     </bean>
-    <!-- Spring-Redis 操作模板 -->
+    <!-- Spring-Redis 操作模板支持事务 -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
           p:connectionFactory-ref="jedisConnectionFactory">
         <property name="enableTransactionSupport" value="true"/>
@@ -48,6 +48,5 @@
             <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
         </property>
     </bean>
-
 
 </beans>

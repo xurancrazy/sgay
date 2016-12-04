@@ -18,7 +18,8 @@
 
         <li><a href="/teachers/吉泽明步">吉泽明步</a></li>
 
-        <li><a href="/teachers/麻仓优">麻仓优</a></li>
+        <li><a href="/category">作品分类</a></li>
+
         <li><a href="/teachers" title="找女优的来这里">女优排行</a></li>
         <div class="search">
             <form name="keyform" method="get" action="http://www.chaomabaida.com/plus/search.php" target="_blank">

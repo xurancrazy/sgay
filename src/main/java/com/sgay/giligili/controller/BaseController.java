@@ -1,12 +1,11 @@
 package com.sgay.giligili.controller;
 
 import com.sgay.giligili.entity.Movie;
-import com.sgay.giligili.service.IMovieService;
-import com.sgay.giligili.service.ITeacherService;
-import com.sgay.giligili.service.IVoteService;
+import com.sgay.giligili.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,10 +20,19 @@ import java.util.List;
 public class BaseController{
     @Autowired
     protected IMovieService mMovieService;
+
     @Autowired
     protected ITeacherService mTeacherService;
+
     @Autowired
     protected IVoteService mVoteService;
+
+    @Autowired
+    protected ICategoryService mCategoryService;
+
+    @Autowired
+    protected ITransactionService mTransactionService;
+
     @Autowired
     protected RedisTemplate<String, String> mRedisTemplate;
 

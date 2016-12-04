@@ -1,5 +1,6 @@
 package com.sgay.giligili.service.impl;
 
+import com.google.common.collect.Lists;
 import com.sgay.giligili.entity.Movie;
 import com.sgay.giligili.exception.PageNotFoundException;
 import com.sgay.giligili.service.IMovieService;
@@ -27,8 +28,32 @@ public class MovieService extends BaseService implements IMovieService {
 
     @Cacheable(value = "queryRecommendMovies", key = "'recommendMovies'")
     @Override
+    @Transactional
     public List<Movie> queryRecommendMovies() {
-        return mMovieMapper.selectRecommendMovies();
+        int recommendMovieNum = 12;
+        int defaultDayInterval = 0;
+        List<Movie> res = new LinkedList<>();
+        int totalNum = 0;
+        int round = 0;
+        while(totalNum < recommendMovieNum){
+            List<Movie> movies = mMovieMapper.selectRecommendMovies(defaultDayInterval + round);
+            int num = movies.size();
+            if (num == 0){
+                round += 1;
+                continue;
+            }
+            if (num + totalNum >= recommendMovieNum){
+                List<Movie> subMovies = movies.subList(0, recommendMovieNum - totalNum);
+                for (Movie movie : subMovies){
+                    res.add(movie);
+                }
+                break;
+            }
+            res.addAll(movies);
+            totalNum += num;
+            round += 1;
+        }
+        return res;
     }
 
     @Cacheable(value = "queryRandomMovies", key = "'randomMovies'", condition = "#isUseCache == true")
@@ -59,9 +84,6 @@ public class MovieService extends BaseService implements IMovieService {
         for (int i = 0; i < times; i++){
             res.addAll(mMovieMapper.selectRandomMovies(numOfOneQuery));
         }
-//        res.addAll(mMovieMapper.selectRandomMovies(1));
-//        res.addAll(mMovieMapper.selectRandomMovies(2));
-//        res.addAll(mMovieMapper.selectRandomMovies(3));
         return res;
     }
 

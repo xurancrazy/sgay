@@ -145,11 +145,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectRecommendMovies" resultType="com.sgay.giligili.entity.Movie">
+  <select id="selectRecommendMovies" parameterType="java.lang.Integer" resultType="com.sgay.giligili.entity.Movie">
     select
     <include refid="Base_Column_List" />
     from movies
-    where recommend = TRUE
+    where publishTime =  date_sub(curdate(),interval #{interval} day)
   </select>
 
   <select id="selectMoviesByTeacherName" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movie">
@@ -157,7 +157,7 @@
     <include refid="Base_Column_List" />
     from movies
     where teacher = #{teacherName,jdbcType=VARCHAR}
-    ORDER BY viewsNum DESC
+    ORDER BY publishTime DESC ,viewsNum DESC
   </select>
 
   <select id="selectMovieByFanhao" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movie">

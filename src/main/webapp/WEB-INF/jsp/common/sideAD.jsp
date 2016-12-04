@@ -23,7 +23,7 @@
                     <c:forEach items="${todayPopularMovies}" var="movie" varStatus="s">
                         <li>
                             <div><span class="diggNum h">${s.index+1}</span><a
-                                    href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                                    href="/movies/${movie.fanhao}" target="_blank"
                                     title="${movie.title}">${movie.fanhao}${movie.title}</a>
                             </div>
                         </li>
@@ -33,7 +33,7 @@
                     <c:forEach items="${lastWeekPopularMovies}" var="movie" varStatus="s">
                         <li>
                             <div><span class="diggNum h">${s.index+1}</span><a
-                                    href="/teachers/${movie.teacher}/${movie.fanhao}"
+                                    href="/movies/${movie.fanhao}"
                                     target="_blank"
                                     title="${movie.title}">${movie.fanhao}${movie.title}</a>
                             </div>
@@ -44,7 +44,7 @@
                     <c:forEach items="${lastMonthPopularMovies}" var="movie" varStatus="s">
                         <li>
                             <div><span class="diggNum h">${s.index+1}</span><a
-                                    href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                                    href="/movies/${movie.fanhao}" target="_blank"
                                     title="${movie.title}">${movie.fanhao}${movie.title}</a>
                             </div>
                         </li>
@@ -61,11 +61,11 @@
         <ul class="ph-tx-list clearfix">
             <c:forEach items="${editorRecommendMovies}" var="movie">
                 <li>
-                    <div class="pic pull-left"><a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                    <div class="pic pull-left"><a href="/movies/${movie.fanhao}" target="_blank"
                                                   title="${movie.title}" rel="nofollow"><img
                             src="/uploads/images/cover/full/${movie.imghref}"
                             alt="${movie.fanhao}"></a></div>
-                    <div class="dec"><h3><a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                    <div class="dec"><h3><a href="/movies/${movie.fanhao}" target="_blank"
                                             title="${movie.title}">${movie.title}</a></h3>
                         <p><span>${movie.publishtime}</span><span>${movie.viewsnum}人浏览</span></p></div>
                 </li>
@@ -83,7 +83,7 @@
                     <font style="color:#F26C4F;">Hot</font>
 
 
-                    <a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                    <a href="/movies/${movie.fanhao}" target="_blank"
                        title="${movie.title}">${movie.fanhao}${movie.title}</a>
                 </li>
             </c:forEach>
@@ -99,11 +99,11 @@
         <ul class="photo-list">
             <c:forEach items="${imageAndTextRecommendMovies}" var="movie">
                 <li>
-                    <div class="pic"><a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                    <div class="pic"><a href="/movies/${movie.fanhao}" target="_blank"
                                         title="${movie.title}"
                                         rel="nofollow"><img src="/uploads/images/cover/full/${movie.imghref}"
                                                             alt="${movie.fanhao}"></a></div>
-                    <a href="/teachers/${movie.teacher}/${movie.fanhao}" target="_blank"
+                    <a href="/movies/${movie.fanhao}" target="_blank"
                        title="${movie.title}">${movie.title}</a>
                 </li>
             </c:forEach>

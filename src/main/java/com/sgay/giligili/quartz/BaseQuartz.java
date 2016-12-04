@@ -7,8 +7,11 @@ import com.sgay.giligili.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +38,9 @@ public class BaseQuartz {
 
     @Autowired
     protected RedisTemplate<String, Object> mRedisTemplate;
+
+    @Autowired
+    protected DataSourceTransactionManager dataSourceTransactionManager;
 
     @Autowired
     protected IMovieService mMovieService;

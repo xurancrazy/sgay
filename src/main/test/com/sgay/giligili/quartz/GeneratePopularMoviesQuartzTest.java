@@ -16,9 +16,4 @@ public class GeneratePopularMoviesQuartzTest extends BaseTest {
     public void generateLastWeekPopularMovies(){
         mGeneratePopularMoviesQuartz.generateLastWeekPopularMovies();
     }
-
-    @Test
-    public void testTransaction(){
-        mGeneratePopularMoviesQuartz.testTransaction();
-    }
 }

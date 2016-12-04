@@ -44,7 +44,7 @@ public class TeacherService extends BaseService implements ITeacherService {
         return teacher;
     }
 
-    @CacheEvict(value = "queryTeacherByName",key = "'teacherDetail:'+#teacher.name")
+    @CacheEvict(value = "updateTeacherViewsNum",key = "'teacherDetail:'+#teacher.name")
     @Override
     @Transactional(propagation = Propagation.NESTED)
     public void updateTeacherViewsNum(Teacher teacher) {

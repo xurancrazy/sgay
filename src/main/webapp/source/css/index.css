@@ -1306,7 +1306,9 @@ a.logo {
 .client li {
     margin-right: 10px;
     color: #878787;
-    line-height: 26px
+    line-height: 26px;
+    padding-left: 10px;
+    background: url(../images/line1.gif) no-repeat left center;
 }
 
 .follow {
@@ -1314,7 +1316,9 @@ a.logo {
 }
 
 .follow li {
-    margin-bottom: 3px
+    margin-bottom: 3px;
+    padding-left: 10px;
+    background: url(../images/line1.gif) no-repeat left center;
 }
 
 .weibo-icon, .TCweibo-icon, .weixin-icon {
@@ -2916,4 +2920,10 @@ blockquote {
     color: #7da33c;
     margin-top: 45px;
     padding-top: 10px;
+}
+.table-thead{
+    margin-top: 10px;
+}
+.categoryHidden{
+    display:none;
 }
