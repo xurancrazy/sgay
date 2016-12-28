@@ -10,7 +10,7 @@
             $('#table').bootstrapTable({
                 method: 'post',
                 contentType: "application/x-www-form-urlencoded",
-                url: '/category/detail',
+                url: '/categories/'+$(".hidden").text(),
                 cache: false,
                 pagination: true,
                 pageNumber: 1,
@@ -40,7 +40,7 @@
                 limit: params.limit,
                 offset: params.offset,
                 order: params.order,
-                category: $(".categoryHidden").text()
+                category: $(".hidden").text()
             };
             return tmp;
         }
@@ -67,7 +67,7 @@
     <div class="row">
         <div id="contrainer" class="span8">
             <div class="article"  style="margin-top:10px;" >
-                <scan class="categoryHidden">${category}</scan>
+                <scan class="hidden">${category}</scan>
                 <table id="table"></table>
             </div>
         </div>

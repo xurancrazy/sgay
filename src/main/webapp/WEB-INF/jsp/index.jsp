@@ -39,13 +39,12 @@
                                                                     class="imgview"
                                                                     target="_blank" rel="nofollow"><img
                                         src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
-                                        data-original="/uploads/images/cover/full/${movie.imghref}"
+                                        data-original="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}"
                                         align="right"
                                         alt="${movie.fanhao}"></a></div>
                                 <div class="desc pull-left">
-                                    <p>日本AV女优<strong>${movie.teacher}</strong>参演的作品番号<strong>${movie.fanhao}</strong>，片名（<strong>${movie.title}</strong>），本作品已收录于番号站，<a
-                                            href="/movies/${movie.fanhao}" target=" _blank">点击此处查看详情</a>
-                                        ，正式发片日期是${movie.publishtime}
+                                    <p>日本AV女优<a href="/teachers/${movie.teacher}">${movie.teacher}</a>参演的作品番号<a href="/movies/${movie.fanhao}">${movie.fanhao}</a>
+                                        ，片名<a href="/movies/${movie.fanhao}">${movie.title}</a>，本作品已收录于番号站，正式发片日期是${movie.publishtime}
                                     </p>
                                 </div>
                             </div>

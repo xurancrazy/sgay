@@ -63,7 +63,7 @@
                 <li>
                     <div class="pic pull-left"><a href="/movies/${movie.fanhao}" target="_blank"
                                                   title="${movie.title}" rel="nofollow"><img
-                            src="/uploads/images/cover/full/${movie.imghref}"
+                            src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}"
                             alt="${movie.fanhao}"></a></div>
                     <div class="dec"><h3><a href="/movies/${movie.fanhao}" target="_blank"
                                             title="${movie.title}">${movie.title}</a></h3>
@@ -101,7 +101,7 @@
                 <li>
                     <div class="pic"><a href="/movies/${movie.fanhao}" target="_blank"
                                         title="${movie.title}"
-                                        rel="nofollow"><img src="/uploads/images/cover/full/${movie.imghref}"
+                                        rel="nofollow"><img src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}"
                                                             alt="${movie.fanhao}"></a></div>
                     <a href="/movies/${movie.fanhao}" target="_blank"
                        title="${movie.title}">${movie.title}</a>

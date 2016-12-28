@@ -31,16 +31,11 @@ public class BaseController{
     protected ICategoryService mCategoryService;
 
     @Autowired
-    protected ITransactionService mTransactionService;
-
-    @Autowired
     protected RedisTemplate<String, String> mRedisTemplate;
 
     protected  Logger logger= LoggerFactory.getLogger(this.getClass());
 
-    protected static final String DEFAULT_404_NOTFOUND_VIEW = "common/404";
 
-    protected static final String DEFAULT_INTERNAL_ERROR_VIEW = "common/500";
 
     protected void SeoOptimization(ModelMap modelMap, String description, String keywords, String title){
         modelMap.addAttribute("title",title);

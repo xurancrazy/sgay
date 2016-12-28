@@ -21,6 +21,8 @@ public interface IMovieService extends IBaseService{
 
     Movie queryMovieByFanhao(String movieName);
 
+    List<Movie> queryMovieByMovieNames(List<String> movieNames);
+
     List<Movie> queryTodayPopularMovies() throws IOException;
 
     List<Movie> queryLastWeekPopularMovies() throws IOException;
@@ -28,6 +30,8 @@ public interface IMovieService extends IBaseService{
     List<Movie> queryLastMonthPopularMovies() throws IOException;
 
     void updateMovieViewsNum(Movie movie);
+
+    List<Movie> queryMoviesByLocateFunction(String locate);
 
     void testTransactional();
 

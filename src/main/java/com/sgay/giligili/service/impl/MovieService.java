@@ -1,5 +1,6 @@
 package com.sgay.giligili.service.impl;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.sgay.giligili.entity.Movie;
 import com.sgay.giligili.exception.PageNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.io.IOException;
@@ -26,7 +28,7 @@ public class MovieService extends BaseService implements IMovieService {
 
     private SimpleDateFormat mSimpleDateFormat = Utils.createSimpleDateFormat(Constants.SF_PATTERN);
 
-    @Cacheable(value = "queryRecommendMovies", key = "'recommendMovies'")
+    @Cacheable(value = "MovieService", key = "'recommendMovies'")
     @Override
     @Transactional
     public List<Movie> queryRecommendMovies() {
@@ -37,11 +39,11 @@ public class MovieService extends BaseService implements IMovieService {
         int round = 0;
         while(totalNum < recommendMovieNum){
             List<Movie> movies = mMovieMapper.selectRecommendMovies(defaultDayInterval + round);
-            int num = movies.size();
-            if (num == 0){
+            if (CollectionUtils.isEmpty(movies)){
                 round += 1;
                 continue;
             }
+            int num = movies.size();
             if (num + totalNum >= recommendMovieNum){
                 List<Movie> subMovies = movies.subList(0, recommendMovieNum - totalNum);
                 for (Movie movie : subMovies){
@@ -56,21 +58,21 @@ public class MovieService extends BaseService implements IMovieService {
         return res;
     }
 
-    @Cacheable(value = "queryRandomMovies", key = "'randomMovies'", condition = "#isUseCache == true")
+    @Cacheable(value = "MovieService", key = "'randomMovies'", condition = "#isUseCache == true")
     @Override
     @Transactional
     public List<Movie> queryRandomMovies(int sum, int numOfOneQuery, boolean isUseCache) {
         return queryRandomMoviesImpl(sum, numOfOneQuery);
     }
 
-    @Cacheable(value = "queryEditorRecommendMovies", key = "'editorRecommendMovies'")
+    @Cacheable(value = "MovieService", key = "'editorRecommendMovies'")
     @Override
     @Transactional
     public List<Movie> queryEditorRecommendMovies(int sum, int numOfOneQuery) {
         return queryRandomMoviesImpl(sum, numOfOneQuery);
     }
 
-    @Cacheable(value = "queryImageAndTextRecommendMovies", key = "'imageAndTextRecommendMovies'")
+    @Cacheable(value = "MovieService", key = "'imageAndTextRecommendMovies'")
     @Override
     @Transactional
     public List<Movie> queryImageAndTextRecommendMovies(int sum, int numOfOneQuery) {
@@ -87,20 +89,43 @@ public class MovieService extends BaseService implements IMovieService {
         return res;
     }
 
-    @Cacheable(value = "queryMoviesByTeacherName", key = "'teacherName:'+#teacherName")
+    @Cacheable(value = "MovieService", key = "'teacherMovies:'+#teacherName")
     @Override
     public List<Movie> queryMoviesByTeacherName(String teacherName) {
-        return mMovieMapper.selectMoviesByTeacherName(teacherName);
+        if (Strings.isNullOrEmpty(teacherName)){
+            throw new PageNotFoundException("Exception: queryMoviesByTeacherName --> " + "teacherName = " + teacherName);
+        }
+        List<Movie> movies = mMovieMapper.selectMoviesByTeacherName(teacherName);
+        if (CollectionUtils.isEmpty(movies)){
+            throw new PageNotFoundException("Exception: queryMoviesByTeacherName --> " + "teacherName = " + teacherName);
+        }
+        return movies;
     }
 
-    @Cacheable(value = "queryMovieByFanhao", key = "'movieName:'+#movieName")
+    @Cacheable(value = "MovieService", key = "'movieDetail:'+#movieName")
     @Override
     public Movie queryMovieByFanhao(String movieName) {
+        if (Strings.isNullOrEmpty(movieName)){
+            throw new PageNotFoundException("Exception: queryMovieByFanhao --> " + "movieName = " + movieName);
+        }
         Movie movie = mMovieMapper.selectMovieByFanhao(movieName);
         if (movie == null){
-            throw new PageNotFoundException("queryMovieByFanhao-->"+"movieName="+movieName);
+            throw new PageNotFoundException("Exception: queryMovieByFanhao --> " + "movieName = " + movieName);
         }
         return movie;
+    }
+
+
+    @Override
+    public List<Movie> queryMovieByMovieNames(List<String> movieNames) {
+        List<Movie> movies = new LinkedList<>();
+        if (!CollectionUtils.isEmpty(movieNames)){
+            for (String movieName : movieNames){
+                Movie movie = queryMovieByFanhao(movieName);
+                movies.add(movie);
+            }
+        }
+        return movies;
     }
 
     @Override
@@ -121,19 +146,26 @@ public class MovieService extends BaseService implements IMovieService {
     public List<Movie> queryPopularMoviesImpl(String key) throws IOException{
         Set<Object> set = mRedisTemplate.opsForZSet().reverseRange(key, 0, 9);
         List<Movie> res = new LinkedList<>();
-        for (Object fanhao : set){
-            Movie movie = (Movie) mRedisTemplate.opsForValue().get("movieName:" + fanhao);
-            res.add(movie);
+        if (!CollectionUtils.isEmpty(set)){
+            for (Object fanhao : set){
+                Movie movie = (Movie) mRedisTemplate.opsForValue().get("movieDetail:" + fanhao);
+                res.add(movie);
+            }
         }
         return res;
     }
 
-    @CacheEvict(value = "queryqueryMovieByFanhao", key = "'movieName:'+#movie.fanhao")
+    @CacheEvict(value = "MovieService", key = "'movieDetail:'+#movie.fanhao")
     @Override
     @Transactional(propagation = Propagation.NESTED)
     public void updateMovieViewsNum(Movie movie) {
         mMovieMapper.updateByPrimaryKeySelective(movie);
-        int a =3/0;
+    }
+
+    @Cacheable(value = "MovieService", key = "'searchPrefix:'+#locate")
+    @Override
+    public List<Movie> queryMoviesByLocateFunction(String locate) {
+        return mMovieMapper.selectMovieByLocateFunction(locate);
     }
 
     @Override

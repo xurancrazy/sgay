@@ -39,13 +39,10 @@
 </head>
 <body style="direction: ltr;">
 <div class="center">
-    <img id="img_error" src="/source/images/404.png" height="427" width="640"><br>
+    <img id="img_error" src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/404.png" height="427" width="640"><br>
     <div class="errmsg">
         <b>返回主页: </b><a href="/">点击返回</a><br>
-        <b>处理服务器:</b> <%= request.getLocalName()%><br>
-        <b>请求地址:</b> <%= request.getContextPath() + request.getAttribute("javax.servlet.error.request_uri")%><br>
-        <b>错误号:</b> <%= request.getAttribute("javax.servlet.error.status_code")%><br>
-        <b>用户IP:</b><%= request.getRemoteAddr()%><br>
+        <b>错误号:</b> 500<br>
     </div>
 </div>
 </body>

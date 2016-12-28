@@ -18,12 +18,14 @@
 
         <li><a href="/teachers/吉泽明步">吉泽明步</a></li>
 
-        <li><a href="/category">作品分类</a></li>
+        <li><a href="/categories">作品分类</a></li>
 
         <li><a href="/teachers" title="找女优的来这里">女优排行</a></li>
         <div class="search">
-            <form name="keyform" method="get" action="http://www.chaomabaida.com/plus/search.php" target="_blank">
-                <input name="q" class="text" type="text" id="alySearch" value="请输入番号搜索" onfocus="if (value =='请输入番号搜索'){value =''}" onblur="if (value ==''){value='请输入番号搜索'}"><input class="submit" type="submit" value="搜索番号"></form>
+            <form name="searchForm" method="get" action="/search">
+                <input name="keyword" class="text" type="text" id="alySearch" value="请输入番号搜索" onfocus="if (value =='请输入番号搜索'){value =''}" onblur="if (value ==''){value='请输入番号搜索'}">
+                <input class="submit" type="submit" value="搜索番号">
+            </form>
         </div>
     </ul></div>
 </div>

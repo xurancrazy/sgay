@@ -1,5 +1,6 @@
 package com.sgay.giligili.service.impl;
 
+import com.google.common.base.Strings;
 import com.sgay.giligili.entity.Teacher;
 import com.sgay.giligili.exception.PageNotFoundException;
 import com.sgay.giligili.service.ITeacherService;
@@ -21,30 +22,33 @@ import java.util.List;
 @Service
 public class TeacherService extends BaseService implements ITeacherService {
 
-    @Cacheable(value = "queryTeachers",key = "'teachers'")
+    @Cacheable(value = "TeacherService",key = "'teachers'")
     @Override
     public List<Teacher> queryTeachers() {
         return mTeacherMapper.selectTeachers();
     }
 
-    @Cacheable(value = "queryTeacherByName",key = "'teacherDetail:'+#teacherName")
+    @Cacheable(value = "TeacherService",key = "'teacherDetail:'+#teacherName")
     @Override
     public Teacher queryTeacherByName(String teacherName) {
+        if (Strings.isNullOrEmpty(teacherName)){
+            throw new PageNotFoundException("Exception: queryTeacherByName--> " + "teacherName = " + teacherName);
+        }
         Teacher teacher = mTeacherMapper.selectTeacherByName(teacherName);
         if (teacher == null){
-            throw new PageNotFoundException("queryTeacherByName-->"+"teacherName="+teacherName);
+            throw new PageNotFoundException("Exception: queryTeacherByName--> " + "teacherName = " + teacherName);
         }
         return teacher;
     }
 
-    @CachePut(value = "queryTeacherById",key = "'teacherDetail:'+#result.name")
+    @CachePut(value = "TeacherService",key = "'teacherDetail:'+#result.name")
     @Override
     public Teacher queryTeacherById(long id) {
         Teacher teacher = mTeacherMapper.selectByPrimaryKey(id);
         return teacher;
     }
 
-    @CacheEvict(value = "updateTeacherViewsNum",key = "'teacherDetail:'+#teacher.name")
+    @CacheEvict(value = "TeacherService",key = "'teacherDetail:'+#teacher.name")
     @Override
     @Transactional(propagation = Propagation.NESTED)
     public void updateTeacherViewsNum(Teacher teacher) {

@@ -20,7 +20,7 @@ import java.util.Date;
 @Component
 public class RedisCacheClickEventAop extends BaseAop{
 
-    @Pointcut("execution(* com.sgay.giligili.controller.TeacherController.teacherMovies(..)) && args(teacherName, ..)")
+    @Pointcut("execution(* com.sgay.giligili.controller.TeacherController.teacherDetail(..)) && args(teacherName, ..)")
     public void viewTeacherPage(String teacherName){}
 
     @Pointcut("execution(* com.sgay.giligili.controller.MovieController.movieDetail(..)) && args(movieName, ..)")

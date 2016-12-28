@@ -12,14 +12,15 @@
 
 	<!-- 扫描组件包 -->
 	<context:component-scan base-package="com.sgay.giligili.controller" />
-	<!-- 允许对静态资源（image、css、js）文件的访问 -->
-	<mvc:default-servlet-handler />
+	<!--&lt;!&ndash; 允许对静态资源（image、css、js）文件的访问 &ndash;&gt;-->
+	<!--<mvc:default-servlet-handler />-->
 
 	<aop:aspectj-autoproxy/>
 	<context:component-scan base-package="com.sgay.giligili.aop" />
 
 	<!-- 添加注解驱动 -->
 	<mvc:annotation-driven/>
+
 	<mvc:resources location="/source/images/" mapping="/source/images/**"/>
 	<mvc:resources location="/source/css/" mapping="/source/css/**"/>
 	<mvc:resources location="/source/js/" mapping="/source/js/**"/>

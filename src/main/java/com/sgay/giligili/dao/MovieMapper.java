@@ -26,4 +26,6 @@ public interface MovieMapper {
     Movie selectMovieByFanhao(String movieName);
 
     List<Movie> selectRandomMovies(Integer numOfOneQuery);
+
+    List<Movie> selectMovieByLocateFunction(String locate);
 }

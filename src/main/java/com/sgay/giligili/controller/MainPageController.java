@@ -20,11 +20,13 @@ import java.util.Set;
 @Controller
 public class MainPageController extends BaseController{
 
+	private final static String JSP_INDEX = "index";
+
 	@GetMapping(value = "/")
 	public String homePage(ModelMap modelMap){
 		List<Movie> recommendMovies = mMovieService.queryRecommendMovies();
 		modelMap.addAttribute("recommendMovies",recommendMovies);
 		SeoOptimization(modelMap, Constants.HOME_PAGE_DESCRIPTION, Constants.HOME_PAGE_KEYWORDS, Constants.HOME_PAGE_TITLE);
-		return "index";
+		return JSP_INDEX;
 	}
 }

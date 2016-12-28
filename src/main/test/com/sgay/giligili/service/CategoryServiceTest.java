@@ -12,13 +12,13 @@ public class CategoryServiceTest extends BaseTest {
 
     @Test
     public void queryCategoryByMovieName(){
-        List<String> categorys = mCategoryService.queryCategoryByMovieName("GVG-135");
+        List<String> categorys = mCategoryService.queryCategoriesByMovieName("GVG-135");
         categorys.stream().forEach(System.out::println);
     }
 
     @Test
     public void queryMovieNameByCategory(){
-        List<String> movies = mCategoryService.queryMovieNameByCategory("乱交");
+        List<String> movies = mCategoryService.queryNameOfMoviesByCategory("乱交");
         movies.stream().forEach(System.out::println);
     }
 

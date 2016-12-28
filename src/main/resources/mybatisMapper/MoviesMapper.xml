@@ -180,4 +180,11 @@
     LIMIT #{numOfOneQuery, jdbcType=INTEGER}
   </select>
 
+  <select id="selectMovieByLocateFunction" parameterType="java.lang.String" resultType="com.sgay.giligili.entity.Movie">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from movies
+    WHERE locate(#{locate,jdbcType=VARCHAR},fanhao)
+  </select>
+
 </mapper>

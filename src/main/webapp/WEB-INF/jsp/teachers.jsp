@@ -57,7 +57,7 @@
                             class="hot fr">人气：${teacher.viewsnum}</span></div>
                     <a href="/teachers/${teacher.name}"><img src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
                                                              alt="${teacher.name}"
-                                                             data-original="uploads/images/icon/full/${teacher.img}"
+                                                             data-original="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/icon/full/${teacher.img}"
                                                              style="display: inline;"></a>
                     <div class="bottom"><span><a href="#" title="投她一票" class="img_on" rel="${teacher.id}">投票</a></span>
                         <h2 class="name">${teacher.name}</h2>
@@ -76,7 +76,7 @@
                         <a href="/teachers/${teacher.name}"><img
                                 src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
                                 alt="${teacher.name}"
-                                data-original="uploads/images/icon/full/${teacher.img}"
+                                data-original="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/icon/full/${teacher.img}"
                                 style="display: inline;"></a>
                         <div class="bottom"><span><a href="#" title="投她一票" class="img_on" rel="134">投票</a></span>
                             <h2 class="name">${teacher.name}</h2>

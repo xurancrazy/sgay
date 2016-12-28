@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Created by xurancrazy on 2016/10/23.
  */
 
+
 public class PageNotFoundException extends RuntimeException {
 
     private String customizeMessage;

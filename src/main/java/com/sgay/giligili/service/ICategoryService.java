@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface ICategoryService extends IBaseService{
 
-    List<String> queryMovieNameByCategory(String category);
+    List<String> queryNameOfMoviesByCategory(String category);
 
-    List<String> queryCategoryByMovieName(String movieName);
+    List<String> queryCategoriesByMovieName(String movieName);
 
     List<String> queryCategorys();
 }

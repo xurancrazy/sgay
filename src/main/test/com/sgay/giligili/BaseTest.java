@@ -4,16 +4,11 @@ import com.sgay.giligili.quartz.GeneratePopularMoviesQuartz;
 import com.sgay.giligili.quartz.RedisCachePersistenceQuartz;
 import com.sgay.giligili.service.ICategoryService;
 import com.sgay.giligili.service.IMovieService;
-import com.sgay.giligili.service.ITransactionService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.validation.ObjectError;
-
-import javax.annotation.Resource;
 
 /**
  * Created by xurancrazy on 2016/11/27.
@@ -27,9 +22,6 @@ public class BaseTest {
 
     @Autowired
     protected ICategoryService mCategoryService;
-
-    @Autowired
-    protected ITransactionService mTransactionService;
 
     @Autowired
     protected RedisCachePersistenceQuartz mRedisCachePersistenceQuartz;

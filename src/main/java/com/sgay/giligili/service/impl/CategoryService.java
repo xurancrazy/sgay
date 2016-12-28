@@ -1,5 +1,6 @@
 package com.sgay.giligili.service.impl;
 
+import com.google.common.base.Strings;
 import com.sgay.giligili.entity.Movie;
 import com.sgay.giligili.exception.PageNotFoundException;
 import com.sgay.giligili.service.ICategoryService;
@@ -9,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.Servlet;
@@ -26,34 +28,32 @@ import java.util.stream.Collectors;
 public class CategoryService extends BaseService implements ICategoryService {
 
     @Override
-    public List<String> queryMovieNameByCategory(String category) {
+    public List<String> queryNameOfMoviesByCategory(String category) {
+        if (Strings.isNullOrEmpty(category)){
+            throw new PageNotFoundException("Exception: queryNameOfMoviesByCategory -- > category:" + category + " not exist");
+        }
         List<String> res = new LinkedList<>();
-        try {
-            String key = "category:" + category;
-            BoundSetOperations<String, Object> queryMovies = mRedisTemplate.boundSetOps(key);
-            Set<Object> movieNamesInCategory = queryMovies.members();
-            if (movieNamesInCategory.size() == 0) {
-                throw new PageNotFoundException("category:" + category + " not exist");
-            }
-            for (Object movieName : movieNamesInCategory) {
+        String key = "category:" + category;
+        BoundSetOperations<String, Object> queryNameOfMovies = mRedisTemplate.boundSetOps(key);
+        Set<Object> nameOfMoviesWithCategory = queryNameOfMovies.members();
+        if (!CollectionUtils.isEmpty(nameOfMoviesWithCategory)) {
+            for (Object movieName : nameOfMoviesWithCategory) {
                 res.add((String) movieName);
             }
-        } catch (PageNotFoundException e) {
-            throw e;
-        } catch (Exception e){
-            return res;
         }
         return res;
     }
 
     @Override
-    public List<String> queryCategoryByMovieName(String movieName) {
+    public List<String> queryCategoriesByMovieName(String movieName) {
         String key = "movieCategory:" + movieName;
-        BoundSetOperations<String, Object> queryCategorys = mRedisTemplate.boundSetOps(key);
-        Set<Object> categorysInMovie = queryCategorys.members();
+        BoundSetOperations<String, Object> queryCategories = mRedisTemplate.boundSetOps(key);
+        Set<Object> categories = queryCategories.members();
         List<String> res = new LinkedList<>();
-        for (Object category : categorysInMovie) {
-            res.add((String) category);
+        if (!CollectionUtils.isEmpty(categories)) {
+            for (Object category : categories) {
+                res.add((String) category);
+            }
         }
         return res;
     }
@@ -64,8 +64,10 @@ public class CategoryService extends BaseService implements ICategoryService {
         BoundSetOperations<String, Object> queryCategorys = mRedisTemplate.boundSetOps(key);
         Set<Object> categorys = queryCategorys.members();
         List<String> res = new LinkedList<>();
-        for (Object category : categorys) {
-            res.add((String) category);
+        if (!CollectionUtils.isEmpty(categorys)){
+            for (Object category : categorys) {
+                res.add((String) category);
+            }
         }
         return res;
     }

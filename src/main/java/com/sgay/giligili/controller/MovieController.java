@@ -1,8 +1,7 @@
 package com.sgay.giligili.controller;
 
-import com.google.common.collect.Lists;
+import com.google.common.base.Strings;
 import com.sgay.giligili.entity.Movie;
-import com.sgay.giligili.exception.PageNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -22,22 +21,20 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/movies")
 public class MovieController extends BaseController{
 
+    private static final String JSP_MOVIE_DETAIL = "movieDetail";
+
     @GetMapping(value = "/{movieName}")
     public String movieDetail(@PathVariable String movieName, ModelMap modelMap){
         Movie movie = mMovieService.queryMovieByFanhao(movieName);
         String teacherName = movie.getTeacher();
-        List<Movie> sameTeacherMovies = createRandomMoviesByTeacherName(teacherName, movieName);
-        List<String> movieCategorys = mCategoryService.queryCategoryByMovieName(movieName);
-        List<Movie> sameTypeMovies;
-        if (movieCategorys == null || movieCategorys.isEmpty()){
-            sameTypeMovies = mMovieService.queryRandomMovies(4,4,false);
-        }
-        sameTypeMovies = createSameTypeMoviesByCategory(movieCategorys, movieName);
+        List<Movie> sameTeacherMovies = createSameTeacherMoviesByTeacherName(teacherName, movieName);
+        List<String> movieCategories = mCategoryService.queryCategoriesByMovieName(movieName);
+        List<Movie> sameTypeMovies = createSameTypeMoviesByCategory(movieCategories, movieName);
         modelMap.addAttribute("sameTypeMovies",sameTypeMovies);
         modelMap.addAttribute("sameTeacherMovies",sameTeacherMovies);
         modelMap.addAttribute("movie",movie);
         modelMap.addAttribute("teacherName",teacherName);
-        modelMap.addAttribute("movieCategorys",movieCategorys);
+        modelMap.addAttribute("movieCategories",movieCategories);
 
         StringBuilder keywords = new StringBuilder();
         keywords.append(teacherName).append(",").append(movieName);
@@ -46,16 +43,16 @@ public class MovieController extends BaseController{
         StringBuilder description = new StringBuilder();
         description.append("作品:").append(movieName).append(" ").append(movie.getTitle()).append(" 发行时间:").append(movie.getPublishtime());
         SeoOptimization(modelMap, description.toString(), keywords.toString(), title.toString());
-        return "movieDetail";
+        return JSP_MOVIE_DETAIL;
     }
 
-    private List<Movie> createSameTypeMoviesByCategory(List<String> movieCategorys, String movieName) {
+    private List<Movie> createSameTypeMoviesByCategory(List<String> movieCategories, String movieName) {
         List<Movie> res = new LinkedList<>();
         int num = 0;
         int total = 4;
-        if (!CollectionUtils.isEmpty(movieCategorys)){
-            for (String category : movieCategorys){
-                List<String> tmp = mCategoryService.queryMovieNameByCategory(category);
+        if (!CollectionUtils.isEmpty(movieCategories)){
+            for (String category : movieCategories){
+                List<String> tmp = mCategoryService.queryNameOfMoviesByCategory(category);
                 List<String> movieNames = null;
                 if (!CollectionUtils.isEmpty(tmp)){
                     movieNames = tmp.stream().filter(name -> !name.equals(movieName)).collect(Collectors.toList());
@@ -68,24 +65,27 @@ public class MovieController extends BaseController{
                 }
                 if (num + size < total){
                     num += size;
-                    res.addAll(mTransactionService.queryMovieByMovieNamesWithCategory(movieNames,category));
+                    res.addAll(mMovieService.queryMovieByMovieNames(movieNames));
                 }else {
-                    res.addAll(mTransactionService.queryMovieByMovieNamesWithCategory(movieNames.subList(0, total - num),category));
+                    res.addAll(mMovieService.queryMovieByMovieNames(movieNames.subList(0, total - num)));
                     break;
                 }
             }
+        }else {
+            res = mMovieService.queryRandomMovies(4,4,false);
         }
         return res.subList(0, total);
     }
 
-    private List<Movie> createRandomMoviesByTeacherName(String teacherName, String movieName){
+    private List<Movie> createSameTeacherMoviesByTeacherName(String teacherName, String movieName){
         List<Movie> movies = mMovieService.queryMoviesByTeacherName(teacherName);
         List<Movie> res = new ArrayList<>();
         int len = movies.size();
         int numOfMovies = len < 4 ? len : 4;
         int curNum = 0;
         int cursor = 0;
-        while(cursor<len && curNum<numOfMovies){
+        //avoid same movie be added to res
+        while(cursor < len && curNum < numOfMovies){
             Movie tmp = movies.get(cursor);
             if (!movieName.equals(tmp.getFanhao())){
                 res.add(tmp);

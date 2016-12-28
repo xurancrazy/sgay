@@ -19,11 +19,11 @@
                     <!--顶级栏目链接--> <p><span>发片时间：${movie.publishtime}</span>
 <span>女优：
 <a href="/teachers/${teacherName}">${teacherName}</a>
-</span><span>番号：${movie.fanhao}</span><span>作品分类：<c:forEach items="${movieCategorys}" var="movieCategory"><a
+</span><span>番号：${movie.fanhao}</span><span>作品分类：<c:forEach items="${movieCategories}" var="movieCategory"><a
                             href="/category/${movieCategory}">${movieCategory}</a>&nbsp;&nbsp;</c:forEach></span></p>
                 </div>
                 <div id="14849" class="artCon">
-                    <img alt="${movie.title}" src="/uploads/images/cover/full/${movie.imghref}">
+                    <img alt="${movie.title}" src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}">
                 </div>
 
                 <!--种子搜索-->
@@ -61,14 +61,14 @@
                 <div class="wz_xgtj">
                     <div class="blockTitle">
                         <h2>${movie.teacher}作品全集</h2>
-                        <a class="more" target="_blank" href="/teachers/${movie.teacher}">更多 &gt;&gt;</a></div>
+                        <a class="more" href="/teachers/${movie.teacher}">更多 &gt;&gt;</a></div>
 
                     <div class="xg_bd">
                         <ul class="hotArticle">
                             <c:forEach items="${sameTeacherMovies}" var="sameTeacherMovie">
                                 <li><a href="/movies/${sameTeacherMovie.fanhao}"
                                        rel="nofollow"><img
-                                        src="/uploads/images/cover/full/${sameTeacherMovie.imghref}"
+                                        src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${sameTeacherMovie.imghref}"
                                         alt="${sameTeacherMovie.fanhao}"></a><a class="hotArticle"
                                                                                 href="/movies/${sameTeacherMovie.fanhao}">
                                     <h3>
@@ -81,14 +81,14 @@
                 <div class="wz_xgtj">
                     <div class="blockTitle">
                         <h2>同类型作品推荐</h2>
-                        <a class="more" target="_blank" href="/teachers">更多 &gt;&gt;</a>
+                        <a class="more" href="/teachers">更多 &gt;&gt;</a>
                     </div>
                     <div class="xg_bd">
                         <ul class="hotArticle">
                             <c:forEach items="${sameTypeMovies}" var="sameTypeMovie">
                                 <li><a rel="nofollow"
                                        href="/movies/${sameTypeMovie.fanhao}"><img
-                                        src="/uploads/images/cover/full/${sameTypeMovie.imghref}"
+                                        src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${sameTypeMovie.imghref}"
                                         alt="${sameTypeMovie.fanhao}"></a><a
                                         class="hotArticle"
                                         href="/movies/${sameTypeMovie.fanhao}">${sameTypeMovie.fanhao}</a>
