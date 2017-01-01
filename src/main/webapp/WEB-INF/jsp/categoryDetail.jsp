@@ -61,8 +61,8 @@
 <body>
 <%@include file="/WEB-INF/jsp/common/navigate.jsp" %>
 <div class="content container">
-    <div class="weizhi2">当前位置：<a href="/">番号站</a> &gt; <a href="/category">作品分类</a> &gt; <a
-            href="/category/${category}">${category}</a>
+    <div class="weizhi2">当前位置：<a href="/">番号站</a> &gt; <a href="/categories">作品分类</a> &gt; <a
+            href="/categories/${category}">${category}</a>
     </div>
     <div class="row">
         <div id="contrainer" class="span8">

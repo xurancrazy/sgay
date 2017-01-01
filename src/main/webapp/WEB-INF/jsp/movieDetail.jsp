@@ -20,7 +20,7 @@
 <span>女优：
 <a href="/teachers/${teacherName}">${teacherName}</a>
 </span><span>番号：${movie.fanhao}</span><span>作品分类：<c:forEach items="${movieCategories}" var="movieCategory"><a
-                            href="/category/${movieCategory}">${movieCategory}</a>&nbsp;&nbsp;</c:forEach></span></p>
+                            href="/categories/${movieCategory}">${movieCategory}</a>&nbsp;&nbsp;</c:forEach></span></p>
                 </div>
                 <div id="14849" class="artCon">
                     <img alt="${movie.title}" src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}">

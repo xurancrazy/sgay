@@ -44,10 +44,11 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler{
         return Constants.DEFAULT_404_NOTFOUND_VIEW;
     }
 
-    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(IOException.class)
-    public String IOExceptionHandler(HttpServletResponse httpServletResponse, IOException exception) throws IOException {
-        logger.error(exception.getMessage());
-        return Constants.DEFAULT_INTERNAL_ERROR_VIEW;
-    }
+//
+//    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+//    @ExceptionHandler(IOException.class)
+//    public String IOExceptionHandler(HttpServletResponse httpServletResponse, IOException exception) throws IOException {
+//        logger.error(exception.getMessage());
+//        return Constants.DEFAULT_INTERNAL_ERROR_VIEW;
+//    }
 }

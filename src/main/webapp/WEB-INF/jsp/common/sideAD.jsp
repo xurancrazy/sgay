@@ -30,7 +30,7 @@
                     </c:forEach>
                 </ol>
                 <ol id="by" class="diggArea tab-pane fade">
-                    <c:forEach items="${lastWeekPopularMovies}" var="movie" varStatus="s">
+                    <c:forEach items="${lastMonthPopularMovies}" var="movie" varStatus="s">
                         <li>
                             <div><span class="diggNum h">${s.index+1}</span><a
                                     href="/movies/${movie.fanhao}"
@@ -41,7 +41,7 @@
                     </c:forEach>
                 </ol>
                 <ol id="bz" class="diggArea tab-pane fade">
-                    <c:forEach items="${lastMonthPopularMovies}" var="movie" varStatus="s">
+                    <c:forEach items="${lastWeekPopularMovies}" var="movie" varStatus="s">
                         <li>
                             <div><span class="diggNum h">${s.index+1}</span><a
                                     href="/movies/${movie.fanhao}" target="_blank"

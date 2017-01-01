@@ -2,19 +2,14 @@ package com.sgay.giligili.quartz;
 
 import com.sgay.giligili.entity.Movie;
 import com.sgay.giligili.entity.Teacher;
-import com.sgay.giligili.redis.RedisSessionCallBack;
 import com.sgay.giligili.utils.Constants;
 import com.sgay.giligili.utils.Utils;
-import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by xurancrazy on 2016/11/2.
@@ -92,5 +87,16 @@ public class RedisCachePersistenceQuartz extends BaseQuartz {
         logger.info("updateTeachers" + System.currentTimeMillis());
         mRedisTemplate.delete(TEACHERS_KEY);
     }
+
+    public void updateTeacherMovies(){
+        logger.info("updateTeacherMovies" + System.currentTimeMillis());
+        Set<String> redisKeys = mRedisTemplate.keys("*");
+        List<String> teacherMoviesKeys = redisKeys.stream().filter(key -> key.startsWith("teacherMovies:")).collect(Collectors.toList());
+        mRedisTemplate.delete(teacherMoviesKeys);
+    }
+
+
+
+
 
 }

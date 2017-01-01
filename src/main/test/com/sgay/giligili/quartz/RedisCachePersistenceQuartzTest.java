@@ -22,4 +22,9 @@ public class RedisCachePersistenceQuartzTest extends BaseTest {
     public void updateTeacherLikeNum(){
         mRedisCachePersistenceQuartz.updateTeacherLikeNum();
     }
+
+    @Test
+    public void updateTeacherMovies(){
+        mRedisCachePersistenceQuartz.updateTeacherMovies();
+    }
 }

@@ -1,0 +1,179 @@
+2016-12-30 AT 20:55:42 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 260 getDefaultTestExecutionListenerClassNames - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-12-30 AT 20:55:42 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 187 getTestExecutionListeners - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14bdbc74, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@12591ac8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5a7fe64f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@38145825, org.springframework.test.context.transaction.TransactionalTestExecutionListener@41330d4f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1b66c0fb]
+2016-12-30 AT 20:55:42 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring-context.xml]
+2016-12-30 AT 20:55:43 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-12-30 AT 20:55:43 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-12-30 AT 20:55:43 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-12-30 AT 20:55:43 INFO  org.springframework.context.support.AbstractApplicationContext 581 prepareRefresh - Refreshing org.springframework.context.support.GenericApplicationContext@62656be4: startup date [Fri Dec 30 20:55:43 CST 2016]; root of context hierarchy
+2016-12-30 AT 20:55:43 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\jdbc.properties]
+2016-12-30 AT 20:55:43 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\redis.properties]
+2016-12-30 AT 20:55:43 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} inited
+2016-12-30 AT 20:55:44 INFO  org.quartz.impl.StdSchedulerFactory 1172 instantiate - Using default implementation for ThreadExecutor
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.SchedulerSignalerImpl 61 <init> - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 240 <init> - Quartz Scheduler v.2.2.3 created.
+2016-12-30 AT 20:55:44 INFO  org.quartz.simpl.RAMJobStore 155 initialize - RAMJobStore initialized.
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 305 initialize - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'schedulerFactory' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-12-30 AT 20:55:44 INFO  org.quartz.impl.StdSchedulerFactory 1327 instantiate - Quartz scheduler 'schedulerFactory' initialized from an externally provided properties instance.
+2016-12-30 AT 20:55:44 INFO  org.quartz.impl.StdSchedulerFactory 1331 instantiate - Quartz scheduler version: 2.2.3
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 2311 setJobFactory - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@18324f97
+2016-12-30 AT 20:55:44 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 341 start - Starting beans in phase 2147483647
+2016-12-30 AT 20:55:44 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 647 startScheduler - Starting Quartz Scheduler now
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 575 start - Scheduler schedulerFactory_$_NON_CLUSTERED started.
+2016-12-30 AT 20:55:44 INFO  org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor 245 finishRegistration - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2016-12-30 AT 20:55:44 INFO  com.sgay.giligili.quartz.RedisCachePersistenceQuartz 99 updateTeacherMovies - updateTeacherMovies1483102544852
+2016-12-30 AT 20:55:44 INFO  org.springframework.context.support.AbstractApplicationContext 982 doClose - Closing org.springframework.context.support.GenericApplicationContext@62656be4: startup date [Fri Dec 30 20:55:43 CST 2016]; root of context hierarchy
+2016-12-30 AT 20:55:44 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 356 stop - Stopping beans in phase 2147483647
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 20:55:44 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 765 destroy - Shutting down Quartz Scheduler
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 694 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutting down.
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 20:55:44 INFO  org.quartz.core.QuartzScheduler 771 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutdown complete.
+2016-12-30 AT 20:55:44 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} closed
+2016-12-30 AT 22:13:24 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 260 getDefaultTestExecutionListenerClassNames - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-12-30 AT 22:13:24 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 187 getTestExecutionListeners - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14bdbc74, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@12591ac8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5a7fe64f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@38145825, org.springframework.test.context.transaction.TransactionalTestExecutionListener@41330d4f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1b66c0fb]
+2016-12-30 AT 22:13:24 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring-context.xml]
+2016-12-30 AT 22:13:25 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-12-30 AT 22:13:25 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-12-30 AT 22:13:25 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-12-30 AT 22:13:25 INFO  org.springframework.context.support.AbstractApplicationContext 581 prepareRefresh - Refreshing org.springframework.context.support.GenericApplicationContext@62656be4: startup date [Fri Dec 30 22:13:25 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:13:25 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\jdbc.properties]
+2016-12-30 AT 22:13:25 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\redis.properties]
+2016-12-30 AT 22:13:25 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} inited
+2016-12-30 AT 22:13:26 INFO  org.quartz.impl.StdSchedulerFactory 1172 instantiate - Using default implementation for ThreadExecutor
+2016-12-30 AT 22:13:26 INFO  org.quartz.core.SchedulerSignalerImpl 61 <init> - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-12-30 AT 22:13:26 INFO  org.quartz.core.QuartzScheduler 240 <init> - Quartz Scheduler v.2.2.3 created.
+2016-12-30 AT 22:13:26 INFO  org.quartz.simpl.RAMJobStore 155 initialize - RAMJobStore initialized.
+2016-12-30 AT 22:13:26 INFO  org.quartz.core.QuartzScheduler 305 initialize - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'schedulerFactory' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-12-30 AT 22:13:26 INFO  org.quartz.impl.StdSchedulerFactory 1327 instantiate - Quartz scheduler 'schedulerFactory' initialized from an externally provided properties instance.
+2016-12-30 AT 22:13:26 INFO  org.quartz.impl.StdSchedulerFactory 1331 instantiate - Quartz scheduler version: 2.2.3
+2016-12-30 AT 22:13:26 INFO  org.quartz.core.QuartzScheduler 2311 setJobFactory - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@64f555e7
+2016-12-30 AT 22:13:27 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 341 start - Starting beans in phase 2147483647
+2016-12-30 AT 22:13:27 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 647 startScheduler - Starting Quartz Scheduler now
+2016-12-30 AT 22:13:27 INFO  org.quartz.core.QuartzScheduler 575 start - Scheduler schedulerFactory_$_NON_CLUSTERED started.
+2016-12-30 AT 22:13:27 INFO  org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor 245 finishRegistration - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2016-12-30 AT 22:13:27 INFO  com.sgay.giligili.quartz.GeneratePopularMoviesQuartz 53 generateLastWeekPopularMovies - GenerateLastWeekPopularMovies  --> time:Fri Dec 30 22:13:27 CST 2016
+2016-12-30 AT 22:13:28 INFO  org.springframework.context.support.AbstractApplicationContext 982 doClose - Closing org.springframework.context.support.GenericApplicationContext@62656be4: startup date [Fri Dec 30 22:13:25 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:13:28 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 356 stop - Stopping beans in phase 2147483647
+2016-12-30 AT 22:13:28 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 22:13:28 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 765 destroy - Shutting down Quartz Scheduler
+2016-12-30 AT 22:13:28 INFO  org.quartz.core.QuartzScheduler 694 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutting down.
+2016-12-30 AT 22:13:28 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 22:13:28 INFO  org.quartz.core.QuartzScheduler 771 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutdown complete.
+2016-12-30 AT 22:13:28 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} closed
+2016-12-30 AT 22:33:33 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 260 getDefaultTestExecutionListenerClassNames - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-12-30 AT 22:33:33 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 187 getTestExecutionListeners - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14bdbc74, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@12591ac8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5a7fe64f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@38145825, org.springframework.test.context.transaction.TransactionalTestExecutionListener@41330d4f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1b66c0fb]
+2016-12-30 AT 22:33:33 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring-context.xml]
+2016-12-30 AT 22:33:34 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-12-30 AT 22:33:34 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-12-30 AT 22:33:34 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-12-30 AT 22:33:34 INFO  org.springframework.context.support.AbstractApplicationContext 581 prepareRefresh - Refreshing org.springframework.context.support.GenericApplicationContext@62656be4: startup date [Fri Dec 30 22:33:34 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:33:34 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\jdbc.properties]
+2016-12-30 AT 22:33:34 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\redis.properties]
+2016-12-30 AT 22:33:34 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} inited
+2016-12-30 AT 22:33:35 INFO  org.quartz.impl.StdSchedulerFactory 1172 instantiate - Using default implementation for ThreadExecutor
+2016-12-30 AT 22:33:35 INFO  org.quartz.core.SchedulerSignalerImpl 61 <init> - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-12-30 AT 22:33:35 INFO  org.quartz.core.QuartzScheduler 240 <init> - Quartz Scheduler v.2.2.3 created.
+2016-12-30 AT 22:33:35 INFO  org.quartz.simpl.RAMJobStore 155 initialize - RAMJobStore initialized.
+2016-12-30 AT 22:33:35 INFO  org.quartz.core.QuartzScheduler 305 initialize - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'schedulerFactory' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-12-30 AT 22:33:35 INFO  org.quartz.impl.StdSchedulerFactory 1327 instantiate - Quartz scheduler 'schedulerFactory' initialized from an externally provided properties instance.
+2016-12-30 AT 22:33:35 INFO  org.quartz.impl.StdSchedulerFactory 1331 instantiate - Quartz scheduler version: 2.2.3
+2016-12-30 AT 22:33:35 INFO  org.quartz.core.QuartzScheduler 2311 setJobFactory - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@64f555e7
+2016-12-30 AT 22:33:35 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 341 start - Starting beans in phase 2147483647
+2016-12-30 AT 22:33:35 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 647 startScheduler - Starting Quartz Scheduler now
+2016-12-30 AT 22:33:35 INFO  org.quartz.core.QuartzScheduler 575 start - Scheduler schedulerFactory_$_NON_CLUSTERED started.
+2016-12-30 AT 22:33:35 INFO  org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor 245 finishRegistration - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2016-12-30 AT 22:33:35 INFO  com.sgay.giligili.quartz.GeneratePopularMoviesQuartz 70 generateLastWeekPopularMovies - GenerateLastWeekPopularMovies  --> time:Fri Dec 30 22:33:35 CST 2016
+2016-12-30 AT 22:33:36 INFO  org.springframework.context.support.AbstractApplicationContext 581 prepareRefresh - Refreshing org.springframework.context.support.FileSystemXmlApplicationContext@56303475: startup date [Fri Dec 30 22:33:36 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:33:36 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring-context.xml]
+2016-12-30 AT 22:33:36 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-12-30 AT 22:33:36 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-12-30 AT 22:33:36 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-12-30 AT 22:33:36 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\jdbc.properties]
+2016-12-30 AT 22:33:36 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\redis.properties]
+2016-12-30 AT 22:33:36 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-2} inited
+2016-12-30 AT 22:33:36 INFO  org.quartz.impl.StdSchedulerFactory 1172 instantiate - Using default implementation for ThreadExecutor
+2016-12-30 AT 22:33:36 INFO  org.quartz.core.SchedulerSignalerImpl 61 <init> - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-12-30 AT 22:33:36 INFO  org.quartz.core.QuartzScheduler 240 <init> - Quartz Scheduler v.2.2.3 created.
+2016-12-30 AT 22:33:36 INFO  org.quartz.simpl.RAMJobStore 155 initialize - RAMJobStore initialized.
+2016-12-30 AT 22:33:36 INFO  org.quartz.core.QuartzScheduler 305 initialize - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'schedulerFactory' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-12-30 AT 22:33:36 INFO  org.quartz.impl.StdSchedulerFactory 1327 instantiate - Quartz scheduler 'schedulerFactory' initialized from an externally provided properties instance.
+2016-12-30 AT 22:33:36 INFO  org.quartz.impl.StdSchedulerFactory 1331 instantiate - Quartz scheduler version: 2.2.3
+2016-12-30 AT 22:33:36 INFO  org.quartz.core.QuartzScheduler 2311 setJobFactory - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@3fae596
+2016-12-30 AT 22:33:36 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 341 start - Starting beans in phase 2147483647
+2016-12-30 AT 22:33:36 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 647 startScheduler - Starting Quartz Scheduler now
+2016-12-30 AT 22:33:36 INFO  org.quartz.core.QuartzScheduler 575 start - Scheduler schedulerFactory_$_NON_CLUSTERED started.
+2016-12-30 AT 22:33:36 INFO  org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor 245 finishRegistration - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2016-12-30 AT 22:33:37 INFO  org.springframework.context.support.AbstractApplicationContext 982 doClose - Closing org.springframework.context.support.GenericApplicationContext@62656be4: startup date [Fri Dec 30 22:33:34 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:33:37 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 356 stop - Stopping beans in phase 2147483647
+2016-12-30 AT 22:33:37 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 22:33:37 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 765 destroy - Shutting down Quartz Scheduler
+2016-12-30 AT 22:33:37 INFO  org.quartz.core.QuartzScheduler 694 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutting down.
+2016-12-30 AT 22:33:37 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 22:33:37 INFO  org.quartz.core.QuartzScheduler 771 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutdown complete.
+2016-12-30 AT 22:33:37 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} closed
+2016-12-30 AT 22:35:10 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 260 getDefaultTestExecutionListenerClassNames - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-12-30 AT 22:35:10 INFO  org.springframework.test.context.support.AbstractTestContextBootstrapper 187 getTestExecutionListeners - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5a7fe64f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@38145825, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@41330d4f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1b66c0fb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3e0e1046, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@24c1b2d2]
+2016-12-30 AT 22:35:10 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring-context.xml]
+2016-12-30 AT 22:35:10 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-redis.xml]
+2016-12-30 AT 22:35:10 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+2016-12-30 AT 22:35:10 INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader 317 loadBeanDefinitions - Loading XML bean definitions from class path resource [spring/spring-quartz.xml]
+2016-12-30 AT 22:35:10 INFO  org.springframework.context.support.AbstractApplicationContext 581 prepareRefresh - Refreshing org.springframework.context.support.GenericApplicationContext@53f3bdbd: startup date [Fri Dec 30 22:35:10 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:35:10 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\jdbc.properties]
+2016-12-30 AT 22:35:10 INFO  org.springframework.core.io.support.PropertiesLoaderSupport 172 loadProperties - Loading properties file from file [G:\giligili\target\classes\properties\redis.properties]
+2016-12-30 AT 22:35:10 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} inited
+2016-12-30 AT 22:35:11 INFO  org.quartz.impl.StdSchedulerFactory 1172 instantiate - Using default implementation for ThreadExecutor
+2016-12-30 AT 22:35:12 INFO  org.quartz.core.SchedulerSignalerImpl 61 <init> - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2016-12-30 AT 22:35:12 INFO  org.quartz.core.QuartzScheduler 240 <init> - Quartz Scheduler v.2.2.3 created.
+2016-12-30 AT 22:35:12 INFO  org.quartz.simpl.RAMJobStore 155 initialize - RAMJobStore initialized.
+2016-12-30 AT 22:35:12 INFO  org.quartz.core.QuartzScheduler 305 initialize - Scheduler meta-data: Quartz Scheduler (v2.2.3) 'schedulerFactory' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2016-12-30 AT 22:35:12 INFO  org.quartz.impl.StdSchedulerFactory 1327 instantiate - Quartz scheduler 'schedulerFactory' initialized from an externally provided properties instance.
+2016-12-30 AT 22:35:12 INFO  org.quartz.impl.StdSchedulerFactory 1331 instantiate - Quartz scheduler version: 2.2.3
+2016-12-30 AT 22:35:12 INFO  org.quartz.core.QuartzScheduler 2311 setJobFactory - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@64f555e7
+2016-12-30 AT 22:35:12 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 341 start - Starting beans in phase 2147483647
+2016-12-30 AT 22:35:12 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 647 startScheduler - Starting Quartz Scheduler now
+2016-12-30 AT 22:35:12 INFO  org.quartz.core.QuartzScheduler 575 start - Scheduler schedulerFactory_$_NON_CLUSTERED started.
+2016-12-30 AT 22:35:12 INFO  org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor 245 finishRegistration - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2016-12-30 AT 22:35:12 INFO  com.sgay.giligili.quartz.GeneratePopularMoviesQuartz 68 generateLastMonthPopularMovies - GenerateLastMonthPopularMovies --> time:Fri Dec 30 22:35:12 CST 2016
+2016-12-30 AT 22:35:13 INFO  org.springframework.context.support.AbstractApplicationContext 982 doClose - Closing org.springframework.context.support.GenericApplicationContext@53f3bdbd: startup date [Fri Dec 30 22:35:10 CST 2016]; root of context hierarchy
+2016-12-30 AT 22:35:13 INFO  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup 356 stop - Stopping beans in phase 2147483647
+2016-12-30 AT 22:35:13 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 22:35:13 INFO  org.springframework.scheduling.quartz.SchedulerFactoryBean 765 destroy - Shutting down Quartz Scheduler
+2016-12-30 AT 22:35:13 INFO  org.quartz.core.QuartzScheduler 694 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutting down.
+2016-12-30 AT 22:35:13 INFO  org.quartz.core.QuartzScheduler 613 standby - Scheduler schedulerFactory_$_NON_CLUSTERED paused.
+2016-12-30 AT 22:35:13 INFO  org.quartz.core.QuartzScheduler 771 shutdown - Scheduler schedulerFactory_$_NON_CLUSTERED shutdown complete.
+2016-12-30 AT 22:35:13 INFO  com.alibaba.druid.support.logging.Log4j2Impl 106 info - {dataSource-1} closed

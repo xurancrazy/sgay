@@ -144,6 +144,7 @@ public class MovieService extends BaseService implements IMovieService {
     }
 
     public List<Movie> queryPopularMoviesImpl(String key) throws IOException{
+        logger.info("queryPopularMoviesImpl -- > key = " + key);
         Set<Object> set = mRedisTemplate.opsForZSet().reverseRange(key, 0, 9);
         List<Movie> res = new LinkedList<>();
         if (!CollectionUtils.isEmpty(set)){

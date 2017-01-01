@@ -20,6 +20,7 @@
                 <ref bean="updateTeacherLikeNumTrigger"/>
                 <ref bean="updateMovieViewNumTrigger"/>
                 <ref bean="updateTeachersTrigger"/>
+                <ref bean="updateTeacherMoviesTrigger"/>
             </list>
         </property>
     </bean>
@@ -48,6 +49,12 @@
         <property name="cronExpression" value="0 3 0 * * ?"/>
     </bean>
 
+    <bean id="updateTeacherMoviesTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateTeacherMovies"/>
+        <!-- run every morning at 00:03 AM -->
+        <property name="cronExpression" value="0 3 0 * * ?"/>
+    </bean>
+
     <bean id="updateTeacherViewNumDetail"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="redisPersistence"/>
@@ -70,6 +77,12 @@
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="redisPersistence"/>
         <property name="targetMethod" value="updateTeachers"/>
+    </bean>
+
+    <bean id="updateTeacherMovies"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="redisPersistence"/>
+        <property name="targetMethod" value="updateTeacherMovies"/>
     </bean>
 
     <bean id="redisPersistence" class="com.sgay.giligili.quartz.RedisCachePersistenceQuartz"/>

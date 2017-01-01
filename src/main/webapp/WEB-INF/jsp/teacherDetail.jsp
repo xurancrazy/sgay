@@ -48,7 +48,7 @@
                 <div class="well_tit" style="width:670px;display:inline-block;">
                     <h2>${teacher.name}<span class="list_tp"><a href="#" title="投她一票" class="img_on"
                                                                 rel="${teacher.id}">投票</a></span></h2>
-                    <img src="/http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/icon/full/${teacher.img}" width="125" height="125" alt="${teacher.name}"
+                    <img src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/icon/full/${teacher.img}" width="125" height="125" alt="${teacher.name}"
                          title="${teacher.name}" style="float: left;">
                     <p class="avms">${teacherDescription}</p>
                     <div class="nian btn-group">

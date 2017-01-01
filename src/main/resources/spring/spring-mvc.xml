@@ -24,6 +24,7 @@
 	<mvc:resources location="/source/images/" mapping="/source/images/**"/>
 	<mvc:resources location="/source/css/" mapping="/source/css/**"/>
 	<mvc:resources location="/source/js/" mapping="/source/js/**"/>
+	<mvc:resources location="/" mapping="/**"/>
 	<mvc:resources location="/uploads/" mapping="/uploads/**"/>
 
 
