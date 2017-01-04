@@ -27,7 +27,11 @@
 	<mvc:resources location="/" mapping="/**"/>
 	<mvc:resources location="/uploads/" mapping="/uploads/**"/>
 
-
+	<mvc:interceptors>
+		<!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+		<bean class="com.sgay.giligili.interceptor.UserAccessInterceptor"/>
+		<bean class="com.sgay.giligili.interceptor.SpiderDenyInterceptor"/>
+	</mvc:interceptors>
 
 	<!--ViewResolver 视图解析器-->
 	<!--用于支持Servlet、JSP视图解析-->

@@ -77,11 +77,12 @@
                         </ul>
                     </div>
                 </div>
+                <!--同演员相关 End-->
                 <!--同类型相关-->
                 <div class="wz_xgtj">
                     <div class="blockTitle">
                         <h2>同类型作品推荐</h2>
-                        <a class="more" href="/teachers">更多 &gt;&gt;</a>
+                        <a class="more" href="/categories">更多 &gt;&gt;</a>
                     </div>
                     <div class="xg_bd">
                         <ul class="hotArticle">
@@ -97,7 +98,7 @@
                         </ul>
                     </div>
                 </div>
-                <!--同演员相关 End-->
+                <!--同类型相关 End-->
             </div>
         </div>
         <!--左侧文章结束-->

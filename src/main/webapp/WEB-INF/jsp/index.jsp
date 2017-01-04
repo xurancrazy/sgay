@@ -17,6 +17,18 @@
 <body>
 <%@include file="/WEB-INF/jsp/common/navigate.jsp" %>
 <div class="content container">
+    <div style="width: 960px;height: 100px;">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- ad -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6258591717321961"
+             data-ad-slot="8127484934"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
     <!--幻灯结束-->
     <div class="row">
         <div id="contrainer" class="span8">

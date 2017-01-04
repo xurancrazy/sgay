@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 
 @ResponseStatus(HttpStatus.FORBIDDEN)
-public class ForbiddenException extends RuntimeException {
+public class ForbiddenAccessException extends RuntimeException {
     private String customizeMessage;
 
-    public ForbiddenException(String message){
+    public ForbiddenAccessException(String message){
         this.customizeMessage = message;
     }
 

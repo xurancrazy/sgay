@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>技术小站</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术小站 'www.fanhaozhan.xyz'">
+    <meta name="keywords" content="技术小站，番号，知识">
+
+    <link rel="icon" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/icon.png">
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/css/index.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+    <!-- JS -->
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/js/ie10-viewport-bug-workaround.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="blog-header">
+        <h1 class="title" itemprop="headline">SPDY 3.1 中的请求 / 响应头</h1>
+    </div>
+    <article class="post post-163" itemscope="" itemtype="http://schema.org/Article">
+        <div class="entry-content" itemprop="articleBody">
+            <p>在我之前的文章中，曾多次提到 SPDY 协议。我的博客也升级到最新的 <a
+                    href="http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3-1">SPDY 3.1</a> 了，今天就来聊一聊 SPDY
+                3.1 中的请求 / 响应头。</p>
+            <p>SPDY 帧层运行在可靠的传输层（如 TCP）之上，提供了多路复用、优先级、头部压缩和服务端推送等 HTTP 不具备的功能。SPDY 连接都是持久的，连接建立后，客户端和服务端会交换帧信息（framed
+                messages）。SPDY 有两种类型的帧：控制帧和数据帧。</p>
+            <p>SPDY 定义了多种控制帧，其中有三种用来管理流（stream）：</p>
+            <ul>
+                <li>SYN_STREAM：打开流；</li>
+                <li>SYN_REPLY：远程确认新打开的流；</li>
+                <li>RST_STREAM：关闭流；</li>
+            </ul>
+            <h3><a name="toc-0"></a>SYN_STREAM 和 SYN_REPLY</h3>
+            <p>SYN_STREAM 控制帧用来打开流，它的格式如下：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">+------------------------------------+
+|<span class="hljs-number">1</span>|    version    |         <span class="hljs-number">1</span>        |
++------------------------------------+
+|  Flags (<span class="hljs-number">8</span>)  |  Length (<span class="hljs-number">24</span> bits)    |
++------------------------------------+
+|X|           Stream-ID (<span class="hljs-number">31</span>bits)     |
++------------------------------------+
+|X| Associated-To-Stream-ID (<span class="hljs-number">31</span>bits) |
++------------------------------------+
+| Pri|Unused | Slot |                |
++-------------------+                |
+| Number of Name/Value pairs (int32) |  &lt;+
++------------------------------------+   |
+|     Length of name (int32)         |   | This section is the
++------------------------------------+   | <span class="hljs-string">"Name/Value Header Block"</span>,
+|           Name (string)            |   | and is compressed.
++------------------------------------+   |
+|     Length of value  (int32)       |   |
++------------------------------------+   |
+|          Value   (string)          |   |
++------------------------------------+   |
+|           (repeats)                |  &lt;+
+</code></pre>
+            <p>简单介绍下这些字段含义：</p>
+            <ul>
+                <li>第一行是：控制位（数据帧的控制位是 0，控制帧是 1）、SPDY 版本和类型（SYN_STREAM 的类型是 1）；</li>
+                <li>flags 是帧标识，有 0x01（FLAG_FIN）和 0x02（FLAG_UNIDIRECTIONAL）两种。FIN
+                    表示该帧是当前流的最后一帧，发送者随后进入半关闭状态；UNIDIRECTIONAL 作用是让接收者进入半关闭状态；
+                </li>
+                <li>Length（长度），表示这一帧剩余部分字节数。对于 SYN_STREAM 来说，它是固定 10 字节加上压缩后键 / 值对的长度；</li>
+                <li>Stream-ID 是流的标识符，会被用于这个流里所有的帧。客户端初始化的流 id 必须是奇数，服务端创建的流是偶数，流 id 在两端必须连续；</li>
+                <li>Associated-To-Stream-ID，关联的流。如果没有关联的流，它应该为 0；</li>
+                <li>Pri（Priority），流优先级，0 表示优先级最高，7 表示最低。发送者和接收者应该尽可能的按照这个优先级去处理流；</li>
+                <li>Name/Value Header Block（键 / 值头部块），SYN_STREAM 携带的一组键 / 值对，这个块一定会使用 zlib 压缩；</li>
+            </ul>
+            <p>SYN_REPLY 控制帧用来确认新打开的流，它的格式是：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">+------------------------------------+
+|<span class="hljs-number">1</span>|    version    |         <span class="hljs-number">2</span>        |
++------------------------------------+
+|  Flags (<span class="hljs-number">8</span>)  |  Length (<span class="hljs-number">24</span> bits)    |
++------------------------------------+
+|X|           Stream-ID (<span class="hljs-number">31</span>bits)     |
++------------------------------------+
+| Number of Name/Value pairs (int32) |  &lt;+
++------------------------------------+   |
+|     Length of name (int32)         |   | This section is the
++------------------------------------+   | <span class="hljs-string">"Name/Value Header Block"</span>,
+|           Name (string)            |   | and is compressed.
++------------------------------------+   |
+|     Length of value  (int32)       |   |
++------------------------------------+   |
+|          Value   (string)          |   |
++------------------------------------+   |
+|           (repeats)                |  &lt;+
+</code></pre>
+            <p>这些字段与 SYN_STREAM 含义几乎一样：</p>
+            <ul>
+                <li>第一行是也是控制位、SPDY 版本和类型（SYN_REPLY 的类型是 2）；</li>
+                <li>Length（长度），表示这一帧剩余部分字节数。对于 SYN_REPLY 来说，它是固定 4 字节加上压缩后键 / 值对的长度；</li>
+            </ul>
+            <p>RST_STREAM 和其他控制帧，以及数据帧与本文关系不大，这里略过。</p>
+            <h3><a name="toc-1"></a>SPDY 上的 HTTP 请求</h3>
+            <p>客户端通过 SYN_STREAM 帧来初始化请求。如果请求不包含正文部分（HTTP Body），那么必须设置 FLAG_FIN 标志，表示客户端不会在这个流上发送其他帧了；否则，客户端会在 SYN_STREAM
+                之后发送一系列数据帧，并给最后一个数据帧设置 FLAG_FIN。</p>
+            <p>SYN_STREAM 中的 Name/Value Header Block，几乎与现在的 HTTP 头部相同，但也有改变：</p>
+            <p><strong>状态行必须像其他 HTTP 头部一样展开为键 / 值对。</strong>我们知道，HTTP 协议请求中，第一行有这些信息：</p>
+<pre><code class="lang-bash">&lt;method&gt; &lt;request-URL&gt; &lt;version&gt;
+</code></pre>
+            <p>在 SPDY 中，这些信息必须放在键 / 值对中：</p>
+            <ul>
+                <li>:method，这个请求对应的 HTTP method（如：GET、POST、HEAD 等）；</li>
+                <li>:path，"/" 开头的 url 路径，参考 <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC3986</a>；</li>
+                <li>:version，HTTP 版本号（如 HTTP/1.1）；</li>
+            </ul>
+            <p>另外，每个请求中，还需要补充以下两个键 / 值对：</p>
+            <ul>
+                <li>:host，请求的主机和端口，参考 <a href="http://www.ietf.org/rfc/rfc1738.txt">RFC1738</a>，与当前 HTTP 的 HOST 头相同；
+                </li>
+                <li>:scheme，URL 的协议部分（如 https）；</li>
+            </ul>
+            <p><strong>所有头部名都需要小写。</strong>我们已经看到，SPDY 新增的键 / 值对的 key 都是小写的，其他已有的 HTTP 头部的 key 也都需要转成小写。</p>
+            <p><strong>不能发送某些头部。</strong>Connection、Host、Keep-Alive、Proxy-Connection、Transfer-Encoding
+                这些头都不能发送。这些头多半与连接控制和传输方式有关，SPDY 已经不需要他们，HOST 则被 :host 代替。</p>
+            <p><strong>客户端必须支持 gzip 压缩。</strong>也就是说，无论客户端是否发送 accept-encoding，服务端始终可以发送 gzip 或者 deflate 编码后的内容。</p>
+            <p><strong>如果服务端收到数据帧长度和不等于 content-length 的请求，必须返回 400（Bad Request）。</strong>同时，对于 POST 请求，也需要包含
+                content-length 头部。</p>
+            <p>另外，客户端可以通过 SYN_STREAM 帧中的 Pri 字段，给不同资源指定不同的优先级。后续我会专门写文章介绍 Chrome 浏览器的优先级策略。</p>
+            <p>如果 SYN_STREAM 帧没有包含 :method、:host、:path、:scheme 以及 :version，服务端必须返回 400（Bad Request）。</p>
+            <h3><a name="toc-2"></a>SPDY 上的 HTTP 响应</h3>
+            <p>服务端用 SYN_REPLY 帧响应客户端的请求。同样，FLAG_FIN 用来标识该响应是否包含正文。与 SPDY 请求类似，SPDY 响应也有一些改变：</p>
+            <p><strong>状态行必须像其他 HTTP 头部一样展开为键 / 值对。</strong>我们知道，HTTP 协议响应中，第一行有这些信息：</p>
+<pre><code class="lang-bash">&lt;version&gt; &lt;status&gt; &lt;respon-phrase&gt;
+</code></pre>
+            <p>在 SPDY 中，他们也必须放在键/值对中：</p>
+            <ul>
+                <li>:status，HTTP 响应状态码（如：200 或 200 OK）；</li>
+                <li>:version，响应的 HTTP 版本号（如 HTTP/1.1）；</li>
+            </ul>
+            <p><strong>所有头部名都需要小写。</strong>与前面请求头规则一致。</p>
+            <p><strong>不能发送某些头部。</strong>Connection、Keep-Alive、Proxy-Connection、Transfer-Encoding 这些头都不能发送。与请求头类似。</p>
+            <p><strong>响应头可以包含 content-length。</strong>如果 content-length 长度不等于响应数据帧长度之和，客户端必须忽略这个头。</p>
+            <p>如果服务端的 SYN_REPLY 中不包含 :status 或 :version头，客户端必须回复 RST_STREAM 帧。</p>
+            <h3><a name="toc-3"></a>SPDY 请求 / 响应实例</h3>
+            <p>通过 Chrome 开发工具的网络面板，可以看到请求 / 响应头的相关信息。通过 chrome://net-internals/#events
+                界面，我们可以看到更多信息。我这里摘录了访问我博客的一段日志，并加上了注释，大家可以对照前面的介绍看看。</p>
+<pre><b class="name">BASH</b><code class="lang-bash">t=<span class="hljs-number">2111847</span> [st = <span
+        class="hljs-number">1</span>]    SPDY_SESSION_SYN_STREAM        【客户端发送请求】
+     --&gt; fin = <span class="hljs-literal">true</span>                 【fin 标记表示这是当前流最后一帧】
+     --&gt; :host: www.fanhaozhan.xyz      【请求头】
+         :method: GET
+         :path: /post/devtool-in-chrome32.html
+         :scheme: https
+         :version: HTTP/<span class="hljs-number">1.1</span>
+         accept: text/html,application/xhtml+xml,application/xml;q=<span class="hljs-number">0.9</span>,image/webp,*/*;q=<span
+            class="hljs-number">0.8</span>
+         accept-encoding: gzip,deflate,sdch
+         accept-language: zh-CN,zh;q=<span class="hljs-number">0.8</span>,en-US;q=<span class="hljs-number">0.6</span>,en;q=<span
+            class="hljs-number">0.4</span>,ja;q=<span class="hljs-number">0.2</span>,de;q=<span
+            class="hljs-number">0.2</span>,zh-TW;q=<span class="hljs-number">0.2</span>
+         cache-control: max-age=<span class="hljs-number">0</span>
+         cookie: [<span class="hljs-number">172</span> bytes were stripped]
+         dnt: <span class="hljs-number">1</span>
+         referer: https://fanhaozhan.xyz/
+         user-agent: Mozilla/<span class="hljs-number">5.0</span> (Macintosh; Intel Mac OS X <span class="hljs-number">10</span>_9_2) AppleWebKit/<span
+            class="hljs-number">537.36</span> (KHTML, like Gecko) Chrome/<span class="hljs-number">34.0</span>.<span
+            class="hljs-number">1847.60</span> Safari/<span class="hljs-number">537.36</span>
+     --&gt; spdy_priority = <span class="hljs-number">0</span>          【优先级，<span class="hljs-number">0</span> 最高】
+     --&gt; stream_id = <span class="hljs-number">1</span>              【流id，客户端创建的流 id 是奇数】
+     --&gt; unidirectional = <span class="hljs-literal">false</span>
+
+t=<span class="hljs-number">2111980</span> [st = <span class="hljs-number">134</span>]    SPDY_SESSION_SYN_REPLY         【服务端返回响应】
+     --&gt; fin = <span class="hljs-literal">false</span>                【fin 为<span class="hljs-literal">false</span>，表示后续还有数据帧】
+     --&gt; :status: <span class="hljs-number">200</span> OK            【响应头】
+         :version: HTTP/<span class="hljs-number">1.1</span>
+         content-encoding: gzip
+         content-type: text/html; charset=utf8
+         date: Sat, <span class="hljs-number">15</span> Mar <span class="hljs-number">2014</span> <span
+            class="hljs-number">06</span>:<span class="hljs-number">08</span>:<span class="hljs-number">47</span> GMT
+         server: nginx
+         strict-transport-security: max-age=<span class="hljs-number">31536000</span>
+         x-cache: HIT from cache.ququ
+         x-powered-by: thinkjs-<span class="hljs-number">0.4</span>.<span class="hljs-number">1</span>
+     --&gt; stream_id = <span class="hljs-number">1</span>
+
+t=<span class="hljs-number">2111981</span> [st = <span class="hljs-number">135</span>]    SPDY_SESSION_RECV_SETTINGS     【各种控制帧】
+     --&gt; clear_persisted = <span class="hljs-literal">true</span>
+     --&gt; host = <span class="hljs-string">"www.fanhaozhan.xyz:443"</span>
+
+t=<span class="hljs-number">2111981</span> [st = <span class="hljs-number">135</span>]    SPDY_SESSION_RECV_SETTING
+     --&gt; flags = <span class="hljs-number">0</span>
+     --&gt; id = <span class="hljs-number">4</span>
+     --&gt; value = <span class="hljs-number">100</span>
+
+t=<span class="hljs-number">2111981</span> [st = <span class="hljs-number">135</span>]    SPDY_SESSION_UPDATE_STREAMS_SEND_WINDOW_SIZE
+     --&gt; delta_window_size = <span class="hljs-number">2147418111</span>
+     ...
+
+t=<span class="hljs-number">2112105</span> [st = <span class="hljs-number">259</span>]    SPDY_SESSION_RECV_DATA         【数据帧】
+     --&gt; fin = <span class="hljs-literal">true</span>                 【当前流最后一帧】
+     --&gt; size = <span class="hljs-number">0</span>
+     --&gt; stream_id = <span class="hljs-number">1</span>
+
+t=<span class="hljs-number">2112208</span> [st = <span class="hljs-number">362</span>]    SPDY_SESSION_SYN_STREAM        【新的请求】
+     --&gt; fin = <span class="hljs-literal">true</span>
+     --&gt; :host: www.fanhaozhan.xyz
+         :method: GET
+         :path: /static/css/theme/the-bizness_datauri_178bc.css
+         :scheme: https
+         :version: HTTP/<span class="hljs-number">1.1</span>
+         accept: text/css,*/*;q=<span class="hljs-number">0.1</span>
+         accept-encoding: gzip,deflate,sdch
+         accept-language: zh-CN,zh;q=<span class="hljs-number">0.8</span>,en-US;q=<span class="hljs-number">0.6</span>,en;q=<span
+            class="hljs-number">0.4</span>,ja;q=<span class="hljs-number">0.2</span>,de;q=<span
+            class="hljs-number">0.2</span>,zh-TW;q=<span class="hljs-number">0.2</span>
+         cache-control: max-age=<span class="hljs-number">0</span>
+         cookie: [<span class="hljs-number">172</span> bytes were stripped]
+         dnt: <span class="hljs-number">1</span>
+         <span class="hljs-keyword">if</span>-modified-since: Mon, <span class="hljs-number">10</span> Feb <span
+            class="hljs-number">2014</span> <span class="hljs-number">15</span>:<span
+            class="hljs-number">08</span>:<span class="hljs-number">22</span> GMT
+         pragma: no-cache
+         referer: https://fanhaozhan.xyz/post/devtool-in-chrome32.html
+         user-agent: Mozilla/<span class="hljs-number">5.0</span> (Macintosh; Intel Mac OS X <span class="hljs-number">10</span>_9_2) AppleWebKit/<span
+            class="hljs-number">537.36</span> (KHTML, like Gecko) Chrome/<span class="hljs-number">34.0</span>.<span
+            class="hljs-number">1847.60</span> Safari/<span class="hljs-number">537.36</span>
+     --&gt; spdy_priority = <span class="hljs-number">1</span>          【优先级为<span class="hljs-number">1</span>】
+     --&gt; stream_id = <span class="hljs-number">3</span>              【客户端创建的流 id 为奇数，且连续】
+     --&gt; unidirectional = <span class="hljs-literal">false</span>
+    ...
+</code></pre>
+            <h3><a name="toc-4"></a>如何部署 SPDY 3.1</h3>
+            <p>Chrome 很快就会<a href="https://code.google.com/p/chromium/issues/detail?id=304955">移除对 SPDY 2 的支持</a>，Firefox
+                28 也<a href="https://developer.mozilla.org/en-US/Firefox/Releases/28/Site_Compatibility#Networking">不支持
+                    SPDY 2</a> 了。如果你还在使用 SPDY 2，是时候升级了。</p>
+            <p>2014 年 2 月 4 日，<a href="http://nginx.org/en/CHANGES">Nginx</a> 发布了 1.5.10 版，开始提供对 SPDY 3.1 的支持。下载 nginx
+                最新的 1.5.11 源码包后，再去 <a href="https://www.openssl.org/source/">openssl 官网</a>下一个最新的 openssl
+                库，就可以编译了。configure 时需要启用 spdy、ssl 模块，另外需要指定前面下载到的 openssl 库，这样才能确保使用最新的 ssl：</p>
+<pre><code class="lang-bash">./configure --with-openssl=/home/jerry/tmp/openssl-<span
+        class="hljs-number">1.0</span>.<span class="hljs-number">1</span>e/ --with-http_spdy_module --with-http_ssl_module
+</code></pre>
+            <p>有了支持 SPDY 3.1 的 nginx，接下来在站点配置里启用就可以了，由于 SPDY 协议必须使用 HTTPS，所以端口默认是 443，证书什么的也需要提前配好。</p>
+<pre><b class="name">BASH</b><code class="lang-bash">server {
+    server_name     www.fanhaozhan.xyz;
+    server_tokens   off;
+
+    listen                  <span class="hljs-number">443</span> ssl spdy;
+    ssl_certificate         /home/jerry/ssl/server.crt;
+    ssl_certificate_key     /home/jerry/ssl/server.key;
+
+    spdy_headers_comp   <span class="hljs-number">6</span>;
+
+    add_header      Strict-Transport-Security   max-age=<span class="hljs-number">31536000</span>;
+    ... ...
+}
+</code></pre>
+            <p>一切 OK 后，打开 Chrome 的这个页面：chrome://net-internals/#spdy，可以查看 SPDY 的使用情况。</p>
+        </div>
+    </article>
+</div><!-- /.container -->
+
+<div class="blog-footer">
+    <p>内容发布 by <a
+            href="/">番号站</a></p>
+    <p>
+        <a href="#">返回顶部</a>
+    </p>
+</div>
+</body>
+</html>

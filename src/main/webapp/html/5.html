@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>技术小站</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术小站 'www.fanhaozhan.xyz'">
+    <meta name="keywords" content="技术小站，番号，知识">
+
+    <link rel="icon" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/icon.png">
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/css/index.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+    <!-- JS -->
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/js/ie10-viewport-bug-workaround.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="blog-header">
+        <h1 class="title" itemprop="headline">HTTP/2 中的 Server Push 讨论</h1>
+    </div>
+    <article class="post post-188" itemscope="" itemtype="http://schema.org/Article">
+        <div class="entry-content" itemprop="articleBody"><p>本文不讨论 Server Push 是什么，也不讨论如何使用 Server Push。</p>
+            <blockquote>
+                <p>如果服务端想要推送的资源本地已经缓存过，客户端会发送 <code>RST_STREAM</code> 告诉服务端不要再传了。不过根据我的观察，H2O 服务端在收到
+                    <code>RST_STREAM</code> 之前，已经发出了资源，造成了流量的浪费。具体原因，我正在向 H2O 作者求证。</p>
+            </blockquote>
+            <p>我给 H2O 项目<a href="https://github.com/h2o/h2o/issues/355">提了一个 issues</a> 询问此事，得到了 H2O 的作者 <a
+                    href="https://github.com/kazuho">Kazuho Oku</a>，aria2 的作者 <a href="https://github.com/tatsuhiro-t">Tatsuhiro
+                Tsujikawa</a>，以及《<a href="http://chimera.labs.oreilly.com/books/1230000000545/index.html">High-Performance
+                Browser Networking</a>》的作者 <a href="https://github.com/igrigorik">Ilya Grigorik</a>
+                的回答。基本搞明白了这个问题，本文记录一下。</p>
+            <p>Kazuho Oku 的回答：</p>
+            <blockquote>
+                <p>Because the HEADERS frame has left the server before the RST_STREAM sent from the client reaches the
+                    server.</p>
+                <p>这是因为客户端发出的 RST_STREAM 帧到达服务端之前，那些 HEADERS 帧（注：HTTP2_SESSION_RECV_HEADERS 和
+                    HTTP2_SESSION_RECV_DATA）已经离开了服务端。</p>
+                <p>The issue is known to the protocol designers of HTTP/2, and my understanding is that there is a
+                    discussion on how the client should notify the server if it already has the asset cached. Until such
+                    mechanism gets introduced, we cannot fix the issue (or in other words you should better not use push
+                    if the negative impact of a cached content being pushed outweighs the positive impact of pushing the
+                    content every time).</p>
+                <p>HTTP/2 协议制定者已经知道这个问题的存在，我认为应该讨论一下客户端已经缓存资源时，如何通知服务端。直到 HTTP/2 协议定义相应的机制前，我们无法修复这个问题（换句话说，如果缓存过的资源每次都被
+                    Push 这件事所带来的弊端大于好处，你就不应该使用这个功能）。</p>
+            </blockquote>
+            <p>Tatsuhiro Tsujikawa 的回答：</p>
+            <blockquote>
+                <p>It is a race condition, between server starts sending pushed data, and it receives RST_STREAM.</p>
+                <p>服务端开始 Push 数据与收到 RST_STREAM 帧这二者是竞争状态。</p>
+                <p>If server receives RST_STREAM while sending pushed data, it will stop sending remaining data.</p>
+                <p>如果服务端正在 Push 数据时收到了 RST_STREAM 帧，它会停止发送剩余数据。</p>
+                <p>People argue the wasted bandwidth when server push is involved. That is by design.</p>
+                <p>人们争论启用 Server Push 所带来的带宽浪费。但设计就是如此。</p>
+                <p>Server push is asynchronous, and just send server's discretion, without client's confirmation, to
+                    eliminate latency penalty. There will be novel use cases for server push, but here we discuss the
+                    use case for ordinal web pages. In this case, server push is introduced to eliminate ugly inlining
+                    we used to avoid additional HTTP request because in HTTP/1.1 request is expensive.</p>
+                <p>Server Push 是异步的，会发送服务端认为需要发送的内容，不需要客户端确认，目的是消除网络延迟。今后肯定会有关于 Server Push 的新颖用法出现，但这里我们要讨论在现有网页中使用
+                    Server Push。这时候，Server Push 的作用是取代「由于 HTTP/1.1 的连接数很宝贵，为避免产生额外 HTTP 请求而引入的」资源内联——它太丑陋了。</p>
+                <p>We mean inlining here is data URI of images in html page, or CSS, to reduce the number of
+                    requests.</p>
+                <p>我们这里说的内联，是指将图片通过 Data URI 的方式内置在 HTML 或者 CSS 里，作用是减少请求数。</p>
+                <p>In HTTP/2, requests are cheap now, and we don't have to do inlining. But without inlining there could
+                    be latency while browser discovers link and requests to the server. Server push is useful in this
+                    situation. You can push contents we used to inlined in html. Now we are no worse than HTTP/1.1
+                    inlining, even if we "waste" bandwidth. In HTTP/1.1, these assets are always inlined, so they are
+                    always wasted. Also data URI is horrible, just inflating bytes. Now in server push, we have separate
+                    cache space, and if client only wants to download html, without formally inlined assets, it can do
+                    so by disabling push. And we allow client to cancel this push, although it may too late in some
+                    situation.</p>
+                <p>在 HTTP/2 里，请求变得非常廉价，我们不再需要内联了。但是如果没有内联，浏览器在发现外链资源并发送请求之前，会有一段时间的延迟。这时候 Server Push 就变得非常有用了。之前需要内联在
+                    HTML 里的资源现在可以改由服务端 Push。现在即使「浪费」了带宽，也不比 HTTP/1 的内联差。因为在 HTTP/1.1 里，那些资源总是会被内联，总会被浪费。另外，Data URI
+                    非常可怕，因为编码后字节数会变多。现在有了 Server Push，每个资源都有自己单独的缓存，如果客户端只想下载没有内联资源的 HTML，可以通过禁用 Push 来实现。我们也允许客户端取消
+                    Push，尽管有时候已经太迟了。 </p>
+                <p>But still we just improving situation, not worsening it.</p>
+                <p>但是这一切仍然是让情况变得更好，而不是更糟糕。</p>
+            </blockquote>
+            <p>Ilya Grigorik 的回答：</p>
+            <blockquote>
+                <p>+1 to everything @tatsuhiro-t said.</p>
+                <p>+1 完全同意楼上所说。</p>
+                <p>Also, note that the client can limit the server in what it's allow to send: (a) the client can limit
+                    max number of push streams, and (b) it can set a low flow control window to limit how much data the
+                    server is allowed to send in first RTT. Between these two the client has all the controls to govern
+                    how and where push is used -- e.g. if you're in data savings mode, you may want to tweak either or
+                    both of those. Beyond that, the server can also be smarter about when it pushes resources -- e.g. if
+                    it pushes a cacheable resource on first session hit, and then receives a second session hit on same
+                    connection (which is within cache lifetime of first push), then it can omit pushing that resources..
+                    and so forth.</p>
+                <p>同时，请注意客户端可以限制服务端能 Push 什么：1）客户端可以限制 Push
+                    流的最大数目；2）客户端可以设置一个很低的流量控制窗口，来限制服务端在第一个往返内发送的数据大小。基于这两点，客户端可以完全控制 Push
+                    怎么用和用在哪——例如，如果你在使用省流模式，你可能会调整前面两个策略之一或者全部。除此之外，服务端在 Push 资源时可以更聪明一些——例如，如果服务端在第一个 Session 里 Push
+                    了一个可被缓存的资源，然后又在同一个连接上收到第二个 Session（在第一次 Push 资源的缓存生命周期内），这时候就可以不再 Push 这个资源了。。诸如此类。</p>
+            </blockquote>
+            <p>我的理解：</p>
+            <p>页面有一些很重要的资源需要尽快加载，例如核心的 css 文件。浏览器加载它们的延迟来自多方面，这几个是 HTTP/2 能解决的：1）同域名并发连接数限制造成的阻塞时间；3）浏览器从 HTML
+                中找出外链资源这段时间；3）浏览器发起请求到服务端收到请求这段时间。</p>
+            <p>HTTP/2 的多路复用特性消除了同域名并发连接数限制；Server Push 则会在客户端请求页面 HTML 时，新建流将最重要的资源一并返回。同时，如果服务端要推送的资源浏览器已经缓存过，客户端会发送
+                <code>RST_STREAM</code>
+                帧来终止流，服务端收到这个信号之前所传输的数据就造成了带宽浪费。这个问题可以通过在服务端记录给每个客户端发送过何种资源，何时过期来优化。实际上，大多数时候带宽都不是瓶颈，延迟才是首先需要考虑的。</p>
+            <p>另外，W3C 的 <a href="http://w3c.github.io/preload/#fetching-the-preload-link">Preload 文档</a>中，定义了一种通过响应头部尽早告诉浏览器需要加载哪些资源的方案。这个方案非常轻量，几乎没有副作用，也推荐使用。
+            </p>
+        </div>
+    </article>
+</div><!-- /.container -->
+
+<div class="blog-footer">
+    <p>内容发布 by <a
+            href="/">番号站</a></p>
+    <p>
+        <a href="#">返回顶部</a>
+    </p>
+</div>
+</body>
+</html>

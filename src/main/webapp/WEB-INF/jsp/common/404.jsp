@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isErrorPage="true"%>
+<% response.setStatus(404); %>
 <html>
 <head>
     <meta http-equiv="Page-Enter" content="blendTrans(Duration=0.5)">

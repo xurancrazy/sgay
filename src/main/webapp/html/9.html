@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>技术小站</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术小站 'www.fanhaozhan.xyz'">
+    <meta name="keywords" content="技术小站，番号，知识">
+
+    <link rel="icon" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/icon.png">
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/css/index.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+    <!-- JS -->
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/js/ie10-viewport-bug-workaround.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="blog-header">
+        <h1 class="title" itemprop="headline">从无法开启 OCSP Stapling 说起</h1>
+    </div>
+    <article class="post post-229" itemscope="" itemtype="http://schema.org/Article">
+        <div class="entry-content" itemprop="articleBody">
+            <div id="toc-container">
+                <div id="toc"><p><strong>文章目录</strong></p>
+                    <ul>
+                        <li><a href="#toc-0">验证 OCSP Stapling 状态</a></li>
+                        <li><a href="#toc-1">获取证书 OCSP Response</a></li>
+                        <li><a href="#toc-2">启用 OCSP Stapling 的条件</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>最近收到的几封读者邮件，都是询问为什么在 Nginx 中无法开启 OCSP Stapling。具体现象是在 Nginx 中明明配置了 <code>ssl_stapling on</code>，但通过 <a
+                    href="https://www.ssllabs.com/ssltest/index.html">SSL Labs</a> 等工具查看，OCSP stapling
+                这一项并没有生效。本文就这个问题详细探讨下，如果你只关心结论，直接跳到最后一节即可。</p>
+            <p>OCSP（Online Certificate Status Protocol，在线证书状态协议）是用来检验证书合法性的在线查询服务，一般由证书所属 CA 提供。某些客户端会在 TLS
+                握手阶段进一步协商时，实时查询 OCSP 接口，并在获得结果前阻塞后续流程。OCSP 查询本质是一次完整的 HTTP 请求 - 响应，这中间 DNS 查询、建立
+                TCP、服务端处理等环节都可能耗费很长时间，导致最终建立 TLS 连接时间变得更长。</p>
+            <p>而 OCSP Stapling（OCSP 封套），是指服务端主动获取 OCSP 查询结果并随着证书一起发送给客户端，从而让客户端跳过自己去验证的过程，提高 TLS 握手效率。</p>
+            <h3><a name="toc-0"></a>验证 OCSP Stapling 状态</h3>
+            <p>通过前面提到的 <a href="https://www.ssllabs.com/ssltest/index.html">SSL Labs</a> 这个强大的在线服务，可以轻松验证指定网站是否开启 OCSP
+                Stapling。但这个网站功能太多，国内网站很可能要花十分钟才能完成全部检测项看到结果。</p>
+            <p>使用 Wireshark 这个神器，设置好抓包条件和过滤器后，也可以很方便地验证某个网站是否开启 OCSP Stapling，有兴趣的同学可以自己试一下。</p>
+            <p>本文介绍如何使用 openssl 这个命令行工具来完成同样的任务。</p>
+            <p>多说一句，Mac 系统自带的 openssl 版本太低了，建议通过 brew 装上新版：</p>
+<pre><code class="lang-bash">$ brew install openssl
+$ brew link openssl --force
+</code></pre>
+            <p>如果使用其它系统，也请通过 <code>openssl version</code> 检查一下 openssl 的版本，不要太旧了。</p>
+            <p>服务端启用 OCSP Stapling 之后，客户端还需要在建立 TLS 时，在 Client Hello 中启用 status_request 这个 TLS 扩展，告诉服务端自己希望得到 OCSP
+                Response。目前主流浏览器都会带上 status_request，而在 openssl 中需要指定 <code>-status</code> 参数。完整命令如下：</p>
+<pre><code class="lang-bash">$ openssl s_client -connect fanhaozhan.xyz:<span class="hljs-number">443</span> -status -tlsextdebug &lt; /dev/null <span
+        class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> | grep -i <span class="hljs-string">"OCSP response"</span>
+</code></pre>
+            <p>如果你的服务器上部署了多个 HTTPS 站点，可能还需要加上 <code>-servername</code> 参数启用 SNI：</p>
+<pre><code class="lang-bash">$ openssl s_client -connect fanhaozhan.xyz:<span class="hljs-number">443</span> -servername fanhaozhan.xyz -status -tlsextdebug &lt; /dev/null <span
+        class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> | grep -i <span class="hljs-string">"OCSP response"</span>
+</code></pre>
+            <p>如果结果是下面这样，说明 OCSP Stapling 已开启：</p>
+<pre><code>OCSP response:
+OCSP Response Data:
+    OCSP Response Status: successful (0x0)
+    Response Type: Basic OCSP Response
+</code></pre>
+            <p>而这样显然是未开启：</p>
+<pre><code>OCSP response: no response sent
+</code></pre>
+            <h3><a name="toc-1"></a>获取证书 OCSP Response</h3>
+            <p>了解如何通过 openssl 验证 OCSP Stapling 状态后，我们再来看看 OCSP Response 的完整内容，去掉前面命令中的 grep 就可以看到。例如这是本站的：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">$ openssl s_client -connect fanhaozhan.xyz:<span class="hljs-number">443</span> -status -tlsextdebug &lt; /dev/null <span
+        class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>
+
+OCSP response:
+======================================
+OCSP Response Data:
+    OCSP Response Status: successful (<span class="hljs-number">0</span>x0)
+    Response Type: Basic OCSP Response
+    Version: <span class="hljs-number">1</span> (<span class="hljs-number">0</span>x0)
+    Responder Id: <span class="hljs-number">87</span>BAEBE8F7B12700EC9CD1A04EE0E123E57D809E
+    Produced At: Mar <span class="hljs-number">11</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+    Responses:
+    Certificate ID:
+      Hash Algorithm: sha1
+      Issuer Name Hash: <span class="hljs-number">7</span>C8E4E54532DB74C235073AAF1CDCF2C2423F86B
+      Issuer Key Hash: F3B5560CC409B0B4CF1FAAF9DD2356F077E8A1F9
+      Serial Number: <span class="hljs-number">5</span>A26
+    Cert Status: good
+    This Update: Mar <span class="hljs-number">11</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+    Next Update: Mar <span class="hljs-number">18</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+
+    Signature Algorithm: sha1WithRSAEncryption
+         <span class="hljs-number">8</span>a:<span class="hljs-number">81</span>:d6:a5:aa:<span
+            class="hljs-number">8</span>a:<span class="hljs-number">92</span>:<span class="hljs-number">05</span>:<span
+            class="hljs-number">6</span>f:<span class="hljs-number">39</span>:<span class="hljs-number">97</span>:f5:da:d0:bc:<span
+            class="hljs-number">06</span>:<span class="hljs-number">86</span>:f2:
+         ... ...
+Certificate:
+    Data:
+        Version: <span class="hljs-number">3</span> (<span class="hljs-number">0</span>x2)
+        Serial Number: <span class="hljs-number">8</span> (<span class="hljs-number">0</span>x8)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, O=GeoTrust Inc., CN=RapidSSL SHA256 CA - G4
+        Validity
+            Not Before: Jul <span class="hljs-number">10</span> <span class="hljs-number">18</span>:<span
+            class="hljs-number">18</span>:<span class="hljs-number">29</span> <span class="hljs-number">2015</span> GMT
+            Not After : May <span class="hljs-number">22</span> <span class="hljs-number">18</span>:<span
+            class="hljs-number">18</span>:<span class="hljs-number">29</span> <span class="hljs-number">2016</span> GMT
+        Subject: CN=RapidSSL SHA256 CA - G4 OCSP Responder
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (<span class="hljs-number">2048</span> bit)
+                Modulus:
+                    <span class="hljs-number">00</span>:<span class="hljs-number">9</span>d:e9:<span
+            class="hljs-number">7</span>b:<span class="hljs-number">75</span>:<span class="hljs-number">81</span>:<span
+            class="hljs-number">1</span>e:<span class="hljs-number">00</span>:ab:b3:b4:cc:<span
+            class="hljs-number">3</span>f:a3:<span class="hljs-number">2</span>d:
+                    ... ...
+                Exponent: <span class="hljs-number">65537</span> (<span class="hljs-number">0</span>x10001)
+        X509v3 extensions:
+            X509v3 Authority Key Identifier:
+                keyid:F3:B5:<span class="hljs-number">56</span>:<span class="hljs-number">0</span>C:C4:<span
+            class="hljs-number">09</span>:B0:B4:CF:<span class="hljs-number">1</span>F:AA:F9:DD:<span
+            class="hljs-number">23</span>:<span class="hljs-number">56</span>:F0:<span class="hljs-number">77</span>:E8:A1:F9
+
+            OCSP No Check:
+
+            X509v3 Subject Key Identifier:
+                <span class="hljs-number">87</span>:BA:EB:E8:F7:B1:<span class="hljs-number">27</span>:<span
+            class="hljs-number">00</span>:EC:<span class="hljs-number">9</span>C:D1:A0:<span
+            class="hljs-number">4</span>E:E0:E1:<span class="hljs-number">23</span>:E5:<span
+            class="hljs-number">7</span>D:<span class="hljs-number">80</span>:<span class="hljs-number">9</span>E
+            X509v3 Extended Key Usage:
+                OCSP Signing
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Key Usage: critical
+                Digital Signature
+            X509v3 Subject Alternative Name:
+                DirName:/CN=TGV-C-<span class="hljs-number">26</span>
+    Signature Algorithm: sha256WithRSAEncryption
+         bb:ac:c3:<span class="hljs-number">3</span>e:<span class="hljs-number">8</span>b:<span
+            class="hljs-number">20</span>:be:a0:a7:<span class="hljs-number">4</span>d:bb:e1:d1:c3:<span
+            class="hljs-number">98</span>:<span class="hljs-number">17</span>:<span class="hljs-number">8</span>e:<span
+            class="hljs-number">58</span>:
+         ... ...
+-----BEGIN CERTIFICATE-----
+MIIDnTCCAoWgAwIBAgIBCDANBgkqhkiG9w0BAQsFADBHMQswCQYDVQQGEwJVUzEW
+... ...
+bmgyvaosG4GykSUnasMqfbA=
+-----END CERTIFICATE-----
+======================================
+</code></pre>
+            <p>可以看到 OCSP Response 由两部分组成：OCSP Response Data 和 Certificate。OCSP Response Data 是本站证书的验证信息；而 Certificate
+                则是用来验证 OCSP Response Data。本例中的 Certificate 的 Common Name 是 RapidSSL SHA256 CA - G4 OCSP
+                Responder，可以看出它专属于 RapidSSL 的 OCSP 服务。后面我们会发现，并不是每一家 CA 的 OCSP Response 都会提供 Certificate 信息。</p>
+            <p>上面这段 OCSP Response 信息是通过服务端 OCSP Stapling 获取的。下面介绍如何通过 openssl 在本地获取证书 OCSP Response。</p>
+            <p>首先需要准备好待验证网站证书链上的所有证书。证书链一般由根证书、一个或多个中间证书、站点证书组成。根证书内置在操作系统或浏览器内（Firefox），可以直接导出，或者去各大 CA
+                官方下载；中间证书、站点证书在建立 TLS 连接时由服务端发送，可以这样获取：</p>
+<pre><b class="name">BASH</b><code class="lang-shell">$ openssl s_client -connect fanhaozhan.xyz:<span class="hljs-number">443</span> -showcerts &lt; /dev/null <span
+        class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>
+
+CONNECTED(<span class="hljs-number">00000003</span>)
+depth=<span class="hljs-number">2</span> C = US, O = GeoTrust Inc., OU = (c) <span class="hljs-number">2008</span> GeoTrust Inc. - For authorized use only, CN = GeoTrust Primary Certification Authority - G3
+verify <span class="hljs-built_in">return</span>:<span class="hljs-number">1</span>
+depth=<span class="hljs-number">1</span> C = US, O = GeoTrust Inc., CN = RapidSSL SHA256 CA - G4
+verify <span class="hljs-built_in">return</span>:<span class="hljs-number">1</span>
+depth=<span class="hljs-number">0</span> CN = www.fanhaozhan.xyz
+verify <span class="hljs-built_in">return</span>:<span class="hljs-number">1</span>
+---
+Certificate chain
+ <span class="hljs-number">0</span> s:/CN=www.fanhaozhan.xyz
+   i:/C=US/O=GeoTrust Inc./CN=RapidSSL SHA256 CA - G4
+-----BEGIN CERTIFICATE-----
+MIIFMDCCBBigAwIBAgICWiYwDQYJKoZIhvcNAQELBQAwRzELMAkGA1UEBhMCVVMx
+... ...
+fBv5YysJ/pgFe75P9RVALMiPUPHvH2FGI47pxlvzs5+<span class="hljs-number">7</span>Gt2p
+-----END CERTIFICATE-----
+ <span class="hljs-number">1</span> s:/C=US/O=GeoTrust Inc./CN=RapidSSL SHA256 CA - G4
+   i:/C=US/O=GeoTrust Inc./OU=(c) <span class="hljs-number">2008</span> GeoTrust Inc. - For authorized use only/CN=GeoTrust Primary Certification Authority - G3
+-----BEGIN CERTIFICATE-----
+MIIEpjCCA46gAwIBAgIQKByJKWYUQ4BCY1U6MkCuszANBgkqhkiG9w0BAQsFADCB
+... ...
+nPvdJAq9WZFKQgM4EnEyiHagjny7Mu+IKhvUam9QuVJni6sw+h/<span class="hljs-number">94</span>ySa
+-----END CERTIFICATE-----
+---
+Server certificate
+subject=/CN=www.fanhaozhan.xyz
+issuer=/C=US/O=GeoTrust Inc./CN=RapidSSL SHA256 CA - G4
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: ECDH, P-<span class="hljs-number">256</span>, <span class="hljs-number">256</span> bits
+---
+SSL handshake has <span class="hljs-built_in">read</span> <span class="hljs-number">3460</span> bytes and written <span
+            class="hljs-number">434</span> bytes
+---
+New, TLSv1/SSLv3, Cipher is ECDHE-RSA-AES128-GCM-SHA256
+Server public key is <span class="hljs-number">4096</span> bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.<span class="hljs-number">2</span>
+    Cipher    : ECDHE-RSA-AES128-GCM-SHA256
+    Session-ID: B6A0F49F6DAD0BD8AFB63F87D134FFCBC2B1487CD81440C26D165B5738A5C3EC
+    Session-ID-ctx:
+    Master-Key: <span class="hljs-number">72871</span>B14BC37B08F51F818285264169C512B865D13839C9B824175115F008801781FBAC64D01FC76376BCAB85E6B8F84
+    Key-Arg   : None
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: <span class="hljs-number">86400</span> (seconds)
+    TLS session ticket:
+    <span class="hljs-number">0000</span> - <span class="hljs-number">56</span> f8 <span class="hljs-number">0</span>d dd <span
+            class="hljs-number">0</span>e ea <span class="hljs-number">7</span>d <span
+            class="hljs-number">0</span>b-<span class="hljs-number">09</span> <span class="hljs-number">70</span> <span
+            class="hljs-number">0</span>b dd <span class="hljs-number">52</span> da b7 a8   V.....}..p..R...
+    ... ...                                                  ... ...
+    <span class="hljs-number">00</span>a0 - c2 <span class="hljs-number">25</span> af a9 <span
+            class="hljs-number">46</span> <span class="hljs-number">69</span> <span class="hljs-number">64</span> <span
+            class="hljs-number">73</span>-<span class="hljs-number">69</span> <span
+            class="hljs-number">16</span> ea <span class="hljs-number">64</span> <span class="hljs-number">94</span> c7 f4 a4   .%..Fidsi..d....
+
+    Start Time: <span class="hljs-number">1457861201</span>
+    Timeout   : <span class="hljs-number">300</span> (sec)
+    Verify <span class="hljs-built_in">return</span> code: <span class="hljs-number">0</span> (ok)
+---
+DONE
+</code></pre>
+            <p>以上内容中 Certificate Chain 这一节，编号为 0 的证书是站点证书；编号为 1
+                的证书是中间证书。我的证书链一共是三级，服务端只需要发送两个证书，对于四级证书链，服务端就需要发送三个证书了。总之，只有根证书无需发送。</p>
+            <p>将站点证书保存为 site.pem；中间证书保存为 intermediate.pem（如果有多个中间证书，按照子证书在上的顺序保存）；再从系统中导出对应的根证书存为
+                root.pem。这样，证书链上的所有证书都搞定了。为了确保无误，建议再验证一下每个证书的 Common Name：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">$ openssl x509 -in site.pem -noout -subject
+subject= /CN=www.fanhaozhan.xyz
+
+$ openssl x509 -in intermediate.pem -noout -subject
+subject= /C=US/O=GeoTrust Inc./CN=RapidSSL SHA256 CA - G4
+
+$ openssl x509 -in root.pem -noout -subject
+subject= /C=US/O=GeoTrust Inc./OU=(c) <span class="hljs-number">2008</span> GeoTrust Inc. - For authorized use only/CN=GeoTrust Primary Certification Authority - G3
+</code></pre>
+            <p>接着，获取站点证书的 OCSP 服务地址：</p>
+<pre><code class="lang-bash">$ openssl x509 -in site.pem -noout -ocsp_uri
+http://gz.symcd.com
+</code></pre>
+            <p>现在万事具备，使用以下命令即可获得站点证书的 OCSP Response：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">$ openssl ocsp -issuer intermediate.pem -cert site.pem -no_nonce -text -url http://gz.symcd.com
+
+OCSP Request Data:
+    Version: <span class="hljs-number">1</span> (<span class="hljs-number">0</span>x0)
+    Requestor List:
+        Certificate ID:
+          Hash Algorithm: sha1
+          Issuer Name Hash: <span class="hljs-number">7</span>C8E4E54532DB74C235073AAF1CDCF2C2423F86B
+          Issuer Key Hash: F3B5560CC409B0B4CF1FAAF9DD2356F077E8A1F9
+          Serial Number: <span class="hljs-number">5</span>A26
+OCSP Response Data:
+    OCSP Response Status: successful (<span class="hljs-number">0</span>x0)
+    Response Type: Basic OCSP Response
+    Version: <span class="hljs-number">1</span> (<span class="hljs-number">0</span>x0)
+    Responder Id: <span class="hljs-number">87</span>BAEBE8F7B12700EC9CD1A04EE0E123E57D809E
+    Produced At: Mar <span class="hljs-number">11</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+    Responses:
+    Certificate ID:
+      Hash Algorithm: sha1
+      Issuer Name Hash: <span class="hljs-number">7</span>C8E4E54532DB74C235073AAF1CDCF2C2423F86B
+      Issuer Key Hash: F3B5560CC409B0B4CF1FAAF9DD2356F077E8A1F9
+      Serial Number: <span class="hljs-number">5</span>A26
+    Cert Status: good
+    This Update: Mar <span class="hljs-number">11</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+    Next Update: Mar <span class="hljs-number">18</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+
+    Signature Algorithm: sha1WithRSAEncryption
+         <span class="hljs-number">8</span>a:<span class="hljs-number">81</span>:d6:a5:aa:<span
+            class="hljs-number">8</span>a:<span class="hljs-number">92</span>:<span class="hljs-number">05</span>:<span
+            class="hljs-number">6</span>f:<span class="hljs-number">39</span>:<span class="hljs-number">97</span>:f5:da:d0:bc:<span
+            class="hljs-number">06</span>:<span class="hljs-number">86</span>:f2:
+         ... ...
+Certificate:
+    Data:
+        Version: <span class="hljs-number">3</span> (<span class="hljs-number">0</span>x2)
+        Serial Number: <span class="hljs-number">8</span> (<span class="hljs-number">0</span>x8)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, O=GeoTrust Inc., CN=RapidSSL SHA256 CA - G4
+        Validity
+            Not Before: Jul <span class="hljs-number">10</span> <span class="hljs-number">18</span>:<span
+            class="hljs-number">18</span>:<span class="hljs-number">29</span> <span class="hljs-number">2015</span> GMT
+            Not After : May <span class="hljs-number">22</span> <span class="hljs-number">18</span>:<span
+            class="hljs-number">18</span>:<span class="hljs-number">29</span> <span class="hljs-number">2016</span> GMT
+        Subject: CN=RapidSSL SHA256 CA - G4 OCSP Responder
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (<span class="hljs-number">2048</span> bit)
+                Modulus:
+                    <span class="hljs-number">00</span>:<span class="hljs-number">9</span>d:e9:<span
+            class="hljs-number">7</span>b:<span class="hljs-number">75</span>:<span class="hljs-number">81</span>:<span
+            class="hljs-number">1</span>e:<span class="hljs-number">00</span>:ab:b3:b4:cc:<span
+            class="hljs-number">3</span>f:a3:<span class="hljs-number">2</span>d:
+                    ... ...
+                Exponent: <span class="hljs-number">65537</span> (<span class="hljs-number">0</span>x10001)
+        X509v3 extensions:
+            X509v3 Authority Key Identifier:
+                keyid:F3:B5:<span class="hljs-number">56</span>:<span class="hljs-number">0</span>C:C4:<span
+            class="hljs-number">09</span>:B0:B4:CF:<span class="hljs-number">1</span>F:AA:F9:DD:<span
+            class="hljs-number">23</span>:<span class="hljs-number">56</span>:F0:<span class="hljs-number">77</span>:E8:A1:F9
+
+            OCSP No Check:
+
+            X509v3 Subject Key Identifier:
+                <span class="hljs-number">87</span>:BA:EB:E8:F7:B1:<span class="hljs-number">27</span>:<span
+            class="hljs-number">00</span>:EC:<span class="hljs-number">9</span>C:D1:A0:<span
+            class="hljs-number">4</span>E:E0:E1:<span class="hljs-number">23</span>:E5:<span
+            class="hljs-number">7</span>D:<span class="hljs-number">80</span>:<span class="hljs-number">9</span>E
+            X509v3 Extended Key Usage:
+                OCSP Signing
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Key Usage: critical
+                Digital Signature
+            X509v3 Subject Alternative Name:
+                DirName:/CN=TGV-C-<span class="hljs-number">26</span>
+    Signature Algorithm: sha256WithRSAEncryption
+         ... ...
+-----BEGIN CERTIFICATE-----
+MIIDnTCCAoWgAwIBAgIBCDANBgkqhkiG9w0BAQsFADBHMQswCQYDVQQGEwJVUzEW
+... ...
+bmgyvaosG4GykSUnasMqfbA=
+-----END CERTIFICATE-----
+Response Verify Failure
+<span class="hljs-number">140735166222416</span>:error:<span class="hljs-number">27069065</span>:OCSP routines:OCSP_basic_verify:certificate verify error:ocsp_vfy.c:<span
+            class="hljs-number">138</span>:Verify error:unable to get <span class="hljs-built_in">local</span> issuer certificate
+site.pem: good
+    This Update: Mar <span class="hljs-number">11</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+    Next Update: Mar <span class="hljs-number">18</span> <span class="hljs-number">07</span>:<span class="hljs-number">56</span>:<span
+            class="hljs-number">56</span> <span class="hljs-number">2016</span> GMT
+</code></pre>
+            <p>可以看到，自己获取的 OCSP Response 和服务端发送的 OCSP Stapling 完全一致，响应中的 <code>Cert Status: good</code> 表示证书合法。</p>
+            <p>但是，这段内容最后，多了这样的奇怪信息：</p>
+<pre><code>Response Verify Failure
+140735166222416:error:27069065:OCSP routines:OCSP_basic_verify:certificate verify error:ocsp_vfy.c:138:Verify error:unable to get local issuer certificate
+</code></pre>
+            <p>实际上，这是因为我们没有告诉 openssl 应该信任哪些证书，openssl 无法验证 OCSP Response 内容而报的错。这个错误可以通过加上 <code>-noverify</code>
+                参数屏蔽，但更好的做法是通过 <code>-CAfile</code> 指定信任证书。</p>
+            <p>将根证书、全部中间证书按照子证书在上的顺序，保存为 <code>chain.pem</code>。再次执行：</p>
+<pre><code class="lang-bash">$ openssl ocsp -CAfile chain.pem -issuer intermediate.pem -cert site.pem -no_nonce -text -url http://gz.symcd.com
+</code></pre>
+            <p>这下，最终的结果就是 Response verify OK 了。</p>
+            <p>Nginx 在实现 OCSP Stapling 这部分逻辑时，直接使用了 OpenSSL 库（这也解释了为什么 Nginx + BoringSSL 不支持 OCSP Stapling）。我们再来看看 Nginx
+                中与 OCSP Stapling 有关的三个重要配置项：</p>
+<pre><code>ssl_stapling               on;
+ssl_stapling_verify        on;
+ssl_trusted_certificate    /your/path/to/chained.pem;
+</code></pre>
+            <p><code>ssl_stapling</code> 的作用自然不用说，<code>ssl_trusted_certificate</code> 相当于前面命令中的 <code>-CAfile</code>。还记得前面说过「如果不指定
+                <code>-CAfile</code> 就得加上 <code>-noverify</code>」么，换句话说，如果开启了 Nginx 的 <code>ssl_stapling_verify</code>，但没有正确配置
+                <code>ssl_trusted_certificate</code>，就会导致 OCSP Response 验证失败，OCSP Stapling 自然不会生效。</p>
+            <p>昨天给我写信的那位同学就是栽在这里。实际上，检查 Nginx 的 error_log，应该有类似这样的错误：</p>
+<pre><code>[error] 5594#0: OCSP_basic_verify() failed (SSL: error:27069065:OCSP routines:OCSP_basic_verify:certificate verify error:Verify error:unable to get local issuer certificate) while requesting certificate status, responder: gz.symcd.com
+</code></pre>
+            <p>可以看到，这个错误确实是 OpenSSL 库报的。</p>
+            <p>看到这里，有些同学可能会说：不对，我明明开启了 <code>ssl_stapling_verify</code>，也没有指定 <code>ssl_trusted_certificate</code>，为什么我的
+                OCSP Stapling 功能也是正常的呢？</p>
+            <p>昨天那位同学的邮件中也问到这个奇怪的问题：</p>
+            <blockquote>
+                <p>我 Nginx 目前的 OCSP stapling 配置为：</p>
+                <p>ssl_stapling on;<br>
+                    ssl_stapling_verify on;<br>
+                    resolver 8.8.8.8 8.8.4.4 223.5.5.5 valid=300s;<br>
+                    resolver_timeout 5s;<br></p>
+                <p>有个奇怪的问题 ：<br>
+                    我在使用 AlphaSSL 证书的域名测试 OCSP stapling 显示 NO，但是用配置了 COMODO ECC 证书的域名 OCSP stapling 就为 Yes。两个域名的 Nginx
+                    配置完全相同。</p>
+            </blockquote>
+            <p>看来这个问题远远没这么简单，难道还跟证书有关？我找了一个同样使用 COMODO 证书的站点，使用前面讲过的方法获得了它的 OCSP Response：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">$ openssl ocsp -CAfile root.pem -issuer intermediate.pem -cert site.pem -no_nonce -text -url http://ocsp.comodoca.com
+
+OCSP Request Data:
+    Version: <span class="hljs-number">1</span> (<span class="hljs-number">0</span>x0)
+    Requestor List:
+        Certificate ID:
+          Hash Algorithm: sha1
+          Issuer Name Hash: <span class="hljs-number">7</span>AE13EE8A0C42A2CB428CBE7A605461940E2A1E9
+          Issuer Key Hash: <span class="hljs-number">90</span>AF6A3A945A0BD890EA125673DF43B43A28DAE7
+          Serial Number: <span class="hljs-number">15</span>F3C026B44BEEF870A7A496640BC484
+OCSP Response Data:
+    OCSP Response Status: successful (<span class="hljs-number">0</span>x0)
+    Response Type: Basic OCSP Response
+    Version: <span class="hljs-number">1</span> (<span class="hljs-number">0</span>x0)
+    Responder Id: <span class="hljs-number">90</span>AF6A3A945A0BD890EA125673DF43B43A28DAE7
+    Produced At: Mar <span class="hljs-number">12</span> <span class="hljs-number">23</span>:<span class="hljs-number">59</span>:<span
+            class="hljs-number">22</span> <span class="hljs-number">2016</span> GMT
+    Responses:
+    Certificate ID:
+      Hash Algorithm: sha1
+      Issuer Name Hash: <span class="hljs-number">7</span>AE13EE8A0C42A2CB428CBE7A605461940E2A1E9
+      Issuer Key Hash: <span class="hljs-number">90</span>AF6A3A945A0BD890EA125673DF43B43A28DAE7
+      Serial Number: <span class="hljs-number">15</span>F3C026B44BEEF870A7A496640BC484
+    Cert Status: good
+    This Update: Mar <span class="hljs-number">12</span> <span class="hljs-number">23</span>:<span class="hljs-number">59</span>:<span
+            class="hljs-number">22</span> <span class="hljs-number">2016</span> GMT
+    Next Update: Mar <span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">59</span>:<span
+            class="hljs-number">22</span> <span class="hljs-number">2016</span> GMT
+
+    Signature Algorithm: sha256WithRSAEncryption
+         <span class="hljs-number">29</span>:a8:b4:a3:<span class="hljs-number">60</span>:<span
+            class="hljs-number">98</span>:d9:c3:<span class="hljs-number">4</span>f:<span class="hljs-number">56</span>:<span
+            class="hljs-number">4</span>b:<span class="hljs-number">72</span>:<span class="hljs-number">6</span>c:<span
+            class="hljs-number">9</span>a:<span class="hljs-number">9</span>e:<span class="hljs-number">7</span>f:<span
+            class="hljs-number">51</span>:<span class="hljs-number">2</span>d:
+         ... ...
+Response Verify Failure
+<span class="hljs-number">140735166222416</span>:error:<span class="hljs-number">27069076</span>:OCSP routines:OCSP_basic_verify:signer certificate not found:ocsp_vfy.c:<span
+            class="hljs-number">92</span>:
+site.pem: good
+    This Update: Mar <span class="hljs-number">12</span> <span class="hljs-number">23</span>:<span class="hljs-number">59</span>:<span
+            class="hljs-number">22</span> <span class="hljs-number">2016</span> GMT
+    Next Update: Mar <span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">59</span>:<span
+            class="hljs-number">22</span> <span class="hljs-number">2016</span> GMT
+</code></pre>
+            <p>这次测试所有步骤跟之前一样，证书状态正常，也指定了 <code>-CAfile</code>，但 OCSP Response 验证还是失败：</p>
+<pre><code>Response Verify Failure
+140735166222416:error:27069076:OCSP routines:OCSP_basic_verify:signer certificate not found:ocsp_vfy.c:92:
+</code></pre>
+            <p>从错误信息中可以得知，COMODO 的 OCSP Response 没有提供 Certificate 信息，导致无法验证其内容。进一步测试发现，对于这种情况，Nginx 直接忽略了 <code>ssl_stapling_verify</code>
+                参数，无论是否配置，都不执行 verify 操作。</p>
+            <p>经过测试，Let's Encrypt 的 OCSP 服务也没有返回 Certificate，所以使用 Let's Encrypt 证书，开启 OCSP Stapling 也无需配置 <code>ssl_trusted_certificate</code>。
+            </p>
+            <p>顺便说一下，获取 Let's Encrypt 证书的 OCSP Response 一定要指定 Host，就像这样：</p>
+<pre><code class="lang-bash">openssl ocsp -CAfile chain.pem -issuer intermediate.pem -cert site.pem -no_nonce -text -url http://ocsp.int-x1.letsencrypt.org/ -header <span
+        class="hljs-string">"HOST"</span> <span class="hljs-string">"ocsp.int-x1.letsencrypt.org"</span>
+</code></pre>
+            <h3><a name="toc-2"></a>启用 OCSP Stapling 的条件</h3>
+            <p>在 Nginx 中配置 <code>ssl_stapling on</code> 并 reload 后，Nginx 并不会马上获取 OCSP Response，它要等第一个请求过来，再发起异步 OCSP
+                请求，所以刚开始几个响应，很可能不带 OCSP Stapling。另外，有时候由于 OCSP 域名无法解析，或者服务器无法访问造成 OCSP Response 获取失败，也会导致 OCSP Stapling
+                无法生效。这是首先需要排查的地方，一般在 Nginx 的 error_log 中会有这样的错误：</p>
+<pre><code>[error] 5225#0: xxx.com could not be resolved (110: Operation timed out) while requesting certificate status, responder: xxx.com
+</code></pre>
+            <p>如果 OCSP Response 包含了 Certificate 信息，并且 Nginx 配置了 <code>ssl_stapling_verify on</code>，那么需要确保正确配置了 <code>ssl_trusted_certificate</code>
+                参数，这个参数应该指向一个包含根证书、中间证书的文件（顺序是子证书在上、父证书在下），否则 OCSP Stapling 无法生效。这时候 Nginx 的 error_log 中会出现类似这样的错误：</p>
+<pre><code>[error] 4832#0: OCSP_basic_verify() failed (SSL: error:27069065:OCSP routines:OCSP_basic_verify:certificate verify error:Verify error:unable to get local issuer certificate) while requesting certificate status, responder: xxx.com
+</code></pre>
+            <p>如果证书 OCSP Response 没有包含 Certificate 信息，例如 COMODO、Let's Encrypt 家的部分证书，那么 <code>ssl_stapling_verify</code>
+                和 <code>ssl_trusted_certificate</code> 两个配置可以忽略，完全不影响开启 OCSP Stapling。</p>
+
+        </div>
+    </article>
+</div><!-- /.container -->
+
+<div class="blog-footer">
+    <p>内容发布 by <a
+            href="/">番号站</a></p>
+    <p>
+        <a href="#">返回顶部</a>
+    </p>
+</div>
+</body>
+</html>

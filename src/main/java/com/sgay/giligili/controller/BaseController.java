@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -44,7 +45,25 @@ public class BaseController{
     }
 
     @ModelAttribute
-    public void queryPopularMovies(ModelMap modelMap) throws IOException {
+    public void querySideADMovies(ModelMap modelMap, HttpServletRequest request) throws IOException {
+        if (!isSideADMoviesQuery(request)){
+            return;
+        }
+        queryPopularMovies(modelMap);
+        queryRandomMovies(modelMap);
+        queryEditorRecommendMovies(modelMap);
+        queryImageAndTextRecommendMovies(modelMap);
+    }
+
+    private boolean isSideADMoviesQuery(HttpServletRequest request){
+        String servletPath = request.getServletPath();
+        if (servletPath.startsWith("/vote") || servletPath.startsWith("/teachers")){
+            return false;
+        }
+        return true;
+    }
+
+    private void queryPopularMovies(ModelMap modelMap) throws IOException {
         List<Movie> todayPopularMovies = mMovieService.queryTodayPopularMovies();
         List<Movie> lastWeekPopularMovies = mMovieService.queryLastWeekPopularMovies();
         List<Movie> lastMonthPopularMovies = mMovieService.queryLastMonthPopularMovies();
@@ -53,21 +72,18 @@ public class BaseController{
         modelMap.addAttribute("lastMonthPopularMovies",lastMonthPopularMovies);
     }
 
-    @ModelAttribute
-    public void queryRandomMovies(ModelMap modelMap){
+    private void queryRandomMovies(ModelMap modelMap){
         boolean isUseCache = true;
         List<Movie> randomMovies = mMovieService.queryRandomMovies(10,2,isUseCache);
         modelMap.addAttribute("randomMovies",randomMovies);
     }
 
-    @ModelAttribute
-    public void queryEditorRecommendMovies(ModelMap modelMap){
+    private void queryEditorRecommendMovies(ModelMap modelMap){
         List<Movie> editorRecommendMovies = mMovieService.queryEditorRecommendMovies(5,1);
         modelMap.addAttribute("editorRecommendMovies",editorRecommendMovies);
     }
 
-    @ModelAttribute
-    public void queryImageAndTextRecommendMovies(ModelMap modelMap){
+    private void queryImageAndTextRecommendMovies(ModelMap modelMap){
         List<Movie> imageAndTextRecommendMovies = mMovieService.queryImageAndTextRecommendMovies(8,2);
         modelMap.addAttribute("imageAndTextRecommendMovies",imageAndTextRecommendMovies);
     }

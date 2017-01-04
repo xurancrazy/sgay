@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>技术小站</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术小站 'www.fanhaozhan.xyz'">
+    <meta name="keywords" content="技术小站，番号，知识">
+
+    <link rel="icon" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/icon.png">
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/css/index.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+    <!-- JS -->
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/js/ie10-viewport-bug-workaround.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="blog-header">
+        <h1 class="title" itemprop="headline">使用 nghttp2 调试 HTTP/2 流量</h1>
+    </div>
+    <article class="post post-227" itemscope="" itemtype="http://schema.org/Article">
+        <div class="entry-content" itemprop="articleBody">
+            <div id="toc-container">
+                <div id="toc"><p><strong>文章目录</strong></p>
+                    <ul>
+                        <li><a href="#toc-0">编译</a></li>
+                        <li><a href="#toc-1">nghttp</a></li>
+                        <li><a href="#toc-2">h2load</a></li>
+                    </ul>
+                </div>
+            </div>
+            <ul>
+                <li>nghttp：HTTP/2 客户端；</li>
+                <li>nghttpd：HTTP/2 服务端；</li>
+                <li>nghttpx：HTTP/2 代理，提供 HTTP/1、HTTP/2 等协议之间的转换；</li>
+                <li>h2load：HTTP/2 性能测试工具；　</li>
+            </ul>
+            <p>本文简单介绍 nghttp、h2load 这两个工具。</p>
+            <h3><a name="toc-0"></a>编译</h3>
+            <p>nghttp2 官方文档中有详细的<a href="https://nghttp2.org/documentation/package_README.html#requirements">编译依赖说明</a>。对于我一直在用的
+                Ubuntu 14.04 LTS 来说，安装依赖是一件再简单不过的事情：</p>
+<pre><code class="lang-bash">sudo apt-get install g++ make binutils autoconf automake autotools-dev libtool pkg-config zlib1g-dev libcunit1-dev libssl-dev libc-ares-dev libxml2-dev libev-dev libevent-dev libjansson-dev libjemalloc-dev cython python3-dev python-setuptools
+</code></pre>
+            <p>解决依赖问题后，获取源码并编译安装即可：</p>
+<pre><b class="name">BASH</b><code class="lang-bash"><span class="hljs-comment"># install spdylay</span>
+git <span class="hljs-built_in">clone</span> https://github.com/tatsuhiro-t/spdylay.git
+<span class="hljs-built_in">cd</span> ./spdylay
+
+autoreconf -i
+automake
+autoconf
+./configure
+
+make
+sudo make install
+
+<span class="hljs-built_in">cd</span> ../
+
+<span class="hljs-comment"># install nghttp2 apps</span>
+git <span class="hljs-built_in">clone</span> https://github.com/tatsuhiro-t/nghttp2.git
+<span class="hljs-built_in">cd</span> ./nghttp2
+
+autoreconf -i
+automake
+autoconf
+./configure --enable-app
+
+make
+sudo make install
+</code></pre>
+            <p>一切妥当后，nghttp2 提供的几个工具就可以直接用了。</p>
+            <h3><a name="toc-1"></a>nghttp</h3>
+            <p>nghttp 做为一个功能完整的 HTTP/2 客户端，非常适合用来查看和调试 HTTP/2 流量。它支持的参数很多，通过<a
+                    href="https://nghttp2.org/documentation/nghttp.1.html">官方文档</a>或者 <code>nghttp -h</code>
+                都能查看。最常用几个参数如下：</p>
+            <ul>
+                <li>-v, --verbose，输出完整的 debug 信息；</li>
+                <li>-n, --null-out，丢弃下载的数据；</li>
+                <li>-a, --get-assets，下载 html 中的 css、js、image 等外链资源；</li>
+                <li>-H, --header=&lt;HEADER&gt;，添加请求头部字段，如 <code>-H':method: PUT'</code>；</li>
+                <li>-u, --upgrade，使用 HTTP 的 Upgrade 机制来协商 HTTP/2 协议，用于 h2c，详见下面的例子；</li>
+            </ul>
+            <p>以下是使用 nghttp 访问 nghttp2 官网的结果。从调试信息中可以清晰看到 h2c 协商以及 Server Push 的整个过程：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">nghttp -nvu http://nghttp2.org
+
+[  0.147] Connected
+[  0.147] HTTP Upgrade request
+GET / HTTP/1.1
+host: nghttp2.org
+connection: Upgrade, HTTP2-Settings
+upgrade: h2c
+http2-settings: AAMAAABkAAQAAP__
+accept: */*
+user-agent: nghttp2/1.9.0-DEV
+
+[  0.291] HTTP Upgrade response
+HTTP/1.1 101 Switching Protocols
+Connection: Upgrade
+Upgrade: h2c
+
+[  0.291] HTTP Upgrade success
+[  0.291] recv SETTINGS frame &lt;length=12, flags=0x00, stream_id=0&gt;
+          (niv=2)
+          [SETTINGS_MAX_CONCURRENT_STREAMS(0x03):100]
+          [SETTINGS_INITIAL_WINDOW_SIZE(0x04):65535]
+[  0.291] send SETTINGS frame &lt;length=12, flags=0x00, stream_id=0&gt;
+          (niv=2)
+          [SETTINGS_MAX_CONCURRENT_STREAMS(0x03):100]
+          [SETTINGS_INITIAL_WINDOW_SIZE(0x04):65535]
+[  0.291] send SETTINGS frame &lt;length=0, flags=0x01, stream_id=0&gt;
+          ; ACK
+          (niv=0)
+[  0.291] send PRIORITY frame &lt;length=5, flags=0x00, stream_id=3&gt;
+          (dep_stream_id=0, weight=201, exclusive=0)
+[  0.291] send PRIORITY frame &lt;length=5, flags=0x00, stream_id=5&gt;
+          (dep_stream_id=0, weight=101, exclusive=0)
+[  0.291] send PRIORITY frame &lt;length=5, flags=0x00, stream_id=7&gt;
+          (dep_stream_id=0, weight=1, exclusive=0)
+[  0.291] send PRIORITY frame &lt;length=5, flags=0x00, stream_id=9&gt;
+          (dep_stream_id=7, weight=1, exclusive=0)
+[  0.291] send PRIORITY frame &lt;length=5, flags=0x00, stream_id=11&gt;
+          (dep_stream_id=3, weight=1, exclusive=0)
+[  0.291] send PRIORITY frame &lt;length=5, flags=0x00, stream_id=1&gt;
+          (dep_stream_id=11, weight=16, exclusive=0)
+[  0.291] recv (stream_id=1) :method: GET
+[  0.291] recv (stream_id=1) :scheme: http
+[  0.291] recv (stream_id=1) :path: /stylesheets/screen.css
+[  0.291] recv (stream_id=1) :authority: nghttp2.org
+[  0.291] recv (stream_id=1) host: nghttp2.org
+[  0.291] recv (stream_id=1) user-agent: nghttp2/1.9.0-DEV
+[  0.291] recv PUSH_PROMISE frame &lt;length=59, flags=0x04, stream_id=1&gt;
+          ; END_HEADERS
+          (padlen=0, promised_stream_id=2)
+[  0.291] recv (stream_id=1) :status: 200
+[  0.291] recv (stream_id=1) date: Mon, 07 Mar 2016 13:02:35 GMT
+[  0.291] recv (stream_id=1) content-type: text/html
+[  0.291] recv (stream_id=1) content-length: 6654
+[  0.291] recv (stream_id=1) last-modified: Mon, 29 Feb 2016 15:38:08 GMT
+[  0.291] recv (stream_id=1) etag: <span class="hljs-string">"56d465e0-19fe"</span>
+[  0.291] recv (stream_id=1) link: &lt;/stylesheets/screen.css&gt;; rel=preload; as=stylesheet
+[  0.291] recv (stream_id=1) accept-ranges: bytes
+[  0.291] recv (stream_id=1) x-backend-header-rtt: 0.00093
+[  0.291] recv (stream_id=1) server: nghttpx nghttp2/1.9.0-DEV
+[  0.291] recv (stream_id=1) via: 2 nghttpx
+[  0.291] recv (stream_id=1) x-frame-options: SAMEORIGIN
+[  0.291] recv (stream_id=1) x-xss-protection: 1; mode=block
+[  0.291] recv (stream_id=1) x-content-type-options: nosniff
+[  0.291] recv HEADERS frame &lt;length=251, flags=0x04, stream_id=1&gt;
+          ; END_HEADERS
+          (padlen=0)
+          ; First response header
+[  0.471] recv DATA frame &lt;length=6654, flags=0x01, stream_id=1&gt;
+          ; END_STREAM
+[  0.471] recv (stream_id=2) :status: 200
+[  0.471] recv (stream_id=2) date: Mon, 07 Mar 2016 13:02:35 GMT
+[  0.471] recv (stream_id=2) content-type: text/css
+[  0.471] recv (stream_id=2) content-length: 39082
+[  0.471] recv (stream_id=2) last-modified: Mon, 29 Feb 2016 15:38:08 GMT
+[  0.471] recv (stream_id=2) etag: <span class="hljs-string">"56d465e0-98aa"</span>
+[  0.471] recv (stream_id=2) accept-ranges: bytes
+[  0.471] recv (stream_id=2) x-backend-header-rtt: 0.000479
+[  0.471] recv (stream_id=2) server: nghttpx nghttp2/1.9.0-DEV
+[  0.471] recv (stream_id=2) via: 2 nghttpx
+[  0.471] recv (stream_id=2) x-frame-options: SAMEORIGIN
+[  0.471] recv (stream_id=2) x-xss-protection: 1; mode=block
+[  0.471] recv (stream_id=2) x-content-type-options: nosniff
+[  0.471] recv (stream_id=2) x-http2-push: 1
+[  0.471] recv HEADERS frame &lt;length=61, flags=0x04, stream_id=2&gt;
+          ; END_HEADERS
+          (padlen=0)
+          ; First push response header
+[  0.964] recv DATA frame &lt;length=16384, flags=0x00, stream_id=2&gt;
+[  0.964] recv DATA frame &lt;length=16384, flags=0x00, stream_id=2&gt;
+[  0.964] send WINDOW_UPDATE frame &lt;length=4, flags=0x00, stream_id=0&gt;
+          (window_size_increment=37620)
+[  0.964] send WINDOW_UPDATE frame &lt;length=4, flags=0x00, stream_id=2&gt;
+          (window_size_increment=32768)
+[  1.538] recv DATA frame &lt;length=6314, flags=0x01, stream_id=2&gt;
+          ; END_STREAM
+[  1.538] recv SETTINGS frame &lt;length=0, flags=0x01, stream_id=0&gt;
+          ; ACK
+          (niv=0)
+[  1.538] send GOAWAY frame &lt;length=8, flags=0x00, stream_id=0&gt;
+          (last_stream_id=2, error_code=NO_ERROR(0x00), opaque_data(0)=[])
+</code></pre>
+            <h3><a name="toc-2"></a>h2load</h3>
+            <p>h2load 是一个支持 HTTP/2 的压测工具，可以用来测试 HTTP/2 服务的稳定性、QPS 等信息。它支持的参数也可以通过<a
+                    href="https://nghttp2.org/documentation/h2load.1.html">官网文档</a>或者 <code>h2load -h</code>
+                来查看。下面是一个简单例子：</p>
+<pre><b class="name">BASH</b><code class="lang-bash">h2load https://example.com -n 100 -c 10
+
+starting benchmark...
+spawning thread <span class="hljs-comment">#0: 10 total client(s). 100 total requests</span>
+TLS Protocol: TLSv1.2
+Cipher: ECDHE-RSA-AES128-GCM-SHA256
+Application protocol: h2
+progress: 10% <span class="hljs-keyword">done</span>
+progress: 20% <span class="hljs-keyword">done</span>
+progress: 30% <span class="hljs-keyword">done</span>
+progress: 40% <span class="hljs-keyword">done</span>
+progress: 50% <span class="hljs-keyword">done</span>
+progress: 60% <span class="hljs-keyword">done</span>
+progress: 70% <span class="hljs-keyword">done</span>
+progress: 80% <span class="hljs-keyword">done</span>
+progress: 90% <span class="hljs-keyword">done</span>
+progress: 100% <span class="hljs-keyword">done</span>
+
+finished <span class="hljs-keyword">in</span> 589.98ms, 169.50 req/s, 2.19MB/s
+requests: 100 total, 100 started, 100 <span class="hljs-keyword">done</span>, 100 succeeded, 0 failed, 0 errored, 0 timeout
+status codes: 100 2xx, 0 3xx, 0 4xx, 0 5xx
+traffic: 1.29MB (1353790) total, 53.42KB (54700) headers (space savings 24.97%), 1.24MB (1295000) data
+                     min         max         mean         sd        +/- sd
+time <span class="hljs-keyword">for</span> request:    17.63ms     73.47ms     32.06ms     10.24ms    78.00%
+time <span class="hljs-keyword">for</span> connect:    81.84ms    168.23ms    119.76ms     26.44ms    60.00%
+time to 1st byte:   119.09ms    201.01ms    158.06ms     23.86ms    70.00%
+req/s           :      17.00       28.63       23.12        3.20    60.00%
+</code></pre>
+
+        </div>
+    </article>
+</div><!-- /.container -->
+
+<div class="blog-footer">
+    <p>内容发布 by <a
+            href="/">番号站</a></p>
+    <p>
+        <a href="#">返回顶部</a>
+    </p>
+</div>
+</body>
+</html>
