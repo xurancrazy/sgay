@@ -40,7 +40,7 @@
 </head>
 <body style="direction: ltr;">
 <div class="center">
-    <img id="img_error" src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/500.png" height="427" width="640"><br>
+    <img id="img_error" src="/source/images/500.png" height="427" width="640"><br>
     <div class="errmsg">
         <b>返回主页: </b><a href="/">点击返回</a><br>
         <b>错误号:</b> 500<br>

@@ -5,10 +5,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/images/icon.png">
+<link rel="icon" href="/source/images/icon.png">
 <!-- CSS -->
 <link type="text/css" rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.3.2/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/css/index.css">
+<link type="text/css" rel="stylesheet" href="/source/css/index.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 
 
@@ -22,7 +22,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/source/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/source/js/ie10-viewport-bug-workaround.js"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {

@@ -51,7 +51,7 @@
                                                                     class="imgview"
                                                                     target="_blank" rel="nofollow"><img
                                         src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
-                                        data-original="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}"
+                                        data-original="/repository/images/cover/full/${movie.imghref}"
                                         align="right"
                                         alt="${movie.fanhao}"></a></div>
                                 <div class="desc pull-left">

@@ -48,7 +48,7 @@
                 <div class="well_tit" style="width:670px;display:inline-block;">
                     <h2>${teacher.name}<span class="list_tp"><a href="#" title="投她一票" class="img_on"
                                                                 rel="${teacher.id}">投票</a></span></h2>
-                    <img src="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/icon/full/${teacher.img}" width="125" height="125" alt="${teacher.name}"
+                    <img src="/repository/images/icon/full/${teacher.img}" width="125" height="125" alt="${teacher.name}"
                          title="${teacher.name}" style="float: left;">
                     <p class="avms">${teacherDescription}</p>
                     <div class="nian btn-group">
@@ -78,7 +78,7 @@
 			<span class="list_img" style="width:210px;">
 			<a href="/movies/${movie.fanhao}" target="_blank">
 			<img src="http://img.yixieshi.com/style/yixieshi/img/grey.gif"
-                 data-original="http://fanhaozhan-1253139182.cosgz.myqcloud.com/images/cover/full/${movie.imghref}" style="display: inline;" alt="${movie.fanhao}"></a>
+                 data-original="/repository/images/cover/full/${movie.imghref}" style="display: inline;" alt="${movie.fanhao}"></a>
 			<span class="arr"><span></span></span>			</span>
 			<span class="list_text">
 			<em><b><a
